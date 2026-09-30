@@ -1,0 +1,18 @@
+# Environmental variables
+.env
+
+# Virtual environment & Cache
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Frontend
+node_modules/
+dist/
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
