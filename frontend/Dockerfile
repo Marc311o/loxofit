@@ -1,5 +1,4 @@
 FROM node:22-alpine
-
 LABEL authors="Jerzy Andrusiewicz"
 
 WORKDIR /app
