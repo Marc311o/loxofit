@@ -16,3 +16,6 @@ dist/
 
 # IDE
 .idea/
+
+# Temporary source folder
+temp

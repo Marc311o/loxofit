@@ -1,2 +1,10 @@
-if __name__ == '__main__':
-    print("Hello, world!")
+from fastapi import FastAPI
+
+from app.core.config import settings
+
+app = FastAPI(title=settings.PROJECT_NAME, version=settings.VERSION)
+
+
+@app.get("/")
+def read_root():
+    return {"message": "Loxofit API initialized successfully"}
