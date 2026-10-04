@@ -51,3 +51,29 @@ ps:
 [group('env')]
 logs service="":
     docker compose logs -f {{service}}
+
+# =======================================================
+# CODE QUALITY
+# =======================================================
+
+# linter (ruff + oxlint)
+[group('quality')]
+lint:
+    docker compose exec api ruff check .
+    docker compose exec frontend npm run lint
+
+# linter (Ruff + Prettier)
+[group('quality')]
+format:
+    docker compose exec api ruff check . --fix
+    docker compose exec api ruff format .
+    docker compose exec frontend npm run format
+
+# =======================================================
+# CLEAN
+# =======================================================
+# cleans everything
+[group('clean')]
+[confirm("Are you sure? This will remove containers, volumes, data and images. This is irreversible.")]
+clean:
+    docker compose --profile tools down -v --rmi local --remove-orphans
