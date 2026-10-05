@@ -17,11 +17,12 @@ class Settings(BaseSettings):
     POSTGRES_DB: str
     POSTGRES_SERVER: str = "db"
     POSTGRES_PORT: int = 5432
+    SQL_ECHO: bool = False
 
     @property
     def DATABASE_URL(self) -> str:
         return (
-            f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
+            f"postgresql+psycopg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
             f"@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
         )
 

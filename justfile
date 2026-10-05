@@ -72,8 +72,29 @@ format:
 # =======================================================
 # CLEAN
 # =======================================================
+
 # cleans everything
 [group('clean')]
 [confirm("Are you sure? This will remove containers, volumes, data and images. This is irreversible.")]
 clean:
     docker compose --profile tools down -v --rmi local --remove-orphans
+
+# # =======================================================
+# DATABASE
+# # =======================================================
+
+# initiate migration
+[group('db')]
+migrate:
+    docker compose exec api alembic upgrade head
+
+# creates new migration
+[group('db')]
+makemigration message:
+    docker compose exec api alembic revision --autogenerate -m "{{message}}"
+
+# Undo migration
+[group('db')]
+[confirm("Undo newest migration?")]
+downgrade:
+    docker compose exec api alembic downgrade -1
