@@ -32,4 +32,4 @@ async def get_db() -> AsyncIterator[AsyncSession]:
         yield db
 
 
-db = Annotated[AsyncSession, Depends(get_db)]
+SessionDep = Annotated[AsyncSession, Depends(get_db)]
