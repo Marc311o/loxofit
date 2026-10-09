@@ -4,10 +4,12 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
 from app.core.config import settings
-from app.core.database import db
+from app.core.database import SessionDep
 from app.core.security import TokenError, decode_access_token
+from app.domains.auth.service import AuthService
 from app.domains.users.enums import UserRole
 from app.domains.users.models import User
+from app.domains.users.service import UserServiceDep
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login")
 
@@ -20,7 +22,9 @@ def _unauthorized() -> HTTPException:
     )
 
 
-async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)], db: db) -> type[User]:
+async def get_current_user(
+    token: Annotated[str, Depends(oauth2_scheme)], db: SessionDep
+) -> type[User]:
     """Returns current user or 401"""
     try:
         user_id = decode_access_token(token)
@@ -47,3 +51,10 @@ async def require_admin(user: CurrentUser) -> User:
 
 
 AdminUser = Annotated[User, Depends(require_admin)]
+
+
+def get_auth_service(db: SessionDep, users: UserServiceDep) -> AuthService:
+    return AuthService(db, users)
+
+
+AuthServiceDep = Annotated[AuthService, Depends(get_auth_service)]

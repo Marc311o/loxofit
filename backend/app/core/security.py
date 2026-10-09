@@ -4,8 +4,9 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import jwt
-from config import settings
 from pwdlib import PasswordHash
+
+from app.core.config import settings
 
 
 # ==============================

@@ -1,8 +1,9 @@
 import uuid
 from datetime import datetime
 
-from enums import UserRole
 from pydantic import BaseModel, ConfigDict
+
+from app.domains.users.enums import UserRole
 
 
 class UserRead(BaseModel):

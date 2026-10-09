@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import HTTPException, Request, status
+from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel
@@ -107,3 +107,10 @@ async def _validation_error_handler(
 async def _unhandled_error_handler(request: Request, exception: Exception) -> JSONResponse:
     logger.exception("Unhandled exception: %s %s", request.method, request.url.path)
     return _error(status.HTTP_500_INTERNAL_SERVER_ERROR, AppError.detail, AppError.code)
+
+
+def register_exception_handlers(app: FastAPI) -> None:
+    app.add_exception_handler(AppError, _app_error_handler)
+    app.add_exception_handler(HTTPException, _http_exception_handler)
+    app.add_exception_handler(RequestValidationError, _validation_error_handler)
+    app.add_exception_handler(Exception, _unhandled_error_handler)
