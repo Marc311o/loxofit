@@ -13,6 +13,9 @@ from app.domains.auth.router import router as auth_router
 
 logging.basicConfig(level=logging.INFO)
 
+# TODO: add 2FA to auth domain
+# TODO: reset password
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
