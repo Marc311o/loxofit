@@ -89,6 +89,7 @@ def _error(
 
 
 async def _app_error_handler(request: Request, exception: AppError) -> JSONResponse:
+    logger.error(f"Unknown error - {exception.detail}")
     return _error(exception.status_code, exception.detail, exception.code, exception.headers)
 
 

@@ -79,9 +79,9 @@ format:
 clean:
     docker compose --profile tools down -v --rmi local --remove-orphans
 
-# # =======================================================
+# =======================================================
 # DATABASE
-# # =======================================================
+# =======================================================
 
 # initiate migration
 [group('db')]
@@ -98,3 +98,16 @@ makemigration message:
 [confirm("Undo newest migration?")]
 downgrade:
     docker compose exec api alembic downgrade -1
+
+
+# =======================================================
+# SHELLS
+# =======================================================
+
+[group('shell')]
+psql:
+    docker compose exec db psql -U {{db_user}} -d {{db_name}}
+
+[group('shell')]
+shell-api:
+    docker compose exec api bash
