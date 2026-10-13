@@ -11,6 +11,8 @@ from app.core.database import Base
 
 from app.domains.auth import models as auth_models  # noqa: F401
 from app.domains.users import models as users_models  # noqa: F401
+from app.domains.catalog import models as catalog_models  # noqa: F401
+from app.domains.model_config import models as model_config_models  # noqa: F401
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL.replace("%", "%%"))
