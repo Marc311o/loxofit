@@ -9,4 +9,4 @@ class UserRole(enum.StrEnum):
 class ExperienceLevel(enum.StrEnum):
     BEGINNER = "beginner"
     INTERMEDIATE = "intermediate"
-    EXPERIENCED = "experienced"
+    ADVANCED = "advanced"

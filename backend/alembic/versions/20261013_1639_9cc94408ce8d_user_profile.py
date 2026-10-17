@@ -27,7 +27,7 @@ def upgrade() -> None:
         sa.Column("user_id", sa.UUID(), nullable=False),
         sa.Column(
             "experience",
-            sa.Enum("beginner", "intermediate", "experienced", name="experience_level"),
+            sa.Enum("beginner", "intermediate", "advanced", name="experience_level"),
             nullable=False,
         ),
         sa.Column("days_per_week", sa.SmallInteger(), nullable=False),
