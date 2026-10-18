@@ -26,6 +26,7 @@ class MuscleRead(ORMSchema):
 
 class EquipmentRead(ORMSchema):
     id: int
+    code: str
     name_en: str
     name_pl: str
     category: EquipmentCategory
@@ -33,6 +34,7 @@ class EquipmentRead(ORMSchema):
 
 class ExerciseListItem(ORMSchema):
     id: int
+    code: str
     name_en: str
     name_pl: str
     main_group: MuscleGroup
