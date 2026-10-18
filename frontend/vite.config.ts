@@ -1,18 +1,18 @@
+import { fileURLToPath, URL } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
+  },
   server: {
     host: true,
     port: 5173,
-    strictPort: true,
     proxy: {
-      "/api": {
-        target: "http://api:8000",
-        changeOrigin: true,
-      },
+      "/api": process.env.API_PROXY_TARGET ?? "http://localhost:8000",
     },
+    watch: { usePolling: true },
   },
 });

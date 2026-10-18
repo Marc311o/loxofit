@@ -52,6 +52,8 @@ services:
     container_name: loxofit-frontend
     build:
       context: ./frontend
+    environment:
+      API_PROXY_TARGET: http://api:8000
     ports:
       - "5173:5173"
     volumes:
