@@ -40,8 +40,10 @@ class Muscle(Base):
 
 class Equipment(Base):
     __tablename__ = "equipment"
+    __table_args__ = (CheckConstraint("code ~ '^[a-z0-9_]+$'", name="code_format"),)
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    code: Mapped[str] = mapped_column(String(40), unique=True)
     name_en: Mapped[str] = mapped_column(String(100), unique=True)
     name_pl: Mapped[str] = mapped_column(String(100), unique=True)
     description_en: Mapped[str | None] = mapped_column(Text)
@@ -60,9 +62,11 @@ class Exercise(Base):
     __table_args__ = (
         CheckConstraint("fatigue_cost BETWEEN 1 AND 5", name="fatigue_cost_range"),
         CheckConstraint("complexity BETWEEN 1 AND 5", name="complexity_range"),
+        CheckConstraint("code ~ '^[a-z0-9_]+$'", name="code_format"),
     )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    code: Mapped[str] = mapped_column(String(40), unique=True)
     name_en: Mapped[str] = mapped_column(String(150), unique=True)
     name_pl: Mapped[str] = mapped_column(String(150), unique=True)
     main_group: Mapped[MuscleGroup] = mapped_column(

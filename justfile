@@ -99,6 +99,35 @@ makemigration message:
 downgrade:
     docker compose exec api alembic downgrade -1
 
+# Seeds catalog data
+[group('db')]
+seed-catalog:
+    docker compose exec api python -m app.scripts.seed_catalog
+
+# Seeds superuser
+[group('db')]
+seed-admin:
+    docker compose exec api python -m app.scripts.seed_admin
+
+# Seeds available model configs
+[group('db')]
+seed-config:
+    docker compose exec api python -m app.scripts.seed_config
+
+# Seeds all
+[group('db')]
+seed-all:
+    docker compose exec api python -m app.scripts.seed_admin
+    docker compose exec api python -m app.scripts.seed_catalog
+    docker compose exec api python -m app.scripts.seed_config
+
+[group('db')]
+[confirm("This action will clear ALL data from the database. Continue?")]
+reset-db:
+    docker compose --profile tools down -v
+    docker compose up --build -d --wait
+    just migrate
+    just seed
 
 # =======================================================
 # SHELLS
