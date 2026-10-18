@@ -12,6 +12,7 @@ import { EquipmentPage } from "../features/catalog/pages/EquipmentPage.tsx";
 import { ProfilePage } from "../features/profile/pages/ProfilePage.tsx";
 import { PlanPage } from "../features/plan/pages/PlanPage.tsx";
 import { WorkoutPage } from "../features/workout/pages/WorkoutPage.tsx";
+import { NotFoundPage } from "./NotFoundPage.tsx";
 
 export const router = createBrowserRouter([
   // Auth
