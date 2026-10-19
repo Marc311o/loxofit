@@ -86,7 +86,7 @@ def test_expired_token_is_rejected():
 def test_wrong_token_type_is_rejected():
     # Correctly signed and not expired - the only problem is the type.
     token = jwt.encode(
-        _payload(type="reset_password"), settings.SECRET_KEY, algorithm=settings.JWT_ALGORITHM
+        _payload(type="reset_password"), settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM
     )
     with pytest.raises(security.TokenError):
         security.decode_access_token(token)
