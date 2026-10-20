@@ -89,7 +89,7 @@ def _error(
 
 
 async def _app_error_handler(request: Request, exception: AppError) -> JSONResponse:
-    if exception.code >= 500:
+    if exception.status_code >= 500:
         logger.error(
             f"{request.method} {request.url.path} -> {exception.code}: {exception.detail}",
             exc_info=exception,

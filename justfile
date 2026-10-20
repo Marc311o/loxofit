@@ -69,6 +69,21 @@ format:
     docker compose exec api ruff format .
     docker compose exec frontend npm run format
 
+# backend tests
+[group('test')]
+test *args:
+    docker compose exec api pytest {{args}}
+
+# only failed tests
+[group('test')]
+test-failed:
+    docker compose exec api pytest --lf -x
+
+# test coverage
+[group('test')]
+test-cov:
+    docker compose exec api pytest --cov=app --cov-report=term-missing --cov-report=html
+
 # =======================================================
 # CLEAN
 # =======================================================
