@@ -25,7 +25,7 @@ up-d:
 # builds project with pgadmin
 [group('env')]
 tools:
-    docker compose --profile tools up --build -d
+    docker compose --profile tools up --build -d -V
 
 # stops project
 [group('env')]
