@@ -36,7 +36,7 @@ class CatalogRepository:
         order_by = {
             EquipmentSort.CATEGORY: (Equipment.category, Equipment.name_en),
             EquipmentSort.NAME_EN: (Equipment.name_en,),
-            EquipmentSort.NAME_PL: (Equipment.name_pl,),
+            EquipmentSort.NAME_PL: (Equipment.name_pl.collate("pl-PL-x-icu"),),
         }[filters.sort]
         result = await self.db.execute(stmt.order_by(*order_by, Equipment.id))
         return result.scalars().all()
@@ -90,7 +90,7 @@ class CatalogRepository:
     def _apply_sort(stmt: Select[tuple[Exercise]], sort: ExerciseSort) -> Select[tuple[Exercise]]:
         order_by = {
             ExerciseSort.NAME_EN: (Exercise.name_en,),
-            ExerciseSort.NAME_PL: (Exercise.name_pl,),
+            ExerciseSort.NAME_PL: (Exercise.name_pl.collate("pl-PL-x-icu"),),
             ExerciseSort.GROUP: (Exercise.main_group, Exercise.name_en),
         }[sort]
         return stmt.order_by(*order_by, Exercise.id)

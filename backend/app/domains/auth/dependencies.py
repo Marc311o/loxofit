@@ -5,21 +5,14 @@ from fastapi.security import OAuth2PasswordBearer
 
 from app.core.config import settings
 from app.core.database import SessionDep
+from app.core.errors import AuthenticationError
 from app.core.security import TokenError, decode_access_token
 from app.domains.auth.service import AuthService
 from app.domains.users.enums import UserRole
 from app.domains.users.models import User
 from app.domains.users.service import UserServiceDep
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login")
-
-
-def _unauthorized() -> HTTPException:
-    return HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Failed to authenticate user.",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login", auto_error=False)
 
 
 async def get_current_user(
@@ -29,11 +22,11 @@ async def get_current_user(
     try:
         user_id = decode_access_token(token)
     except TokenError as e:
-        raise _unauthorized() from e
+        raise AuthenticationError() from e
 
     user = await db.get(User, user_id)
     if user is None or not user.is_active:
-        raise _unauthorized()
+        raise AuthenticationError()
 
     return user
 
