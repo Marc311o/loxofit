@@ -63,11 +63,11 @@ class ExerciseDetail(ExerciseListItem):
 class ExerciseFilters(PageParams):
     model_config = ConfigDict(extra="forbid")
 
-    muscle_group: MuscleGroup | None
-    pattern: MovementPattern | None
-    muscle_id: int | None = Field(ge=1)
-    equipment_id: int | None = Field(ge=1)
-    search: str | None = Field(min_length=1, max_length=100, default=None)
+    muscle_group: MuscleGroup | None = None
+    pattern: MovementPattern | None = None
+    muscle_id: int | None = Field(default=None, ge=1)
+    equipment_id: int | None = Field(default=None, ge=1)
+    search: str | None = Field(default=None, min_length=1, max_length=100)
     sort: ExerciseSort = ExerciseSort.NAME_EN
 
 
