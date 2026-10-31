@@ -145,6 +145,16 @@ reset-db:
     just seed
 
 # =======================================================
+# ENGINE
+# =======================================================
+
+# evaluates a plan file with the engine (no database)
+[group('engine')]
+engine-eval plan *args:
+    docker compose exec api python -m app.scripts.engine_eval {{plan}} {{args}}
+
+
+# =======================================================
 # SHELLS
 # =======================================================
 

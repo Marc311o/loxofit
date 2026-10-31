@@ -42,7 +42,8 @@ class MuscleTarget:
     def __post_init__(self) -> None:
         if not 0 <= self.mev < self.mav_upper <= self.mrv:
             raise ValueError(
-                f"Expected 0 <= mev < mav_upper <= mrv, got {self.mev}, {self.mav_upper}, {self.mrv}"
+                f"Expected 0 <= mev < mav_upper <= mrv, got "
+                f"{self.mev}, {self.mav_upper}, {self.mrv}"
             )
         if self.priority < 0:
             raise ValueError(f"priority must be >= 0, got {self.priority}")

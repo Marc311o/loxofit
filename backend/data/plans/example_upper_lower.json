@@ -1,0 +1,47 @@
+{
+  "weeks": 5,
+  "sessions": [
+    {
+      "name": "Upper A",
+      "max_minutes": 60,
+      "exercises": [
+        {"exercise": "bb_bench", "sets": 3},
+        {"exercise": "cable_row_seated", "sets": 3},
+        {"exercise": "db_shoulder_press", "sets": 2},
+        {"exercise": "lat_pulldown_pron", "sets": 2},
+        {"exercise": "db_curl", "sets": 2}
+      ]
+    },
+    {
+      "name": "Lower A",
+      "max_minutes": 60,
+      "exercises": [
+        {"exercise": "bb_squat", "sets": 3},
+        {"exercise": "bb_rdl", "sets": 3},
+        {"exercise": "leg_ext_uni", "sets": 2},
+        {"exercise": "ball_rollout", "sets": 2}
+      ]
+    },
+    {
+      "name": "Upper B",
+      "max_minutes": 60,
+      "exercises": [
+        {"exercise": "db_bench", "sets": 3},
+        {"exercise": "bb_row_bent", "sets": 3},
+        {"exercise": "db_lateral_raise", "sets": 3},
+        {"exercise": "reverse_pec_deck", "sets": 2},
+        {"exercise": "bb_bench_close", "sets": 2}
+      ]
+    },
+    {
+      "name": "Lower B",
+      "max_minutes": 60,
+      "exercises": [
+        {"exercise": "bb_deadlift", "sets": 2},
+        {"exercise": "leg_press_uni", "sets": 3},
+        {"exercise": "bb_hip_thrust", "sets": 3},
+        {"exercise": "bw_nordic_curl", "sets": 2}
+      ]
+    }
+  ]
+}
