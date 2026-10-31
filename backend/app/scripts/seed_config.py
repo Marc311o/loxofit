@@ -1,16 +1,11 @@
 """
-Configurations are IMMUTABLE and VERSIONED. Do not remove old configs, as resetting db will erase them
+Writes the model configurations from config_versions.CONFIGS to the database.
 
-Adding new version:
-1. Add ConfigVersion at the end of CONFIGS variable (DO NOT REMOVE OTHERS),
-2. If default – change DEFAULT_CONFIG_NAME,
-3. Launch script
+The registry itself (and the rules for adding versions) lives in config_versions.py.
 """
 
 import asyncio
 import logging
-from dataclasses import dataclass, field
-from typing import Any
 
 from sqlalchemy import select, update
 from sqlalchemy.dialects.postgresql import insert
@@ -18,39 +13,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import SessionLocal, engine
 from app.domains.catalog.enums import MuscleRole
-from app.domains.model_config.enums import VolumeMode
 from app.domains.model_config.models import ConfigRoleWeight, ModelConfig
+from app.scripts.config_versions import CONFIGS, DEFAULT_CONFIG_NAME, ConfigVersion
 
 logger = logging.getLogger("seed")
-
-
-@dataclass(frozen=True)
-class ConfigVersion:
-    name: str
-    params: dict[str, Any] = field(default_factory=dict)
-    role_weights: dict[MuscleRole, float] = field(default_factory=dict)
-
-
-FRACTIONAL_SETS = {
-    MuscleRole.PRIMARY: 1.0,
-    MuscleRole.SECONDARY: 0.5,
-    MuscleRole.STABILIZER: 0.0,
-}
-
-CONFIGS: list[ConfigVersion] = [
-    ConfigVersion(
-        name="global-v1",
-        params={
-            "volume_mode": VolumeMode.GLOBAL,
-            "global_mev": 4.0,
-            "global_mav_upper": 13.0,
-            "global_mrv": 16.0,
-        },
-        role_weights=FRACTIONAL_SETS,
-    ),
-]
-
-DEFAULT_CONFIG_NAME = "global-v1"
 _MANAGED_COLUMNS = {"id", "name", "is_default", "created_at"}
 
 

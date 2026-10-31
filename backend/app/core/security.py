@@ -13,7 +13,8 @@ from app.core.config import settings
 # EXCEPTIONS
 # ==============================
 class TokenError(Exception):
-    """Invalid token: incorrect signature, token is outdated, it is of wrong type or no data is provided."""
+    """Invalid token: incorrect signature, token is outdated,
+    it is of wrong type or no data is provided."""
 
 
 # ==============================
@@ -29,7 +30,8 @@ def hash_password(plain_password: str) -> str:
 
 
 def verify_password(plain_password: str, hashed_password: str | None) -> bool:
-    """Checks password. If user is None - compares the password to dummy_hash to prevent timing attacks."""
+    """Checks password. If user is None - compares the password to dummy_hash
+    to prevent timing attacks."""
     if hashed_password is None:
         _password_hash.verify(plain_password, _DUMMY_PASSWORD_HASH)
         return False
