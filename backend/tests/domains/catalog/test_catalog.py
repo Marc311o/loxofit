@@ -4,7 +4,7 @@ import pytest
 from httpx import AsyncClient
 
 from tests.conftest import API
-from tests.domains.catalog.conftest import Catalog
+from tests.domains.conftest import Catalog
 
 pytestmark = pytest.mark.usefixtures("catalog")
 

@@ -1,4 +1,4 @@
-from collections.abc import Sequence
+from collections.abc import Collection, Sequence
 from typing import Annotated
 
 from fastapi import Depends
@@ -66,6 +66,12 @@ class CatalogService:
         shares = compute_muscle_shares(exercise.muscle_roles, weights)
 
         return ExerciseDetail.model_validate(exercise).model_copy(update={"muscles": shares})
+
+    async def get_existing_exercise_ids(self, ids: Collection[int]) -> set[int]:
+        return await self.repo.existing_exercise_ids(ids)
+
+    async def get_volume_target_muscle_ids(self, ids: Collection[int]) -> set[int]:
+        return await self.repo.volume_target_muscle_ids(ids)
 
 
 def get_catalog_service(db: SessionDep, model_configs: ModelConfigServiceDep) -> CatalogService:

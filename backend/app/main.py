@@ -11,6 +11,7 @@ from app.core.database import SessionDep, engine
 from app.core.errors import ErrorResponse, ServiceUnavailableError, register_exception_handlers
 from app.domains.auth.router import router as auth_router
 from app.domains.catalog.router import router as catalog_router
+from app.domains.plans.router import router as plans_router
 
 logging.basicConfig(level=logging.INFO)
 
@@ -46,4 +47,5 @@ async def health(db: SessionDep) -> dict[str, str]:
 
 api_router.include_router(auth_router)
 api_router.include_router(catalog_router)
+api_router.include_router(plans_router)
 app.include_router(api_router)

@@ -1,4 +1,4 @@
-from collections.abc import Sequence
+from collections.abc import Collection, Sequence
 
 from sqlalchemy import ColumnElement, Select, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -94,3 +94,11 @@ class CatalogRepository:
             ExerciseSort.GROUP: (Exercise.main_group, Exercise.name_en),
         }[sort]
         return stmt.order_by(*order_by, Exercise.id)
+
+    async def existing_exercise_ids(self, ids: Collection[int]) -> set[int]:
+        stmt = select(Exercise.id).where(Exercise.id.in_(ids))
+        return set((await self.db.execute(stmt)).scalars())
+
+    async def volume_target_muscle_ids(self, ids: Collection[int]) -> set[int]:
+        stmt = select(Muscle.id).where(Muscle.id.in_(ids), Muscle.is_volume_target)
+        return set((await self.db.execute(stmt)).scalars())

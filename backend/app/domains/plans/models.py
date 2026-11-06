@@ -60,10 +60,14 @@ class Plan(Base):
         back_populates="plan",
         order_by="PlanWeek.week_number",
         cascade="all, delete-orphan",
+        passive_deletes=True,
         lazy="raise",
     )
     muscle_targets: Mapped[list["PlanMuscleTarget"]] = relationship(
-        back_populates="plan", cascade="all, delete-orphan", lazy="raise"
+        back_populates="plan",
+        cascade="all, delete-orphan",
+        lazy="raise",
+        passive_deletes=True,
     )
 
 
@@ -86,6 +90,7 @@ class PlanWeek(Base):
         back_populates="week",
         order_by="PlanSession.position",
         cascade="all, delete-orphan",
+        passive_deletes=True,
         lazy="raise",
     )
 
@@ -112,6 +117,7 @@ class PlanSession(Base):
         back_populates="session",
         order_by="PrescribedExercise.slot",
         cascade="all, delete-orphan",
+        passive_deletes=True,
         lazy="raise",
     )
 
