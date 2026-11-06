@@ -25,3 +25,8 @@ class InvalidPlanError(AppError):
     status_code = 422
     code = "INVALID_PLAN"
     detail = "Invalid plan"
+
+
+class UnsupportedConfigError(ConflictError):
+    code = "UNSUPPORTED_CONFIG"
+    detail = "The plan's model config is not supported by the analysis"

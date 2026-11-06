@@ -131,6 +131,9 @@ async def default_config(db: AsyncSession) -> ModelConfig:
             ConfigRoleWeight(role=S, weight=0.5),
             ConfigRoleWeight(role=MuscleRole.STABILIZER, weight=0.0),
         ],
+        global_mev=4,
+        global_mav_upper=13,
+        global_mrv=16,
     )
     db.add(config)
     await db.flush()

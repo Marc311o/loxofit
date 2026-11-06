@@ -4,7 +4,7 @@ from typing import Self
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from app.domains.plans.enums import PlanStatus
+from app.domains.plans.enums import AnalysisSource, PlanStatus, VolumeZone
 
 MAX_SESSIONS_PER_WEEK = 7
 MAX_EXERCISES_PER_SESSION = 15
@@ -140,3 +140,36 @@ class MuscleTargetsWrite(WriteSchema):
         if len(ids) != len(set(ids)):
             raise ValueError("a muscle can appear only once")
         return self
+
+
+# ---------------------------------------------------------------------------
+# Analysis
+# ---------------------------------------------------------------------------
+
+
+class MuscleAnalysis(BaseModel):
+    muscle_id: int
+    muscle_code: str
+    volume: float
+    zone: VolumeZone
+    benefit: float | None  # None in the deload week and for muscles with priority 0
+    penalty: float | None
+    score: float | None
+
+
+class WeekAnalysis(BaseModel):
+    week_number: int
+    rir: int
+    is_deload: bool
+    volume_score: float
+    overtime_minutes: float
+    session_minutes: list[float]
+    muscles: list[MuscleAnalysis]
+
+
+class PlanAnalysis(BaseModel):
+    source: AnalysisSource
+    score: float
+    volume_score: float
+    time_penalty: float
+    weeks: list[WeekAnalysis]

@@ -102,3 +102,11 @@ class CatalogRepository:
     async def volume_target_muscle_ids(self, ids: Collection[int]) -> set[int]:
         stmt = select(Muscle.id).where(Muscle.id.in_(ids), Muscle.is_volume_target)
         return set((await self.db.execute(stmt)).scalars())
+
+    async def exercises_with_roles(self, ids: Collection[int]) -> Sequence[Exercise]:
+        stmt = (
+            select(Exercise)
+            .where(Exercise.id.in_(ids))
+            .options(selectinload(Exercise.muscle_roles).joinedload(ExerciseMuscleRole.muscle))
+        )
+        return (await self.db.execute(stmt)).scalars().all()

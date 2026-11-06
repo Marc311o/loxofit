@@ -77,3 +77,14 @@ class EquipmentFilters(BaseModel):
     category: EquipmentCategory | None = None
     search: str | None = Field(min_length=1, max_length=100, default=None)
     sort: EquipmentSort = EquipmentSort.CATEGORY
+
+
+class ExerciseRoles(BaseModel):
+    """What the engine needs about an exercise: flags, tempo and muscle roles by muscle code."""
+
+    id: int
+    code: str
+    is_compound: bool
+    is_unilateral: bool
+    default_tempo: str | None
+    roles: dict[str, MuscleRole]

@@ -8,7 +8,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import SessionDep
 from app.domains.catalog.service import CatalogService, CatalogServiceDep
 from app.domains.model_config.service import ModelConfigService, ModelConfigServiceDep
-from app.domains.plans.enums import PlanStatus
+from app.domains.plans.engine_adapter import (
+    build_config,
+    build_session,
+    build_spec,
+    build_targets,
+    build_week,
+    to_analysis,
+)
+from app.domains.plans.enums import AnalysisSource, PlanStatus
 from app.domains.plans.exceptions import (
     InvalidPlanError,
     NoActivePlanError,
@@ -27,6 +35,7 @@ from app.domains.plans.repository import PlanRepository
 from app.domains.plans.schemas import (
     BaseWeekWrite,
     MuscleTargetsWrite,
+    PlanAnalysis,
     PlanCreate,
     PlanDetail,
     PlanSummary,
@@ -34,6 +43,10 @@ from app.domains.plans.schemas import (
     PrescribedExerciseWrite,
 )
 from app.domains.users.models import User
+from app.engine.evaluate import evaluate
+from app.engine.progression import build_mesocycle
+from app.engine.types import EngineConfig, ExerciseSpec, Mesocycle, MuscleTargets
+from app.engine.types import Session as EngineSession
 
 T = TypeVar("T")
 
@@ -44,6 +57,26 @@ def _take(items: dict[uuid.UUID, T], key: uuid.UUID, kind: str) -> T:
         return items.pop(key)
     except KeyError:
         raise InvalidPlanError(f"Unknown {kind} id: {key}") from None
+
+
+def _copy_session(source: PlanSession, generated: EngineSession) -> PlanSession:
+    """A week-1 session with set counts from the engine's progressed version of it."""
+    return PlanSession(
+        position=source.position,
+        name=source.name,
+        max_minutes=source.max_minutes,
+        weekday=source.weekday,
+        exercises=[
+            PrescribedExercise(
+                exercise_id=e.exercise_id,
+                slot=e.slot,
+                sets=g.sets,
+                rep_min=e.rep_min,
+                rep_max=e.rep_max,
+            )
+            for e, g in zip(source.exercises, generated.exercises, strict=True)
+        ],
+    )
 
 
 class PlanService:
@@ -68,6 +101,21 @@ class PlanService:
         if plan_id is None:
             raise NoActivePlanError()
         return await self.get_plan(user, plan_id)
+
+    async def analyze(self, user: User, plan_id: uuid.UUID) -> PlanAnalysis:
+        plan = await self._get_owned(user, plan_id, detail=True)
+        config, targets, specs, muscle_ids = await self._engine_context(plan)
+
+        if len(plan.weeks) == plan.num_weeks:
+            source = AnalysisSource.STORED
+            mesocycle = Mesocycle(tuple(build_week(w, specs) for w in plan.weeks))
+        else:
+            source = AnalysisSource.PROJECTED
+            base = tuple(build_session(s, specs) for s in plan.weeks[0].sessions)
+            mesocycle = build_mesocycle(base, plan.num_weeks, config)
+
+        evaluation = evaluate(mesocycle, targets, config)
+        return to_analysis(mesocycle, evaluation, targets, muscle_ids, source)
 
     # -- commands -----------------------------------------------------------
 
@@ -153,6 +201,35 @@ class PlanService:
         await self._save(plan)
         return await self.get_plan(user, plan.id)
 
+    async def generate_progression(self, user: User, plan_id: uuid.UUID) -> PlanDetail:
+        plan = await self._get_editable(user, plan_id)
+        base = plan.weeks[0]
+        if not any(s.exercises for s in base.sessions):
+            raise InvalidPlanError("The base week has no exercises")
+
+        config, _, specs, _ = await self._engine_context(plan)
+        base_sessions = tuple(build_session(s, specs) for s in base.sessions)
+        mesocycle = build_mesocycle(base_sessions, plan.num_weeks, config)
+
+        self._drop_generated_weeks(plan)
+        await self.db.flush()
+
+        base.rir = mesocycle.weeks[0].rir
+        for number, week in enumerate(mesocycle.weeks[1:], start=2):
+            plan.weeks.append(
+                PlanWeek(
+                    week_number=number,
+                    rir=week.rir,
+                    is_deload=week.is_deload,
+                    sessions=[
+                        _copy_session(src, gen)
+                        for src, gen in zip(base.sessions, week.sessions, strict=True)
+                    ],
+                )
+            )
+        await self._save(plan)
+        return await self.get_plan(user, plan.id)
+
     # -- helpers ------------------------------------------------------------
 
     async def _get_owned(self, user: User, plan_id: uuid.UUID, *, detail: bool = False) -> Plan:
@@ -178,6 +255,25 @@ class PlanService:
         missing = ids - await self.catalog.get_existing_exercise_ids(ids)
         if missing:
             raise InvalidPlanError(f"Unknown exercise ids: {sorted(missing)}")
+
+    async def _engine_context(
+        self, plan: Plan
+    ) -> tuple[EngineConfig, MuscleTargets, dict[int, ExerciseSpec], dict[str, int]]:
+        """Engine config, muscle targets, exercise specs and muscle code -> id for a plan."""
+        config = await self.model_configs.get(plan.config_id)
+        muscles = await self.catalog.list_muscles()
+        priorities = {t.muscle_id: t.priority for t in plan.muscle_targets}
+
+        ids = {e.exercise_id for w in plan.weeks for s in w.sessions for e in s.exercises}
+        roles = await self.catalog.get_exercise_roles(ids) if ids else {}
+        specs = {exercise_id: build_spec(r) for exercise_id, r in roles.items()}
+
+        return (
+            build_config(config),
+            build_targets(config, muscles, priorities),
+            specs,
+            {m.code: m.id for m in muscles},
+        )
 
     @staticmethod
     def _drop_generated_weeks(plan: Plan) -> None:

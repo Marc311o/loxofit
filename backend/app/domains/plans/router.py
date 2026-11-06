@@ -7,6 +7,7 @@ from app.domains.auth.dependencies import CurrentUser
 from app.domains.plans.schemas import (
     BaseWeekWrite,
     MuscleTargetsWrite,
+    PlanAnalysis,
     PlanCreate,
     PlanDetail,
     PlanSummary,
@@ -75,3 +76,17 @@ async def set_muscle_targets(
     plan_id: uuid.UUID, data: MuscleTargetsWrite, user: CurrentUser, plans: PlanServiceDep
 ) -> PlanDetail:
     return await plans.set_muscle_targets(user, plan_id, data)
+
+
+@router.post("/{plan_id}/progression", responses=_CONFLICT)
+async def generate_progression(
+    plan_id: uuid.UUID, user: CurrentUser, plans: PlanServiceDep
+) -> PlanDetail:
+    return await plans.generate_progression(user, plan_id)
+
+
+@router.get("/{plan_id}/analysis", responses=_CONFLICT)
+async def analyze_plan(
+    plan_id: uuid.UUID, user: CurrentUser, plans: PlanServiceDep
+) -> PlanAnalysis:
+    return await plans.analyze(user, plan_id)

@@ -122,3 +122,83 @@ async def test_delete_plan(client: AsyncClient, auth_headers: dict, plan: dict, 
     response = await client.delete(f"{PLANS}/{plan['id']}", headers=auth_headers)
     assert response.status_code == 204
     assert (await client.get(f"{PLANS}/{plan['id']}", headers=auth_headers)).status_code == 404
+
+
+async def _with_progression(client: AsyncClient, headers: dict, plan: dict, catalog: Catalog):
+    url = f"{PLANS}/{plan['id']}"
+    await client.put(f"{url}/base-week", json=_week(catalog, sets=(4, 2)), headers=headers)
+    response = await client.post(f"{url}/progression", headers=headers)
+    assert response.status_code == 200, response.text
+    return response.json()
+
+
+async def test_progression_materializes_all_weeks(
+    client: AsyncClient, auth_headers: dict, plan: dict, catalog: Catalog
+) -> None:
+    result = await _with_progression(client, auth_headers, plan, catalog)
+
+    weeks = result["weeks"]
+    assert [w["week_number"] for w in weeks] == [1, 2, 3, 4, 5]
+    assert [w["is_deload"] for w in weeks] == [False, False, False, False, True]
+    # 4 sets * 1.15 = 4.6 -> 5; deload: 4 * 0.5 = 2
+    week_2 = weeks[1]["sessions"][0]["exercises"]
+    deload = weeks[4]["sessions"][0]["exercises"]
+    assert week_2[0]["sets"] == 5
+    assert deload[0]["sets"] == 2
+
+
+async def test_progression_can_be_regenerated(
+    client: AsyncClient, auth_headers: dict, plan: dict, catalog: Catalog
+) -> None:
+    await _with_progression(client, auth_headers, plan, catalog)
+    response = await client.post(f"{PLANS}/{plan['id']}/progression", headers=auth_headers)
+    assert response.status_code == 200, response.text
+    assert len(response.json()["weeks"]) == 5
+
+
+async def test_progression_of_empty_week_is_rejected(
+    client: AsyncClient, auth_headers: dict, plan: dict
+) -> None:
+    response = await client.post(f"{PLANS}/{plan['id']}/progression", headers=auth_headers)
+    assert response.status_code == 422
+
+
+async def test_analysis_is_projected_before_progression(
+    client: AsyncClient, auth_headers: dict, plan: dict, catalog: Catalog
+) -> None:
+    url = f"{PLANS}/{plan['id']}"
+    await client.put(f"{url}/base-week", json=_week(catalog), headers=auth_headers)
+
+    response = await client.get(f"{url}/analysis", headers=auth_headers)
+
+    assert response.status_code == 200, response.text
+    body = response.json()
+    assert body["source"] == "projected"
+    assert len(body["weeks"]) == 5
+    assert body["weeks"][-1]["is_deload"]
+    assert {m["muscle_code"] for m in body["weeks"][0]["muscles"]} == set(catalog.muscles)
+
+
+async def test_analysis_uses_stored_weeks_after_progression(
+    client: AsyncClient, auth_headers: dict, plan: dict, catalog: Catalog
+) -> None:
+    await _with_progression(client, auth_headers, plan, catalog)
+    response = await client.get(f"{PLANS}/{plan['id']}/analysis", headers=auth_headers)
+    assert response.json()["source"] == "stored"
+
+
+async def test_activation_archives_previous_active_plan(
+    client: AsyncClient, auth_headers: dict, plan: dict, catalog: Catalog
+) -> None:
+    await _with_progression(client, auth_headers, plan, catalog)
+    first = await client.post(f"{PLANS}/{plan['id']}/activate", headers=auth_headers)
+    assert first.status_code == 200, first.text
+
+    second_plan = (await client.post(PLANS, json={"name": "B"}, headers=auth_headers)).json()
+    await _with_progression(client, auth_headers, second_plan, catalog)
+    await client.post(f"{PLANS}/{second_plan['id']}/activate", headers=auth_headers)
+
+    plans = {p["id"]: p["status"] for p in (await client.get(PLANS, headers=auth_headers)).json()}
+    assert plans == {plan["id"]: "archived", second_plan["id"]: "active"}
+    active = await client.get(f"{PLANS}/active", headers=auth_headers)
+    assert active.json()["id"] == second_plan["id"]
