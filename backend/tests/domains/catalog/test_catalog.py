@@ -155,6 +155,23 @@ async def test_list_item_includes_equipment(client, auth_headers):
     assert sorted(e["code"] for e in item["equipment"]) == ["barbell", "flat_bench"]
 
 
+async def test_available_with_returns_only_exercises_with_owned_equipment(
+    client: AsyncClient, auth_headers: dict, catalog: Catalog
+) -> None:
+    owned = catalog.equipment["barbell"]
+    response = await client.get(
+        f"{API}/exercises",
+        params={"available_with": [owned.id], "size": 100},
+        headers=auth_headers,
+    )
+
+    assert response.status_code == 200, response.text
+    expected = {
+        e.code for e in catalog.exercises.values() if all(q.id == owned.id for q in e.equipment)
+    }
+    assert {e["code"] for e in response.json()["items"]} == expected
+
+
 # ---------------------------------------------------------------------------
 # Exercise detail
 # ---------------------------------------------------------------------------

@@ -69,6 +69,7 @@ class ExerciseFilters(PageParams):
     equipment_id: int | None = Field(default=None, ge=1)
     search: str | None = Field(default=None, min_length=1, max_length=100)
     sort: ExerciseSort = ExerciseSort.NAME_EN
+    available_with: list[int] | None = Field(default=None, max_length=100)
 
 
 class EquipmentFilters(BaseModel):

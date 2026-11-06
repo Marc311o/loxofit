@@ -87,6 +87,12 @@ class CatalogService:
             for e in await self.repo.exercises_with_roles(ids)
         }
 
+    async def get_equipment_by_ids(self, ids: Collection[int]) -> list[EquipmentRead]:
+        return [EquipmentRead.model_validate(e) for e in await self.repo.equipment_by_ids(ids)]
+
+    async def get_existing_equipment_ids(self, ids: Collection[int]) -> set[int]:
+        return await self.repo.existing_equipment_ids(ids)
+
 
 def get_catalog_service(db: SessionDep, model_configs: ModelConfigServiceDep) -> CatalogService:
     return CatalogService(db, model_configs)
