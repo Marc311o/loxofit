@@ -69,6 +69,7 @@ class ExerciseFilters(PageParams):
     equipment_id: int | None = Field(default=None, ge=1)
     search: str | None = Field(default=None, min_length=1, max_length=100)
     sort: ExerciseSort = ExerciseSort.NAME_EN
+    available_with: list[int] | None = Field(default=None, max_length=100)
 
 
 class EquipmentFilters(BaseModel):
@@ -77,3 +78,14 @@ class EquipmentFilters(BaseModel):
     category: EquipmentCategory | None = None
     search: str | None = Field(min_length=1, max_length=100, default=None)
     sort: EquipmentSort = EquipmentSort.CATEGORY
+
+
+class ExerciseRoles(BaseModel):
+    """What the engine needs about an exercise: flags, tempo and muscle roles by muscle code."""
+
+    id: int
+    code: str
+    is_compound: bool
+    is_unilateral: bool
+    default_tempo: str | None
+    roles: dict[str, MuscleRole]

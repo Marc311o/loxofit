@@ -1,4 +1,4 @@
-from collections.abc import Sequence
+from collections.abc import Collection, Sequence
 from typing import Annotated
 
 from fastapi import Depends
@@ -16,6 +16,7 @@ from app.domains.catalog.schemas import (
     ExerciseDetail,
     ExerciseFilters,
     ExerciseListItem,
+    ExerciseRoles,
     MuscleRead,
     MuscleShare,
 )
@@ -66,6 +67,31 @@ class CatalogService:
         shares = compute_muscle_shares(exercise.muscle_roles, weights)
 
         return ExerciseDetail.model_validate(exercise).model_copy(update={"muscles": shares})
+
+    async def get_existing_exercise_ids(self, ids: Collection[int]) -> set[int]:
+        return await self.repo.existing_exercise_ids(ids)
+
+    async def get_volume_target_muscle_ids(self, ids: Collection[int]) -> set[int]:
+        return await self.repo.volume_target_muscle_ids(ids)
+
+    async def get_exercise_roles(self, ids: Collection[int]) -> dict[int, ExerciseRoles]:
+        return {
+            e.id: ExerciseRoles(
+                id=e.id,
+                code=e.code,
+                is_compound=e.is_compound,
+                is_unilateral=e.is_unilateral,
+                default_tempo=e.default_tempo,
+                roles={r.muscle.code: r.role for r in e.muscle_roles},
+            )
+            for e in await self.repo.exercises_with_roles(ids)
+        }
+
+    async def get_equipment_by_ids(self, ids: Collection[int]) -> list[EquipmentRead]:
+        return [EquipmentRead.model_validate(e) for e in await self.repo.equipment_by_ids(ids)]
+
+    async def get_existing_equipment_ids(self, ids: Collection[int]) -> set[int]:
+        return await self.repo.existing_equipment_ids(ids)
 
 
 def get_catalog_service(db: SessionDep, model_configs: ModelConfigServiceDep) -> CatalogService:

@@ -83,3 +83,14 @@ class UserProfile(Base):
     )
 
     user: Mapped["User"] = relationship(back_populates="profile", lazy="raise")
+
+
+class UserEquipment(Base):
+    __tablename__ = "user_equipment"
+
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), primary_key=True
+    )
+    equipment_id: Mapped[int] = mapped_column(
+        ForeignKey("equipment.id", ondelete="CASCADE"), primary_key=True, index=True
+    )

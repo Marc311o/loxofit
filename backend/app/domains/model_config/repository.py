@@ -16,3 +16,11 @@ class ModelConfigRepository:
             .options(selectinload(ModelConfig.role_weights))
         )
         return (await self.db.execute(stmt)).scalar_one_or_none()
+
+    async def get_by_id(self, config_id: int) -> ModelConfig | None:
+        stmt = (
+            select(ModelConfig)
+            .where(ModelConfig.id == config_id)
+            .options(selectinload(ModelConfig.role_weights))
+        )
+        return (await self.db.execute(stmt)).scalar_one_or_none()

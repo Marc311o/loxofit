@@ -6,7 +6,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import SessionDep
 from app.domains.catalog.enums import MuscleRole
-from app.domains.model_config.exceptions import DefaultConfigMissingError
+from app.domains.model_config.exceptions import DefaultConfigMissingError, ModelConfigNotFoundError
+from app.domains.model_config.models import ModelConfig
 from app.domains.model_config.repository import ModelConfigRepository
 
 logger = logging.getLogger(__name__)
@@ -26,6 +27,12 @@ class ModelConfigService:
     async def get_default_role_weights(self) -> dict[MuscleRole, float]:
         config = await self.get_default()
         return {rw.role: rw.weight for rw in config.role_weights}
+
+    async def get(self, config_id: int) -> ModelConfig:
+        config = await self.repo.get_by_id(config_id)
+        if config is None:
+            raise ModelConfigNotFoundError()
+        return config
 
 
 def get_model_config_service(db: SessionDep) -> ModelConfigService:

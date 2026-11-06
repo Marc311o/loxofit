@@ -5,6 +5,7 @@ Shared by the catalog seed (seed_catalog.py) and the engine CLI (engine_eval.py)
 both can parse the same file. Importing this module needs no .env and no database.
 """
 
+import warnings
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Annotated, Any, TypeVar
@@ -242,7 +243,11 @@ def load_catalog(path: Path = DATA_FILE) -> CatalogData:
     if not path.exists():
         raise SeedDataError([f"File {path} not found"])
 
-    wb = load_workbook(path, read_only=True, data_only=True)
+    with warnings.catch_warnings():
+        warnings.filterwarnings(
+            "ignore", message="Data Validation extension is not supported", category=UserWarning
+        )
+        wb = load_workbook(path, read_only=True, data_only=True)
     errors: list[str] = []
     try:
         data = CatalogData(

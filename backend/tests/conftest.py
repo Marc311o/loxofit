@@ -22,6 +22,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engin
 import app.domains.auth.models
 import app.domains.catalog.models
 import app.domains.model_config.models
+import app.domains.plans.models
 import app.domains.users.models
 from app.core.config import settings
 from app.core.database import Base, get_db

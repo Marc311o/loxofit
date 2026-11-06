@@ -1,4 +1,4 @@
-from collections.abc import Sequence
+from collections.abc import Collection, Sequence
 
 from sqlalchemy import ColumnElement, Select, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -84,6 +84,8 @@ class CatalogRepository:
             stmt = stmt.where(Exercise.equipment.any(Equipment.id == filters.equipment_id))
         if filters.search:
             stmt = stmt.where(_search(filters.search, Exercise.name_en, Exercise.name_pl))
+        if filters.available_with is not None:
+            stmt = stmt.where(~Exercise.equipment.any(Equipment.id.not_in(filters.available_with)))
         return stmt
 
     @staticmethod
@@ -94,3 +96,31 @@ class CatalogRepository:
             ExerciseSort.GROUP: (Exercise.main_group, Exercise.name_en),
         }[sort]
         return stmt.order_by(*order_by, Exercise.id)
+
+    async def existing_exercise_ids(self, ids: Collection[int]) -> set[int]:
+        stmt = select(Exercise.id).where(Exercise.id.in_(ids))
+        return set((await self.db.execute(stmt)).scalars())
+
+    async def volume_target_muscle_ids(self, ids: Collection[int]) -> set[int]:
+        stmt = select(Muscle.id).where(Muscle.id.in_(ids), Muscle.is_volume_target)
+        return set((await self.db.execute(stmt)).scalars())
+
+    async def exercises_with_roles(self, ids: Collection[int]) -> Sequence[Exercise]:
+        stmt = (
+            select(Exercise)
+            .where(Exercise.id.in_(ids))
+            .options(selectinload(Exercise.muscle_roles).joinedload(ExerciseMuscleRole.muscle))
+        )
+        return (await self.db.execute(stmt)).scalars().all()
+
+    async def equipment_by_ids(self, ids: Collection[int]) -> Sequence[Equipment]:
+        stmt = (
+            select(Equipment)
+            .where(Equipment.id.in_(ids))
+            .order_by(Equipment.category, Equipment.name_en)
+        )
+        return (await self.db.execute(stmt)).scalars().all()
+
+    async def existing_equipment_ids(self, ids: Collection[int]) -> set[int]:
+        stmt = select(Equipment.id).where(Equipment.id.in_(ids))
+        return set((await self.db.execute(stmt)).scalars())
