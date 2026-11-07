@@ -22,11 +22,12 @@ export function BrandPanel() {
         flexDirection: "column",
         justifyContent: "space-between",
         gap: { xs: 3.5, md: 6 },
+        width: "100%"
       }}
     >
       <Logo inverted />
 
-      <Stack spacing={4} sx={{ maxWidth: 460}}>
+      <Stack spacing={4} sx={{minWidth: "300px"}}>
         <Typography
           sx={{
             display: { xs: "none", md: "block" },
