@@ -69,6 +69,7 @@ class EquipmentRow(SeedRow):
     category: EquipmentCategory
     description_en: str | None = None
     description_pl: str | None = None
+    image_url: str | None = Field(default=None, max_length=300)
 
 
 class ExerciseRow(SeedRow):

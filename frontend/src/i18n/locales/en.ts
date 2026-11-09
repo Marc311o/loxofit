@@ -156,6 +156,7 @@ export const en = {
       showResults_one: "Show {{count}} exercise",
       showResults_other: "Show {{count}} exercises",
       showResultsPending: "Show results",
+      muscle: "Muscle",
     },
     list: {
       count_one: "{{count}} exercise",
@@ -189,6 +190,33 @@ export const en = {
       notFound: "Exercise not found",
       notFoundBody: "It may have been removed from the catalog.",
       backToList: "Back to exercises",
+    },
+    muscles: {
+      showExercises: "Exercises",
+      notTracked: "No volume target",
+      notTrackedHint:
+        "Plans set no volume target for this muscle - it only gets work as a helper in other exercises.",
+      loadError: "Couldn't load muscles",
+    },
+    equipment: {
+      intro:
+        "Tick the equipment you have access to. Your plans and the “My equipment only” filter will only use exercises you can do with it.",
+      selectAll: "Select all",
+      clearAll: "Clear",
+      toggleCategory: "Select all: {{category}}",
+      selected: "{{selected}} of {{total}} selected",
+      available_one: "{{count}} exercise available",
+      available_other: "{{count}} exercises available",
+      bodyweightOnly: "bodyweight exercises only",
+      unsaved: "Unsaved changes",
+      discard: "Discard",
+      save: "Save",
+      saved: "Equipment saved.",
+      leaveTitle: "Leave without saving?",
+      leaveBody: "Your equipment changes will be lost.",
+      leave: "Leave",
+      stay: "Stay",
+      loadError: "Couldn't load equipment",
     },
     muscleGroups: {
       chest: "Chest",

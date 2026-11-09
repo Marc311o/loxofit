@@ -30,6 +30,7 @@ class EquipmentRead(ORMSchema):
     name_en: str
     name_pl: str
     category: EquipmentCategory
+    image_url: str | None
 
 
 class ExerciseListItem(ORMSchema):

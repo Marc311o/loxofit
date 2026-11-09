@@ -55,6 +55,7 @@ class Equipment(Base):
             values_callable=lambda e: [member.value for member in e],
         )
     )
+    image_url: Mapped[str | None] = mapped_column(String(300))
 
 
 class Exercise(Base):

@@ -55,6 +55,7 @@ export type Equipment = {
   name_en: string;
   name_pl: string;
   category: EquipmentCategory;
+  image_url: string | null;
 };
 
 export type ExerciseSummary = {

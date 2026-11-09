@@ -158,6 +158,7 @@ export const pl: Messages = {
       showResults_many: "Pokaż {{count}} ćwiczeń",
       showResults_other: "Pokaż {{count}} ćwiczenia",
       showResultsPending: "Pokaż wyniki",
+      muscle: "Mięsień",
     },
     list: {
       count_one: "{{count}} ćwiczenie",
@@ -193,6 +194,35 @@ export const pl: Messages = {
       notFound: "Nie znaleziono ćwiczenia",
       notFoundBody: "Mogło zostać usunięte z katalogu.",
       backToList: "Wróć do ćwiczeń",
+    },
+    muscles: {
+      showExercises: "Ćwiczenia",
+      notTracked: "Poza objętością",
+      notTrackedHint:
+        "Plany nie wyznaczają dla tego mięśnia docelowej objętości - pracuje tylko pomocniczo w innych ćwiczeniach.",
+      loadError: "Nie udało się wczytać mięśni",
+    },
+    equipment: {
+      intro:
+        "Zaznacz sprzęt, do którego masz dostęp. Plany i filtr „Tylko mój sprzęt” użyją tylko ćwiczeń, które da się na nim wykonać.",
+      selectAll: "Zaznacz wszystko",
+      clearAll: "Wyczyść",
+      toggleCategory: "Zaznacz wszystko: {{category}}",
+      selected: "Wybrano {{selected}} z {{total}}",
+      available_one: "{{count}} dostępne ćwiczenie",
+      available_few: "{{count}} dostępne ćwiczenia",
+      available_many: "{{count}} dostępnych ćwiczeń",
+      available_other: "{{count}} dostępnego ćwiczenia",
+      bodyweightOnly: "tylko ćwiczenia z masą ciała",
+      unsaved: "Niezapisane zmiany",
+      discard: "Odrzuć",
+      save: "Zapisz",
+      saved: "Zapisano sprzęt.",
+      leaveTitle: "Wyjść bez zapisywania?",
+      leaveBody: "Zmiany w sprzęcie zostaną utracone.",
+      leave: "Wyjdź",
+      stay: "Zostań",
+      loadError: "Nie udało się wczytać sprzętu",
     },
     muscleGroups: {
       chest: "Klatka",
