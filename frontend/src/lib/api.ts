@@ -1,12 +1,9 @@
+import i18n from "@/i18n";
+import { en } from "@/i18n/locales/en";
 import { notifySessionExpired, session } from "@/lib/session";
 
 const BASE_URL = "/api/v1";
-const NO_REFRESH_PATHS = [
-  "/auth/login",
-  "/auth/register",
-  "/auth/refresh",
-  "/auth/logout",
-];
+const NO_REFRESH_PATHS = ["/auth/login", "/auth/register", "/auth/refresh", "/auth/logout"];
 
 export type TokenResponse = {
   access_token: string;
@@ -20,11 +17,7 @@ export class ApiError extends Error {
   readonly detail: unknown;
 
   constructor(status: number, code: string | null, detail: unknown) {
-    super(
-      typeof detail === "string"
-        ? detail
-        : `Request failed with status ${status}`,
-    );
+    super(typeof detail === "string" ? detail : `Request failed with status ${status}`);
     this.status = status;
     this.code = code;
     this.detail = detail;
@@ -35,8 +28,7 @@ function send(path: string, init: RequestInit = {}): Promise<Response> {
   const headers = new Headers(init.headers);
   const token = session.getAccessToken();
   if (token) headers.set("Authorization", `Bearer ${token}`);
-  if (typeof init.body === "string")
-    headers.set("Content-Type", "application/json");
+  if (typeof init.body === "string") headers.set("Content-Type", "application/json");
   return fetch(`${BASE_URL}${path}`, {
     ...init,
     headers,
@@ -90,26 +82,17 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
   if (!response.ok) {
     const body = await response.json().catch(() => null);
-    throw new ApiError(
-      response.status,
-      body?.code ?? null,
-      body?.detail ?? body,
-    );
+    throw new ApiError(response.status, body?.code ?? null, body?.detail ?? body);
   }
-  return response.status === 204
-    ? (undefined as T)
-    : ((await response.json()) as T);
+  return response.status === 204 ? (undefined as T) : ((await response.json()) as T);
 }
 
-const json = (body: unknown) =>
-  body === undefined ? undefined : JSON.stringify(body);
+const json = (body: unknown) => (body === undefined ? undefined : JSON.stringify(body));
 
 export const api = {
   get: <T>(path: string) => request<T>(path),
-  post: <T>(path: string, body?: unknown) =>
-    request<T>(path, { method: "POST", body: json(body) }),
-  put: <T>(path: string, body?: unknown) =>
-    request<T>(path, { method: "PUT", body: json(body) }),
+  post: <T>(path: string, body?: unknown) => request<T>(path, { method: "POST", body: json(body) }),
+  put: <T>(path: string, body?: unknown) => request<T>(path, { method: "PUT", body: json(body) }),
   patch: <T>(path: string, body?: unknown) =>
     request<T>(path, { method: "PATCH", body: json(body) }),
   delete: <T>(path: string) => request<T>(path, { method: "DELETE" }),
@@ -122,11 +105,7 @@ type ValidationIssue = { loc: (string | number)[]; msg: string };
 
 /** FastAPI 422 -> { field: message } */
 export function getFieldErrors(error: unknown): Record<string, string> {
-  if (
-    !(error instanceof ApiError) ||
-    error.status !== 422 ||
-    !Array.isArray(error.detail)
-  ) {
+  if (!(error instanceof ApiError) || error.status !== 422 || !Array.isArray(error.detail)) {
     return {};
   }
   const errors: Record<string, string> = {};
@@ -139,13 +118,18 @@ export function getFieldErrors(error: unknown): Record<string, string> {
   return errors;
 }
 
+type KnownErrorCode = keyof typeof en.common.errorCodes;
+
+function isKnownErrorCode(code: string | null): code is KnownErrorCode {
+  return code !== null && code in en.common.errorCodes;
+}
+
+/** User-facing message: a translated backend `code` when we know it, otherwise a generic one. */
 export function errorMessage(error: unknown): string {
   if (error instanceof ApiError) {
-    if (error.status >= 500)
-      return "Something went wrong on our side. Try again in a moment.";
-    if (typeof error.detail === "string") return error.detail;
-    return "The request could not be completed.";
+    if (isKnownErrorCode(error.code)) return i18n.t(`errorCodes.${error.code}`);
+    return error.status >= 500 ? i18n.t("errors.server") : i18n.t("errors.requestFailed");
   }
-  if (error instanceof TypeError) return "No connection to the server.";
-  return "Something went wrong.";
+  if (error instanceof TypeError) return i18n.t("errors.network");
+  return i18n.t("errors.generic");
 }

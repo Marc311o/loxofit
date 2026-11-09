@@ -8,11 +8,13 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import { onSessionExpired } from "@/lib/session";
 
 export function SessionExpiredDialog() {
+  const { t } = useTranslation("auth");
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -28,15 +30,13 @@ export function SessionExpiredDialog() {
 
   return (
     <Dialog open={open} aria-labelledby="session-expired-title">
-      <DialogTitle id="session-expired-title">Session expired</DialogTitle>
+      <DialogTitle id="session-expired-title">{t("sessionExpired.title")}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          You have been signed out. Log in again to continue.
-        </DialogContentText>
+        <DialogContentText>{t("sessionExpired.body")}</DialogContentText>
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2 }}>
         <Button variant="contained" onClick={handleSignIn}>
-          Log in again
+          {t("sessionExpired.action")}
         </Button>
       </DialogActions>
     </Dialog>

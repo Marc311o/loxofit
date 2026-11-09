@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "format": "prettier --write src",
     "format:check": "prettier --check .",
-    "gen:api": "openapi-typescript http://localhost:8000/api/v1/openapi.json -o src/lib/api/schema.d.ts"
+    "gen:api": "openapi-typescript http://localhost:8000/api/v1/openapi.json -o src/lib/api/schema.d.ts",
+    "gen:body-map": "node scripts/build-body-map.mjs && prettier --write src/features/catalog/components/bodyMapPaths.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

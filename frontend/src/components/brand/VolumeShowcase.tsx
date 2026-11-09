@@ -1,15 +1,19 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { keyframes } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
+import { useFormatNumber } from "@/i18n/useLocalized";
 import { useCycle } from "@/lib/useCycle";
 import { FONT_MONO } from "@/styles/theme";
 
 const SCALE = 22; // sets shown at full bar width
 const MRV = 16;
-const MUSCLES = ["Chest", "Lats", "Quads", "Glutes"] as const;
+/** Keys in `brand.muscles`. */
+const MUSCLES = ["chest", "lats", "quads", "glutes"] as const;
 
 type Week = {
-  label: string;
+  /** 1-based week number; deload weeks are labelled separately. */
+  number: number;
   rir: number;
   deload?: boolean;
   sets: Record<(typeof MUSCLES)[number], number>;
@@ -18,30 +22,30 @@ type Week = {
 // One mesocycle of the example plan - volume grows, glutes cross MRV in W4, deload drops it.
 const WEEKS: Week[] = [
   {
-    label: "W1",
+    number: 1,
     rir: 3,
-    sets: { Chest: 7.5, Lats: 9, Quads: 9.5, Glutes: 13.5 },
+    sets: { chest: 7.5, lats: 9, quads: 9.5, glutes: 13.5 },
   },
   {
-    label: "W2",
+    number: 2,
     rir: 2,
-    sets: { Chest: 8.5, Lats: 10.5, Quads: 11, Glutes: 15.5 },
+    sets: { chest: 8.5, lats: 10.5, quads: 11, glutes: 15.5 },
   },
   {
-    label: "W3",
+    number: 3,
     rir: 2,
-    sets: { Chest: 10, Lats: 12, Quads: 12.5, Glutes: 18 },
+    sets: { chest: 10, lats: 12, quads: 12.5, glutes: 18 },
   },
   {
-    label: "W4",
+    number: 4,
     rir: 1,
-    sets: { Chest: 11.5, Lats: 13.5, Quads: 14, Glutes: 20.5 },
+    sets: { chest: 11.5, lats: 13.5, quads: 14, glutes: 20.5 },
   },
   {
-    label: "Deload",
+    number: 5,
     rir: 4,
     deload: true,
-    sets: { Chest: 4, Lats: 4.5, Quads: 5, Glutes: 7 },
+    sets: { chest: 4, lats: 4.5, quads: 5, glutes: 7 },
   },
 ];
 const STATIC_WEEK = 2;
@@ -66,6 +70,9 @@ export function VolumeShowcase({ animate }: { animate: boolean }) {
   const cycled = useCycle(WEEKS.length, 2600, !animate);
   const index = animate ? cycled : STATIC_WEEK;
   const week = WEEKS[index];
+  const { t } = useTranslation("brand");
+  const formatNumber = useFormatNumber();
+  const weekLabel = week.deload ? t("deload") : t("week", { number: week.number });
 
   return (
     <Box
@@ -78,18 +85,15 @@ export function VolumeShowcase({ animate }: { animate: boolean }) {
         gap: 1.75,
       }}
     >
-      <Stack
-        direction="row"
-        sx={{ justifyContent: "space-between", alignItems: "center" }}
-      >
+      <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center" }}>
         <Typography variant="overline" sx={{ color: "#A9CFC4" }}>
-          Effective sets
+          {t("effectiveSets")}
         </Typography>
         <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
           <Stack direction="row" spacing={0.5} aria-hidden>
             {WEEKS.map((w, i) => (
               <Box
-                key={w.label}
+                key={w.number}
                 sx={{
                   width: i === index ? 16 : 6,
                   height: 6,
@@ -102,7 +106,7 @@ export function VolumeShowcase({ animate }: { animate: boolean }) {
             ))}
           </Stack>
           <Typography
-            key={week.label}
+            key={week.number}
             sx={{
               minWidth: 92,
               textAlign: "right",
@@ -113,7 +117,7 @@ export function VolumeShowcase({ animate }: { animate: boolean }) {
               ...NO_MOTION,
             }}
           >
-            {week.label.toUpperCase()} · RIR {week.rir}
+            {weekLabel.toUpperCase()} · RIR {week.rir}
           </Typography>
         </Stack>
       </Stack>
@@ -121,14 +125,9 @@ export function VolumeShowcase({ animate }: { animate: boolean }) {
       {MUSCLES.map((name) => {
         const sets = week.sets[name];
         return (
-          <Stack
-            key={name}
-            direction="row"
-            spacing={1.75}
-            sx={{ alignItems: "center" }}
-          >
-            <Typography sx={{ width: 56, fontSize: 13, color: "#E4F1EC" }}>
-              {name}
+          <Stack key={name} direction="row" spacing={1.75} sx={{ alignItems: "center" }}>
+            <Typography sx={{ width: 84, fontSize: 13, color: "#E4F1EC" }}>
+              {t(`muscles.${name}`)}
             </Typography>
             <Box
               sx={{
@@ -177,7 +176,7 @@ export function VolumeShowcase({ animate }: { animate: boolean }) {
                 ...NO_MOTION,
               }}
             >
-              {sets}
+              {formatNumber(sets)}
             </Typography>
           </Stack>
         );

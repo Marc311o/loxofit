@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import VisibilityOffOutlined from "@mui/icons-material/VisibilityOffOutlined";
 import VisibilityOutlined from "@mui/icons-material/VisibilityOutlined";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 type TextInputProps = {
   label: string;
@@ -41,6 +42,7 @@ export function TextInput({
   errorText,
   helperText,
 }: TextInputProps) {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const hasError = error || Boolean(errorText);
 
@@ -67,7 +69,7 @@ export function TextInput({
           endAdornment: password ? (
             <InputAdornment position="end">
               <IconButton
-                aria-label={visible ? "Hide password" : "Show password"}
+                aria-label={visible ? t("password.hide") : t("password.show")}
                 onClick={() => setVisible((v) => !v)}
                 edge="end"
                 disabled={disabled}

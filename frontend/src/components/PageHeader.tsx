@@ -8,12 +8,7 @@ type PageHeaderProps = {
   actions?: ReactNode;
 };
 
-export function PageHeader({
-  title,
-  overline,
-  subtitle,
-  actions,
-}: PageHeaderProps) {
+export function PageHeader({ title, overline, subtitle, actions }: PageHeaderProps) {
   return (
     <Stack
       direction="row"

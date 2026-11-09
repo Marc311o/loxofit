@@ -1,9 +1,4 @@
-import {
-  LOGO_MARKS,
-  LOGO_VARIANT,
-  MARK_BG,
-  type LogoVariant,
-} from "./logoMarks";
+import { LOGO_MARKS, LOGO_VARIANT, MARK_BG, type LogoVariant } from "./logoMarks";
 
 interface LogoMarkProps {
   size?: number;
@@ -11,11 +6,7 @@ interface LogoMarkProps {
   title?: string;
 }
 
-export function LogoMark({
-  size = 32,
-  variant = LOGO_VARIANT,
-  title = "Loxofit",
-}: LogoMarkProps) {
+export function LogoMark({ size = 32, variant = LOGO_VARIANT, title = "Loxofit" }: LogoMarkProps) {
   const mark = LOGO_MARKS[variant];
 
   return (

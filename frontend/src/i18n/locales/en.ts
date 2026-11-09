@@ -1,0 +1,245 @@
+// Source of truth for translation keys - every other locale must match this shape.
+export const en = {
+  common: {
+    moreInfo: "More information",
+    actions: {
+      tryAgain: "Try again",
+      close: "Close",
+    },
+    language: {
+      label: "Language",
+      pl: "Polski",
+      en: "English",
+    },
+    password: {
+      show: "Show password",
+      hide: "Hide password",
+    },
+    notFound: {
+      title: "Page not found",
+      description: "The page you are looking for does not exist or was moved.",
+      backHome: "Back to start",
+    },
+    errors: {
+      server: "Something went wrong on our side. Try again in a moment.",
+      network: "No connection to the server.",
+      requestFailed: "The request could not be completed.",
+      generic: "Something went wrong.",
+    },
+    /** Backend `code` -> message; unknown codes fall back to `errors`. */
+    errorCodes: {
+      INVALID_CREDENTIALS: "Wrong email or password.",
+      ACCOUNT_INACTIVE: "This account is disabled.",
+      INVALID_REFRESH_TOKEN: "Your session has expired. Log in again.",
+      EMAIL_TAKEN: "An account with this email already exists.",
+      PROFILE_NOT_FOUND: "Complete your profile first.",
+      INVALID_EQUIPMENT: "Some of the selected equipment does not exist.",
+    },
+  },
+  nav: {
+    label: "Main",
+    items: {
+      start: "Start",
+      plans: "Plans",
+      workout: "Workout",
+      catalog: "Catalog",
+      profile: "Profile",
+    },
+    logout: "Log out",
+  },
+  auth: {
+    login: {
+      title: "Welcome back",
+      subtitle: "Log in to continue your mesocycle.",
+      email: "Email",
+      emailPlaceholder: "john.doe@email.com",
+      password: "Password",
+      passwordPlaceholder: "password",
+      submit: "Log in",
+      noAccount: "No account yet?",
+      createOne: "Create one",
+    },
+    register: {
+      title: "Create account",
+      subtitle: "Plans balanced for every muscle.",
+      email: "Email",
+      name: "Name (optional)",
+      password: "Password",
+      confirm: "Confirm password",
+      submit: "Create account",
+      haveAccount: "Already have an account?",
+      logIn: "Log in",
+      unexpected: "Could not create the account. Try again in a moment.",
+      welcome: "Account created. Welcome to Loxofit!",
+    },
+    validation: {
+      emailRequired: "Enter your email.",
+      emailInvalid: "This does not look like an email address.",
+      passwordRequired: "Enter your password.",
+      passwordTooShort: "Password is too short.",
+      passwordsMismatch: "Passwords do not match.",
+    },
+    rules: {
+      minLength: "At least {{min}} characters",
+      match: "Both passwords match",
+    },
+    sessionExpired: {
+      title: "Session expired",
+      body: "You have been signed out. Log in again to continue.",
+      action: "Log in again",
+    },
+  },
+  brand: {
+    headline: "Every muscle gets the volume it needs. Not more.",
+    footnote: "Plans checked against MEV, MAV and MRV, set by set.",
+    effectiveSets: "Effective sets",
+    week: "W{{number}}",
+    deload: "Deload",
+    muscles: {
+      chest: "Chest",
+      lats: "Lats",
+      quads: "Quads",
+      glutes: "Glutes",
+    },
+    tiles: {
+      today: {
+        overline: "Today",
+        title: "Upper B",
+        caption: "5 exercises · ~58 min",
+      },
+      score: {
+        overline: "Plan score",
+        title: "23.2",
+        caption: "volume 23.8 · time −0.6",
+      },
+      progression: {
+        overline: "Next time",
+        title: "Bench 80 > 82.5 kg",
+        caption: "all sets hit RIR 2",
+      },
+      warning: {
+        overline: "Check",
+        title: "Glutes over MRV",
+        caption: "week 4 · 20.5 sets",
+      },
+      deload: {
+        overline: "Deload",
+        title: "Week 5",
+        caption: "half the sets · RIR 4",
+      },
+    },
+  },
+  catalog: {
+    title: "Catalog",
+    sections: "Catalog sections",
+    tabs: {
+      exercises: "Exercises",
+      muscles: "Muscles",
+      equipment: "Equipment",
+    },
+    search: "Search exercises",
+    filters: {
+      title: "Filters",
+      muscleGroup: "Muscle group",
+      all: "All",
+      bodyFront: "Front",
+      bodyBack: "Back",
+      bodyHint: "Tap a muscle group",
+      type: "Type",
+      equipment: "Equipment",
+      myEquipmentOnly: "My equipment only",
+      myEquipmentHint: "Pick your equipment on the Equipment tab first.",
+      advanced: "Advanced",
+      pattern: "Movement pattern",
+      anyPattern: "Any pattern",
+      clear: "Clear filters",
+      showResults_one: "Show {{count}} exercise",
+      showResults_other: "Show {{count}} exercises",
+      showResultsPending: "Show results",
+    },
+    list: {
+      count_one: "{{count}} exercise",
+      count_other: "{{count}} exercises",
+      loadError: "Couldn't load exercises",
+      emptyTitle: "No exercises match",
+      emptyBody: "Try a different search or clear the filters.",
+    },
+    exercise: {
+      compound: "Compound",
+      isolation: "Isolation",
+      unilateral: "Unilateral",
+      bilateral: "Bilateral",
+      bodyweight: "Bodyweight",
+      musclesWorked: "Muscles worked",
+      musclesHint:
+        "The bar shows how much one set counts for each muscle: a full bar is 1 effective set (primary muscle), half a bar is 0.5 (secondary muscle).",
+      facts: "Exercise facts",
+      pattern: "Pattern",
+      tempo: "Tempo",
+      tempoHint: "Seconds per phase: lowering · pause at the bottom · lifting · pause at the top.",
+      fatigue: "Fatigue",
+      fatigueHint:
+        "How much the exercise taxes the whole body. Higher means longer recovery between sessions.",
+      complexity: "Complexity",
+      complexityHint:
+        "How technically demanding the exercise is. Higher means more practice to do it well.",
+      outOfFive: "{{value}} / 5",
+      howTo: "How to do it",
+      loadError: "Couldn't load the exercise",
+      notFound: "Exercise not found",
+      notFoundBody: "It may have been removed from the catalog.",
+      backToList: "Back to exercises",
+    },
+    muscleGroups: {
+      chest: "Chest",
+      back: "Back",
+      shoulders: "Shoulders",
+      arms: "Arms",
+      core: "Core",
+      glutes: "Glutes",
+      thighs: "Thighs",
+      calves: "Calves",
+    },
+    patterns: {
+      horizontal_push: "Horizontal push",
+      vertical_push: "Vertical push",
+      horizontal_pull: "Horizontal pull",
+      vertical_pull: "Vertical pull",
+      squat: "Squat",
+      hip_hinge: "Hip hinge",
+      lunge: "Lunge",
+      hip_extension: "Hip extension",
+      knee_flexion: "Knee flexion",
+      knee_extension: "Knee extension",
+      elbow_flexion: "Elbow flexion",
+      elbow_extension: "Elbow extension",
+      shoulder_abduction: "Shoulder abduction",
+      shoulder_horizontal_abduction: "Shoulder horizontal abduction",
+      chest_fly: "Chest fly",
+      core_flexion: "Core flexion",
+      core_anti_extension: "Core anti-extension",
+      calf_raise: "Calf raise",
+    },
+    roles: {
+      primary: "Primary",
+      secondary: "Secondary",
+      stabilizer: "Stabilizer",
+    },
+    equipmentCategories: {
+      free_weights: "Free weights",
+      station: "Stations",
+      cable: "Cables",
+      machine: "Machines",
+    },
+  },
+};
+
+type PluralSuffix = "zero" | "two" | "few" | "many";
+
+/**
+ * Same keys as `en`, any string values. Extra plural forms (`_few`, `_many`)
+ * are allowed because languages like Polish need more of them than English.
+ */
+export type Messages<T = typeof en> = {
+  [K in keyof T]: T[K] extends string ? string : Messages<T[K]>;
+} & { [K in `${string}_${PluralSuffix}`]: string };

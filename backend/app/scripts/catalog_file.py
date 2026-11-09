@@ -84,6 +84,7 @@ class ExerciseRow(SeedRow):
     default_tempo: str | None = Field(default=None, pattern=r"^\d{4}$")
     instructions_en: str | None = None
     instructions_pl: str | None = None
+    image_url: str | None = Field(default=None, max_length=300)
 
     @field_validator("default_tempo", mode="before")
     @classmethod

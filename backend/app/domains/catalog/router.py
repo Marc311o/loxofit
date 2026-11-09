@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, Path, Query, status
 from app.core.errors import ErrorResponse
 from app.core.pagination import Page
 from app.domains.auth.dependencies import get_current_user
+from app.domains.catalog.enums import MuscleGroup
 from app.domains.catalog.schemas import (
     EquipmentFilters,
     EquipmentRead,
@@ -39,6 +40,14 @@ async def list_exercises(
     catalog: CatalogServiceDep, filters: Annotated[ExerciseFilters, Query()]
 ) -> Page[ExerciseListItem]:
     return await catalog.list_exercises(filters)
+
+
+@router.get("/exercises/group-counts")
+async def count_exercises_by_group(
+    catalog: CatalogServiceDep, filters: Annotated[ExerciseFilters, Query()]
+) -> dict[MuscleGroup, int]:
+    """Exercises per muscle group for the given filters (`muscle_group` itself is ignored)."""
+    return await catalog.count_exercises_by_group(filters)
 
 
 @router.get("/exercises/{exercise_id}")

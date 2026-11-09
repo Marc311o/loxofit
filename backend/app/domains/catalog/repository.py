@@ -4,7 +4,7 @@ from sqlalchemy import ColumnElement, Select, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.domains.catalog.enums import EquipmentSort, ExerciseSort
+from app.domains.catalog.enums import EquipmentSort, ExerciseSort, MuscleGroup
 from app.domains.catalog.models import Equipment, Exercise, ExerciseMuscleRole, Muscle
 from app.domains.catalog.schemas import EquipmentFilters, ExerciseFilters
 
@@ -57,6 +57,15 @@ class CatalogRepository:
         items = (await self.db.execute(page_stmt)).scalars().all()
         return items, total
 
+    async def count_exercises_by_group(self, filters: ExerciseFilters) -> dict[MuscleGroup, int]:
+        """Exercise count per main group, with every filter applied except the group itself."""
+        matching = self._apply_filters(
+            select(Exercise), filters.model_copy(update={"muscle_group": None})
+        ).subquery()
+        stmt = select(matching.c.main_group, func.count()).group_by(matching.c.main_group)
+        rows = (await self.db.execute(stmt)).tuples().all()
+        return {group: count for group, count in rows}
+
     async def get_exercise_detail(self, exercise_id: int) -> Exercise | None:
         stmt = (
             select(Exercise)
@@ -76,6 +85,8 @@ class CatalogRepository:
             stmt = stmt.where(Exercise.main_group == filters.muscle_group)
         if filters.pattern is not None:
             stmt = stmt.where(Exercise.movement_pattern == filters.pattern)
+        if filters.is_compound is not None:
+            stmt = stmt.where(Exercise.is_compound == filters.is_compound)
         if filters.muscle_id is not None:
             stmt = stmt.where(
                 Exercise.muscle_roles.any(ExerciseMuscleRole.muscle_id == filters.muscle_id)

@@ -3,6 +3,7 @@
 import pytest
 from httpx import AsyncClient
 
+from app.domains.catalog.enums import MuscleGroup
 from tests.conftest import API
 from tests.domains.conftest import Catalog
 
@@ -98,6 +99,32 @@ async def test_filter_by_muscle_group(client, auth_headers):
 async def test_filter_by_pattern(client, auth_headers):
     response = await client.get(f"{API}/exercises?pattern=vertical_pull", headers=auth_headers)
     assert codes(response) == ["lat_pulldown"]
+
+
+@pytest.mark.parametrize(
+    ("is_compound", "expected"),
+    [("true", ["bb_bench", "lat_pulldown"]), ("false", ["cable_curl", "cable_fly"])],
+)
+async def test_filter_by_compound(client, auth_headers, is_compound, expected):
+    response = await client.get(f"{API}/exercises?is_compound={is_compound}", headers=auth_headers)
+    assert sorted(codes(response)) == expected
+
+
+async def test_group_counts_ignore_the_group_filter(client, auth_headers):
+    response = await client.get(
+        f"{API}/exercises/group-counts?muscle_group=back&is_compound=false", headers=auth_headers
+    )
+    assert response.status_code == 200
+    counts = response.json()
+    assert counts["chest"] == 1  # cable_fly; bb_bench is compound
+    assert counts["arms"] == 1  # cable_curl
+    assert counts["back"] == 0  # lat_pulldown is compound
+    assert set(counts) == {g.value for g in MuscleGroup}
+
+
+async def test_exercise_list_includes_image_url(client, auth_headers):
+    response = await client.get(f"{API}/exercises", headers=auth_headers)
+    assert all(item["image_url"] is None for item in response.json()["items"])
 
 
 async def test_filter_by_muscle_matches_any_role(client, auth_headers, catalog: Catalog):
