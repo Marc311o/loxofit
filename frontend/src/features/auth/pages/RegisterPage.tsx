@@ -3,16 +3,14 @@ import BadgeOutlined from "@mui/icons-material/BadgeOutlined";
 import LockOutlined from "@mui/icons-material/LockOutlined";
 import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
 import { Alert, Button, Link, Stack, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { Link as RouterLink, useNavigate } from "react-router";
 
 import { TextInput } from "@/components/TextInput";
 import { useRegister } from "@/features/auth/api";
 import { PasswordRules } from "@/features/auth/components/PasswordRules";
-import {
-  validateRegister,
-  type RegisterForm,
-} from "@/features/auth/validation";
-import { getFieldErrors } from "@/lib/api";
+import { validateRegister, type RegisterForm } from "@/features/auth/validation";
+import { errorMessage, getFieldErrors } from "@/lib/api";
 
 const EMPTY: RegisterForm = {
   email: "",
@@ -22,6 +20,7 @@ const EMPTY: RegisterForm = {
 };
 
 export function RegisterPage() {
+  const { t } = useTranslation("auth");
   const [form, setForm] = useState<RegisterForm>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
   const register = useRegister();
@@ -30,8 +29,7 @@ export function RegisterPage() {
   const errors = submitted ? validateRegister(form) : {};
   const server = getFieldErrors(register.error);
   const emailTaken = register.error?.code === "EMAIL_TAKEN";
-  const unexpected =
-    register.isError && !emailTaken && Object.keys(server).length === 0;
+  const unexpected = register.isError && !emailTaken && Object.keys(server).length === 0;
 
   const update = (field: keyof RegisterForm) => (value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -55,20 +53,14 @@ export function RegisterPage() {
   return (
     <Stack component="form" onSubmit={handleSubmit} noValidate spacing={2.25}>
       <Stack spacing={0.5}>
-        <Typography variant="h1">Create account</Typography>
-        <Typography color="text.secondary">
-          Plans balanced for every muscle.
-        </Typography>
+        <Typography variant="h1">{t("register.title")}</Typography>
+        <Typography color="text.secondary">{t("register.subtitle")}</Typography>
       </Stack>
 
-      {unexpected && (
-        <Alert severity="error">
-          Could not create the account. Try again in a moment.
-        </Alert>
-      )}
+      {unexpected && <Alert severity="error">{t("register.unexpected")}</Alert>}
 
       <TextInput
-        label="Email"
+        label={t("register.email")}
         type="email"
         icon={<MailOutlineRounded />}
         value={form.email}
@@ -76,14 +68,15 @@ export function RegisterPage() {
         autoComplete="email"
         autoFocus
         errorText={
-          errors.email ??
-          (emailTaken
-            ? "An account with this email already exists."
-            : server.email)
+          errors.email
+            ? t(`validation.${errors.email}`)
+            : emailTaken
+              ? errorMessage(register.error)
+              : server.email
         }
       />
       <TextInput
-        label="Name (optional)"
+        label={t("register.name")}
         icon={<BadgeOutlined />}
         value={form.displayName}
         onChange={update("displayName")}
@@ -91,7 +84,7 @@ export function RegisterPage() {
         errorText={server.display_name}
       />
       <TextInput
-        label="Password"
+        label={t("register.password")}
         password
         icon={<LockOutlined />}
         value={form.password}
@@ -100,7 +93,7 @@ export function RegisterPage() {
         error={Boolean(errors.password || server.password)}
       />
       <TextInput
-        label="Confirm password"
+        label={t("register.confirm")}
         password
         icon={<LockOutlined />}
         value={form.confirm}
@@ -108,24 +101,15 @@ export function RegisterPage() {
         autoComplete="new-password"
         error={Boolean(errors.confirm)}
       />
-      <PasswordRules
-        password={form.password}
-        confirm={form.confirm}
-        showErrors={submitted}
-      />
+      <PasswordRules password={form.password} confirm={form.confirm} showErrors={submitted} />
 
-      <Button
-        type="submit"
-        variant="contained"
-        size="large"
-        loading={register.isPending}
-      >
-        Create account
+      <Button type="submit" variant="contained" size="large" loading={register.isPending}>
+        {t("register.submit")}
       </Button>
       <Typography sx={{ textAlign: "center", color: "text.secondary" }}>
-        Already have an account?{" "}
+        {t("register.haveAccount")}{" "}
         <Link component={RouterLink} to="/login" sx={{ fontWeight: 600 }}>
-          Log in
+          {t("register.logIn")}
         </Link>
       </Typography>
     </Stack>

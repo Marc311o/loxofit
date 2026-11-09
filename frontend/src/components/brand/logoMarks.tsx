@@ -7,20 +7,7 @@ export const MARK_ACCENT = "#E8893A";
 const FG = MARK_FG;
 const ACC = MARK_ACCENT;
 
-export const LOGO_VARIANTS = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-] as const;
+export const LOGO_VARIANTS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"] as const;
 export type LogoVariant = (typeof LOGO_VARIANTS)[number];
 
 export const LOGO_VARIANT: LogoVariant = "B";
@@ -81,24 +68,8 @@ export const LOGO_MARKS: Record<LogoVariant, MarkDefinition> = {
     name: "Słupki pod sufitem MRV",
     glyph: (
       <>
-        <rect
-          x="10.5"
-          y="27"
-          width="7"
-          height="11"
-          rx="3.5"
-          fill={FG}
-          fillOpacity={0.5}
-        />
-        <rect
-          x="20.5"
-          y="20"
-          width="7"
-          height="18"
-          rx="3.5"
-          fill={FG}
-          fillOpacity={0.78}
-        />
+        <rect x="10.5" y="27" width="7" height="11" rx="3.5" fill={FG} fillOpacity={0.5} />
+        <rect x="20.5" y="20" width="7" height="18" rx="3.5" fill={FG} fillOpacity={0.78} />
         <rect x="30.5" y="14" width="7" height="24" rx="3.5" fill={FG} />
         <rect x="9" y="9" width="30" height="2.6" rx="1.3" fill={ACC} />
       </>
@@ -144,14 +115,7 @@ export const LOGO_MARKS: Record<LogoVariant, MarkDefinition> = {
     name: "Talerz",
     glyph: (
       <>
-        <circle
-          cx="24"
-          cy="24"
-          r="12"
-          fill="none"
-          stroke={FG}
-          strokeWidth={5}
-        />
+        <circle cx="24" cy="24" r="12" fill="none" stroke={FG} strokeWidth={5} />
         <circle cx="24" cy="24" r="4.5" fill={ACC} />
       </>
     ),
@@ -170,33 +134,9 @@ export const LOGO_MARKS: Record<LogoVariant, MarkDefinition> = {
     name: "Słupki pod krzywą",
     glyph: (
       <>
-        <rect
-          x="9.5"
-          y="30"
-          width="6"
-          height="8"
-          rx="3"
-          fill={FG}
-          fillOpacity={0.5}
-        />
-        <rect
-          x="17.5"
-          y="21"
-          width="6"
-          height="17"
-          rx="3"
-          fill={FG}
-          fillOpacity={0.7}
-        />
-        <rect
-          x="25.5"
-          y="16.5"
-          width="6"
-          height="21.5"
-          rx="3"
-          fill={FG}
-          fillOpacity={0.88}
-        />
+        <rect x="9.5" y="30" width="6" height="8" rx="3" fill={FG} fillOpacity={0.5} />
+        <rect x="17.5" y="21" width="6" height="17" rx="3" fill={FG} fillOpacity={0.7} />
+        <rect x="25.5" y="16.5" width="6" height="21.5" rx="3" fill={FG} fillOpacity={0.88} />
         <rect x="33.5" y="15" width="6" height="23" rx="3" fill={FG} />
         <path
           d="M8 31 C 14 20, 22 14.5, 41 12.5"
@@ -330,25 +270,9 @@ export const LOGO_MARKS: Record<LogoVariant, MarkDefinition> = {
       <g transform="rotate(-38 24 24)">
         <rect x="13" y="22.4" width="22" height="3.2" rx="1.6" fill={ACC} />
         <rect x="8.5" y="15" width="5.5" height="18" rx="2.75" fill={FG} />
-        <rect
-          x="14.8"
-          y="18"
-          width="3.6"
-          height="12"
-          rx="1.8"
-          fill={FG}
-          fillOpacity={0.75}
-        />
+        <rect x="14.8" y="18" width="3.6" height="12" rx="1.8" fill={FG} fillOpacity={0.75} />
         <rect x="34" y="15" width="5.5" height="18" rx="2.75" fill={FG} />
-        <rect
-          x="29.6"
-          y="18"
-          width="3.6"
-          height="12"
-          rx="1.8"
-          fill={FG}
-          fillOpacity={0.75}
-        />
+        <rect x="29.6" y="18" width="3.6" height="12" rx="1.8" fill={FG} fillOpacity={0.75} />
       </g>
     ),
   },

@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 
+import i18n from "@/i18n";
 import {
   api,
   ApiError,
@@ -10,7 +11,7 @@ import {
   type TokenResponse,
 } from "@/lib/api";
 import { session } from "@/lib/session";
-import { toast } from "@/lib/toast.ts";
+import { toast } from "@/lib/toast";
 
 export type User = {
   id: string;
@@ -68,15 +69,12 @@ export function useRegister() {
     },
     onSuccess: (tokens) => {
       session.setAccessToken(tokens.access_token);
-      toast.success("Account created. Welcome to Loxofit!");
+      toast.success(i18n.t("auth:register.welcome"));
       return queryClient.resetQueries({ queryKey: currentUserKey });
     },
     onError: (error) => {
       const fieldErrors = getFieldErrors(error);
-      if (
-        error.code !== "EMAIL_TAKEN" &&
-        Object.keys(fieldErrors).length === 0
-      ) {
+      if (error.code !== "EMAIL_TAKEN" && Object.keys(fieldErrors).length === 0) {
         toast.error(errorMessage(error));
       }
     },

@@ -30,6 +30,7 @@ class EquipmentRead(ORMSchema):
     name_en: str
     name_pl: str
     category: EquipmentCategory
+    image_url: str | None
 
 
 class ExerciseListItem(ORMSchema):
@@ -41,6 +42,7 @@ class ExerciseListItem(ORMSchema):
     movement_pattern: MovementPattern
     is_compound: bool
     is_unilateral: bool
+    image_url: str | None
     equipment: list[EquipmentRead]
 
 
@@ -65,6 +67,7 @@ class ExerciseFilters(PageParams):
 
     muscle_group: MuscleGroup | None = None
     pattern: MovementPattern | None = None
+    is_compound: bool | None = None
     muscle_id: int | None = Field(default=None, ge=1)
     equipment_id: int | None = Field(default=None, ge=1)
     search: str | None = Field(default=None, min_length=1, max_length=100)

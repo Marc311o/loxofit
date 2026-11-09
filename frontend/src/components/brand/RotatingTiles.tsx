@@ -1,32 +1,18 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { keyframes } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 import { useCycle } from "@/lib/useCycle";
 import { FONT_DISPLAY, FONT_MONO } from "@/styles/theme";
 
-type Tile = {
-  overline: string;
-  title: string;
-  caption: string;
-  accent?: boolean;
-};
-
-const TILES: Tile[] = [
-  { overline: "Today", title: "Upper B", caption: "5 exercises · ~58 min" },
-  { overline: "Plan score", title: "23.2", caption: "volume 23.8 · time −0.6" },
-  {
-    overline: "Next time",
-    title: "Bench 80 > 82.5 kg",
-    caption: "all sets hit RIR 2",
-  },
-  {
-    overline: "Check",
-    title: "Glutes over MRV",
-    caption: "week 4 · 20.5 sets",
-    accent: true,
-  },
-  { overline: "Deload", title: "Week 5", caption: "half the sets · RIR 4" },
-];
+/** Keys in `brand.tiles`; the texts live in the locale files. */
+const TILES = [
+  { id: "today" },
+  { id: "score" },
+  { id: "progression" },
+  { id: "warning", accent: true },
+  { id: "deload" },
+] as const;
 
 const enter = keyframes`from { opacity: 0; transform: translateY(14px) scale(0.98); } to { opacity: 1; transform: none; }`;
 
@@ -36,6 +22,7 @@ const NO_MOTION = {
 
 /** A small deck of app "moments" that rotates - decoration only, hidden from screen readers. */
 export function RotatingTiles({ animate }: { animate: boolean }) {
+  const { t } = useTranslation("brand");
   const index = useCycle(TILES.length, 3200, !animate);
   const tile = TILES[index];
 
@@ -86,27 +73,22 @@ export function RotatingTiles({ animate }: { animate: boolean }) {
             fontSize: 11,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
-            color: tile.accent ? "#B85C1E" : "#5B6965",
+            color: "accent" in tile ? "#B85C1E" : "#5B6965",
           }}
         >
-          {tile.overline}
+          {t(`tiles.${tile.id}.overline`)}
         </Typography>
-        <Typography
-          sx={{ fontFamily: FONT_DISPLAY, fontSize: 22, fontWeight: 600 }}
-        >
-          {tile.title}
+        <Typography sx={{ fontFamily: FONT_DISPLAY, fontSize: 22, fontWeight: 600 }}>
+          {t(`tiles.${tile.id}.title`)}
         </Typography>
-        <Stack
-          direction="row"
-          sx={{ justifyContent: "space-between", alignItems: "center" }}
-        >
+        <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center" }}>
           <Typography sx={{ fontSize: 13, color: "#5B6965" }}>
-            {tile.caption}
+            {t(`tiles.${tile.id}.caption`)}
           </Typography>
           <Stack direction="row" spacing={0.5}>
-            {TILES.map((t, i) => (
+            {TILES.map((item, i) => (
               <Box
-                key={t.title}
+                key={item.id}
                 sx={{
                   width: 6,
                   height: 6,

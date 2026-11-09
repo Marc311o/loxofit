@@ -5,10 +5,10 @@ import { RequireAuth } from "@/features/auth/components/RequireAuth";
 import { LoginPage } from "@/features/auth/pages/LoginPage";
 import { RegisterPage } from "@/features/auth/pages/RegisterPage";
 import { CatalogLayout } from "@/features/catalog/CatalogLayout";
-import { EquipmentPage } from "@/features/catalog/pages/EquipmentPage";
-import { ExerciseDetailDialog } from "@/features/catalog/pages/ExerciseDetailDialog";
-import { ExercisesPage } from "@/features/catalog/pages/ExercisePage";
-import { MusclesPage } from "@/features/catalog/pages/MusclesPage";
+import { EquipmentPage } from "@/features/catalog/equipment/pages/EquipmentPage.tsx";
+import { ExerciseDetailDialog } from "@/features/catalog/exercises/pages/ExerciseDetailDialog.tsx";
+import { ExercisesPage } from "@/features/catalog/exercises/pages/ExercisesPage.tsx";
+import { MusclesPage } from "@/features/catalog/muscles/pages/MusclesPage.tsx";
 import { PlanPage } from "@/features/plan/pages/PlanPage";
 import { StartPage } from "@/features/plan/pages/StartPage";
 import { ProfilePage } from "@/features/profile/pages/ProfilePage";
@@ -48,9 +48,7 @@ export const router = createBrowserRouter([
               {
                 path: "exercises",
                 element: <ExercisesPage />,
-                children: [
-                  { path: ":exerciseId", element: <ExerciseDetailDialog /> },
-                ],
+                children: [{ path: ":exerciseId", element: <ExerciseDetailDialog /> }],
               },
               { path: "muscles", element: <MusclesPage /> },
               { path: "equipment", element: <EquipmentPage /> },
@@ -60,7 +58,6 @@ export const router = createBrowserRouter([
           { path: "/profile", element: <ProfilePage /> },
         ],
       },
-      // Full-screen tracker without the bottom navigation (S5)
       { path: "/workout/:sessionId", element: <WorkoutPage /> },
     ],
   },

@@ -2,14 +2,16 @@ import { useState, type SubmitEvent } from "react";
 import LockOutlined from "@mui/icons-material/LockOutlined";
 import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
 import { Button, Link, Stack, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router";
 
 import { TextInput } from "@/components/TextInput";
 import { useLogin } from "@/features/auth/api";
-import { toast } from "@/lib/toast.ts";
-import { errorMessage } from "@/lib/api.ts";
+import { errorMessage } from "@/lib/api";
+import { toast } from "@/lib/toast";
 
 export function LoginPage() {
+  const { t } = useTranslation("auth");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -33,10 +35,8 @@ export function LoginPage() {
       {
         onSuccess: () => navigate(from, { replace: true }),
         onError: (error) => {
-          if (error.code === "ACCOUNT_INACTIVE")
-            toast.warning("This account is disabled.");
-          else if (error.code !== "INVALID_CREDENTIALS")
-            toast.error(errorMessage(error));
+          if (error.code === "ACCOUNT_INACTIVE") toast.warning(errorMessage(error));
+          else if (error.code !== "INVALID_CREDENTIALS") toast.error(errorMessage(error));
         },
       },
     );
@@ -45,54 +45,47 @@ export function LoginPage() {
   return (
     <Stack component="form" onSubmit={handleSubmit} noValidate spacing={2.25}>
       <Stack spacing={0.5}>
-        <Typography variant="h1">Welcome back</Typography>
-        <Typography color="text.secondary">
-          Log in to continue your mesocycle.
-        </Typography>
+        <Typography variant="h1">{t("login.title")}</Typography>
+        <Typography color="text.secondary">{t("login.subtitle")}</Typography>
       </Stack>
 
       <TextInput
-        label="Email"
+        label={t("login.email")}
         type="email"
         icon={<MailOutlineRounded />}
-        placeholder="john.doe@email.com"
+        placeholder={t("login.emailPlaceholder")}
         value={email}
         onChange={edit(setEmail)}
         autoComplete="email"
         autoFocus
         error={wrongCredentials}
-        errorText={submitted && !email.trim() ? "Enter your email." : undefined}
+        errorText={submitted && !email.trim() ? t("validation.emailRequired") : undefined}
       />
       <TextInput
-        label="Password"
+        label={t("login.password")}
         password
         icon={<LockOutlined />}
-        placeholder={"password"}
+        placeholder={t("login.passwordPlaceholder")}
         value={password}
         onChange={edit(setPassword)}
         autoComplete="current-password"
         error={wrongCredentials}
         errorText={
           wrongCredentials
-            ? "Wrong email or password."
+            ? errorMessage(login.error)
             : submitted && !password
-              ? "Enter your password."
+              ? t("validation.passwordRequired")
               : undefined
         }
       />
 
-      <Button
-        type="submit"
-        variant="contained"
-        size="large"
-        loading={login.isPending}
-      >
-        Log in
+      <Button type="submit" variant="contained" size="large" loading={login.isPending}>
+        {t("login.submit")}
       </Button>
       <Typography sx={{ textAlign: "center", color: "text.secondary" }}>
-        No account yet?{" "}
+        {t("login.noAccount")}{" "}
         <Link component={RouterLink} to="/register" sx={{ fontWeight: 600 }}>
-          Create one
+          {t("login.createOne")}
         </Link>
       </Typography>
     </Stack>

@@ -9,8 +9,7 @@ export function RequireAuth() {
   const user = useCurrentUser();
 
   if (user.isPending) return <FullScreenLoader />;
-  if (user.isError)
-    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+  if (user.isError) return <Navigate to="/login" replace state={{ from: location.pathname }} />;
 
   return (
     <>

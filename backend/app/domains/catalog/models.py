@@ -55,6 +55,7 @@ class Equipment(Base):
             values_callable=lambda e: [member.value for member in e],
         )
     )
+    image_url: Mapped[str | None] = mapped_column(String(300))
 
 
 class Exercise(Base):
@@ -92,6 +93,7 @@ class Exercise(Base):
     default_tempo: Mapped[str | None] = mapped_column(String(4))
     instructions_pl: Mapped[str | None] = mapped_column(Text)
     instructions_en: Mapped[str | None] = mapped_column(Text)
+    image_url: Mapped[str | None] = mapped_column(String(300))
 
     equipment: Mapped[list["Equipment"]] = relationship(
         secondary="exercise_equipment", order_by="Equipment.name_en", lazy="raise"

@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import SessionDep
 from app.core.pagination import Page
-from app.domains.catalog.enums import MuscleRole
+from app.domains.catalog.enums import MuscleGroup, MuscleRole
 from app.domains.catalog.exceptions import ExerciseNotFoundError
 from app.domains.catalog.models import ExerciseMuscleRole
 from app.domains.catalog.repository import CatalogRepository
@@ -57,6 +57,10 @@ class CatalogService:
     async def list_exercises(self, filters: ExerciseFilters) -> Page[ExerciseListItem]:
         items, total = await self.repo.list_exercises(filters)
         return Page.create([ExerciseListItem.model_validate(e) for e in items], total, filters)
+
+    async def count_exercises_by_group(self, filters: ExerciseFilters) -> dict[MuscleGroup, int]:
+        counts = await self.repo.count_exercises_by_group(filters)
+        return {group: counts.get(group, 0) for group in MuscleGroup}
 
     async def get_exercise(self, exercise_id: int) -> ExerciseDetail:
         exercise = await self.repo.get_exercise_detail(exercise_id)

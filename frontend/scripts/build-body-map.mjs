@@ -1,0 +1,194 @@
+// Turns the Figma export (src/assets/body-map.svg) into bodyMapPaths.ts.
+// Usage: npm run gen:body-map
+//
+// Layer structure inside <g id="body">:
+//   <g id="{muscle group}">        - click target on the body map (chest, back...)
+//     <g id="{muscle code}">       - optional: one catalog muscle (lats, triceps...)
+//     <path>                       - part of the group only (serratus, forearms...)
+// Any other top-level layer (head, palms, feet...) is decoration.
+import { readFileSync, writeFileSync } from "node:fs";
+
+const SOURCE = "src/assets/body-map.svg";
+const TARGET = "src/features/catalog/components/bodyMapPaths.ts";
+
+const MUSCLE_GROUPS = [
+  "chest",
+  "back",
+  "shoulders",
+  "arms",
+  "core",
+  "glutes",
+  "thighs",
+  "calves",
+];
+
+/** Muscle codes from the catalog seed - a layer with another name is treated as group-only. */
+const MUSCLES = [
+  "pec_major",
+  "delt_ant",
+  "delt_mid",
+  "delt_post",
+  "biceps",
+  "triceps",
+  "lats",
+  "trapezius",
+  "erectors",
+  "quads",
+  "bic_fem",
+  "glute_max",
+  "rect_abd",
+  "ext_obl",
+  "int_obl",
+];
+
+/** Deep muscles nobody can see: shown on the surface muscle that covers them. */
+const SHOWN_AS = { int_obl: "ext_obl" };
+
+const svg = readFileSync(SOURCE, "utf8");
+const viewBox = svg.match(/viewBox="([^"]+)"/)[1];
+const [, , width, height] = viewBox.split(" ").map(Number);
+/** The front figure is drawn in the left half, the back figure in the right one. */
+const split = width / 2;
+
+const groups = new Map(); // group -> paths (including its muscles)
+const decor = []; // paths outside any muscle group
+const muscles = new Map(); // muscle code -> paths
+const ignored = new Set(); // sub-layers that are not catalog muscles
+
+// Walk the markup keeping the stack of open <g> ids: ["body", group, muscle?].
+const stack = [];
+for (const tag of svg.matchAll(/<(\/?)(g|path)\b([^>]*?)(\/?)>/g)) {
+  const [, closing, name, attrs, selfClosing] = tag;
+  if (name === "g") {
+    if (closing) stack.pop();
+    else stack.push(attrs.match(/id="([^"]+)"/)[1]);
+    continue;
+  }
+  if (closing && !selfClosing) continue;
+  const d = attrs.match(/\sd="([^"]+)"/)[1];
+  const [, group, sub] = stack;
+
+  if (!MUSCLE_GROUPS.includes(group)) {
+    decor.push(d);
+    continue;
+  }
+  if (!groups.has(group)) groups.set(group, []);
+  groups.get(group).push(d);
+
+  if (sub && MUSCLES.includes(sub)) {
+    if (!muscles.has(sub)) muscles.set(sub, []);
+    muscles.get(sub).push(d);
+  } else if (sub) {
+    ignored.add(`${group}/${sub}`);
+  }
+}
+
+const missingGroups = MUSCLE_GROUPS.filter((group) => !groups.has(group));
+if (missingGroups.length > 0)
+  throw new Error(`Missing group layers: ${missingGroups.join(", ")}`);
+
+for (const [muscle, surface] of Object.entries(SHOWN_AS))
+  if (!muscles.has(muscle)) muscles.set(muscle, muscles.get(surface) ?? []);
+
+const missingMuscles = MUSCLES.filter((m) => !muscles.get(m)?.length);
+if (missingMuscles.length > 0)
+  throw new Error(`Missing muscle layers: ${missingMuscles.join(", ")}`);
+
+/** The figure that shows more of the muscle; a tie goes to the front. */
+const isFront = (d) => Number(d.match(/^M\s*([\d.]+)/)[1]) < split;
+const viewOf = (paths) =>
+  paths.filter(isFront).length * 2 >= paths.length ? "front" : "back";
+/** Paths of a muscle that lie in its chosen view. */
+const visible = (muscle) => {
+  const paths = muscles.get(muscle);
+  const front = viewOf(paths) === "front";
+  return paths.filter((d) => isFront(d) === front);
+};
+
+/** Bounding box of absolute M/L/H/V/C/Z paths (all Figma exports). */
+function bounds(paths) {
+  const xs = [];
+  const ys = [];
+  for (const d of paths) {
+    let x = 0;
+    let y = 0;
+    for (const [, command, args] of d.matchAll(/([MLHVCZ])([^MLHVCZ]*)/g)) {
+      const n = args.trim().split(/[\s,]+/).filter(Boolean).map(Number);
+      if (command === "H") n.forEach((v) => xs.push((x = v)));
+      else if (command === "V") n.forEach((v) => ys.push((y = v)));
+      else
+        for (let i = 0; i + 1 < n.length; i += 2) {
+          xs.push((x = n[i]));
+          ys.push((y = n[i + 1]));
+        }
+    }
+    xs.push(x);
+    ys.push(y);
+  }
+  return {
+    minX: Math.min(...xs),
+    maxX: Math.max(...xs),
+    minY: Math.min(...ys),
+    maxY: Math.max(...ys),
+  };
+}
+
+/**
+ * Square crop around the muscle with some body around it for context,
+ * kept inside its own figure.
+ */
+function crop(paths, view) {
+  const b = bounds(paths);
+  const side = Math.min(
+    split,
+    height,
+    Math.max(90, Math.max(b.maxX - b.minX, b.maxY - b.minY) * 1.5 + 20),
+  );
+  const left = view === "front" ? 0 : split;
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const x = clamp((b.minX + b.maxX - side) / 2, left, left + split - side);
+  const y = clamp((b.minY + b.maxY - side) / 2, 0, height - side);
+  const r = (v) => Math.round(v * 10) / 10;
+  return `${r(x)} ${r(y)} ${r(side)} ${r(side)}`;
+}
+
+const list = (paths, indent) =>
+  paths.map((d) => `${indent}"${d}",`).join("\n");
+
+const out = `// Generated by scripts/build-body-map.mjs from ${SOURCE} - do not edit by hand.
+import type { MuscleGroup } from "../types";
+
+export const BODY_MAP_VIEWBOX = "${viewBox}";
+
+/** The front figure takes the left half of the drawing, the back figure the right one. */
+export const BODY_MAP_SPLIT = ${split};
+
+/** Muscle shapes per group; a group can appear in both views. */
+export const MUSCLE_PATHS: Record<MuscleGroup, string[]> = {
+${MUSCLE_GROUPS.map((group) => `  ${group}: [\n${list(groups.get(group), "    ")}\n  ],`).join("\n")}
+};
+
+/** Non-interactive shapes (head, palms, feet...). */
+export const DECOR_PATHS: string[] = [
+${list(decor, "  ")}
+];
+
+export type MuscleFigure = {
+  view: "front" | "back";
+  crop: string;
+  paths: string[];
+};
+
+/** Shapes of each catalog muscle (by code), the view that shows it best and a crop around it. */
+export const MUSCLE_FIGURES: Record<string, MuscleFigure> = {
+${MUSCLES.map((m) => `  ${m}: {\n    view: "${viewOf(muscles.get(m))}",\n    crop: "${crop(visible(m), viewOf(muscles.get(m)))}",\n    paths: [\n${list(muscles.get(m), "      ")}\n    ],\n  },`).join("\n")}
+};
+`;
+writeFileSync(TARGET, out);
+
+console.log(
+  `${TARGET}\n  groups: ${MUSCLE_GROUPS.map((g) => `${g} ${groups.get(g).length}`).join(", ")}` +
+    `\n  muscles: ${MUSCLES.map((m) => `${m} ${muscles.get(m).length} (${viewOf(muscles.get(m))})`).join(", ")}` +
+    `\n  decor: ${decor.length}` +
+    (ignored.size ? `\n  group-only layers: ${[...ignored].join(", ")}` : ""),
+);

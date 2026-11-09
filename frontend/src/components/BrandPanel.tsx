@@ -1,4 +1,5 @@
 import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { Logo } from "@/components/brand/Logo";
 import { RotatingTiles } from "@/components/brand/RotatingTiles";
@@ -7,6 +8,7 @@ import { FONT_DISPLAY } from "@/styles/theme";
 
 /** Dark brand area of the auth screens: a header band on phones, a half-screen panel on desktop. */
 export function BrandPanel() {
+  const { t } = useTranslation("brand");
   const animate = !useMediaQuery("(prefers-reduced-motion: reduce)");
 
   return (
@@ -38,7 +40,7 @@ export function BrandPanel() {
             letterSpacing: "-0.02em",
           }}
         >
-          Every muscle gets the volume it needs. Not more.
+          {t("headline")}
         </Typography>
         <VolumeShowcase animate={animate} />
         <Box sx={{ display: { xs: "none", md: "block" } }}>
@@ -53,7 +55,7 @@ export function BrandPanel() {
           color: "#A9CFC4",
         }}
       >
-        Plans checked against MEV, MAV and MRV, set by set.
+        {t("footnote")}
       </Typography>
     </Box>
   );

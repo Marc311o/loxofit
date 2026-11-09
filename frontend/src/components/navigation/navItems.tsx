@@ -6,16 +6,17 @@ import PersonOutlined from "@mui/icons-material/PersonOutlined";
 import SearchRounded from "@mui/icons-material/SearchRounded";
 
 export type NavItem = {
-  label: string;
+  /** Key in `nav.items`. */
+  id: "start" | "plans" | "workout" | "catalog" | "profile";
   to: string;
   icon: ReactNode;
   exact?: boolean;
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Start", to: "/", icon: <HomeOutlined />, exact: true },
-  { label: "Plans", to: "/plans", icon: <LayersOutlined /> },
-  { label: "Workout", to: "/workout", icon: <FitnessCenterRounded /> },
-  { label: "Catalog", to: "/catalog", icon: <SearchRounded /> },
-  { label: "Profile", to: "/profile", icon: <PersonOutlined /> },
+  { id: "start", to: "/", icon: <HomeOutlined />, exact: true },
+  { id: "plans", to: "/plans", icon: <LayersOutlined /> },
+  { id: "workout", to: "/workout", icon: <FitnessCenterRounded /> },
+  { id: "catalog", to: "/catalog", icon: <SearchRounded /> },
+  { id: "profile", to: "/profile", icon: <PersonOutlined /> },
 ];
