@@ -10,6 +10,7 @@ from app.domains.plans.enums import AnalysisSource, VolumeZone
 from app.domains.plans.exceptions import UnsupportedConfigError
 from app.domains.plans.models import PlanSession, PlanWeek
 from app.domains.plans.schemas import MuscleAnalysis, PlanAnalysis, WeekAnalysis
+from app.engine.benefit import benefit
 from app.engine.evaluate import Evaluation
 from app.engine.types import (
     EngineConfig,
@@ -88,10 +89,17 @@ def _r(x: float) -> float:
     return round(x, 2)
 
 
+def max_score(mesocycle: Mesocycle, targets: MuscleTargets, config: EngineConfig) -> float:
+    """Every muscle at the upper bound of MAV in every training week, with no time penalty."""
+    per_week = sum(t.priority * benefit(t.mav_upper, t, config.curve_k) for t in targets.values())
+    return per_week * len(mesocycle.training_weeks)
+
+
 def to_analysis(
     mesocycle: Mesocycle,
     evaluation: Evaluation,
     targets: MuscleTargets,
+    config: EngineConfig,
     muscle_ids: Mapping[str, int],
     source: AnalysisSource,
 ) -> PlanAnalysis:
@@ -109,6 +117,10 @@ def to_analysis(
                     muscle_code=code,
                     volume=_r(volume),
                     zone=volume_zone(volume, target),
+                    mev=target.mev,
+                    mav_upper=target.mav_upper,
+                    mrv=target.mrv,
+                    priority=target.priority,
                     benefit=_r(score.benefit) if score else None,
                     penalty=_r(score.penalty) if score else None,
                     score=_r(score.score) if score else None,
@@ -128,6 +140,7 @@ def to_analysis(
     return PlanAnalysis(
         source=source,
         score=_r(evaluation.score),
+        max_score=_r(max_score(mesocycle, targets, config)),
         volume_score=_r(evaluation.volume_score),
         time_penalty=_r(evaluation.time_penalty),
         weeks=weeks,

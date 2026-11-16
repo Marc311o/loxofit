@@ -102,3 +102,8 @@ def test_total_overtime_sums_sessions():
     over = session((BENCH, 3), (FLY, 2), max_minutes=15)
     ok = session((BENCH, 3), max_minutes=60)
     assert total_overtime_minutes([over, ok, over], CONFIG) == pytest.approx(2 * (1192 / 60 - 15))
+
+
+def test_isolation_does_not_replace_compound_warmup():
+    fly_first = session_duration_s(session((FLY, 2), (BENCH, 3)), CONFIG)
+    assert fly_first == pytest.approx(1192)

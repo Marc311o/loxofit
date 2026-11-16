@@ -1,3 +1,5 @@
+import math
+
 import pytest
 from httpx import AsyncClient
 from sqlalchemy import select
@@ -185,6 +187,24 @@ async def test_analysis_uses_stored_weeks_after_progression(
     await _with_progression(client, auth_headers, plan, catalog)
     response = await client.get(f"{PLANS}/{plan['id']}/analysis", headers=auth_headers)
     assert response.json()["source"] == "stored"
+
+
+async def test_analysis_reports_landmarks_and_max_score(
+    client: AsyncClient, auth_headers: dict, plan: dict, catalog: Catalog
+) -> None:
+    url = f"{PLANS}/{plan['id']}"
+    await client.put(f"{url}/base-week", json=_week(catalog), headers=auth_headers)
+
+    body = (await client.get(f"{url}/analysis", headers=auth_headers)).json()
+
+    muscle = body["weeks"][0]["muscles"][0]
+    assert (muscle["mev"], muscle["mav_upper"], muscle["mrv"]) == (4, 13, 16)
+    assert muscle["priority"] == 1.0
+    # 4 training weeks, every muscle at MAV: benefit 1 - e^(-k), k = curve_k (default 3)
+    training_weeks = sum(not w["is_deload"] for w in body["weeks"])
+    expected = len(catalog.muscles) * training_weeks * (1 - math.exp(-3))
+    assert body["max_score"] == pytest.approx(expected, abs=0.01)
+    assert body["score"] < body["max_score"]
 
 
 async def test_activation_archives_previous_active_plan(

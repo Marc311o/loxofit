@@ -39,7 +39,11 @@ def warmup_duration_s(exercise: ExerciseSpec, config: EngineConfig) -> float:
 
 
 def needs_warmup(exercise: ExerciseSpec, trained_primary: set[str]) -> bool:
-    """Compound whose primary muscles were not yet trained as primary in this session."""
+    """Compound whose primary muscles were not yet trained by an earlier compound.
+
+    Isolation work does not count: a leg extension before squats does not replace
+    the squat's ramp-up sets, so an isolation-first order is not rewarded with time.
+    """
     return exercise.is_compound and trained_primary.isdisjoint(exercise.primary_muscles())
 
 
@@ -57,7 +61,8 @@ def session_duration_s(session: Session, config: EngineConfig) -> float:
     for planned in session.exercises:
         warm_up = needs_warmup(planned.exercise, trained_primary)
         total += exercise_duration_s(planned, config, warm_up)
-        trained_primary |= planned.exercise.primary_muscles()
+        if planned.exercise.is_compound:
+            trained_primary |= planned.exercise.primary_muscles()
     total += max(0, len(session.exercises) - 1) * config.transitions_s
     return total
 
