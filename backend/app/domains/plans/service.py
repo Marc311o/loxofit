@@ -115,7 +115,7 @@ class PlanService:
             mesocycle = build_mesocycle(base, plan.num_weeks, config)
 
         evaluation = evaluate(mesocycle, targets, config)
-        return to_analysis(mesocycle, evaluation, targets, muscle_ids, source)
+        return to_analysis(mesocycle, evaluation, targets, config, muscle_ids, source)
 
     # -- commands -----------------------------------------------------------
 

@@ -152,6 +152,10 @@ class MuscleAnalysis(BaseModel):
     muscle_code: str
     volume: float
     zone: VolumeZone
+    mev: float
+    mav_upper: float
+    mrv: float
+    priority: float
     benefit: float | None  # None in the deload week and for muscles with priority 0
     penalty: float | None
     score: float | None
@@ -167,9 +171,19 @@ class WeekAnalysis(BaseModel):
     muscles: list[MuscleAnalysis]
 
 
+class PlanAssumptions(BaseModel):
+    """Prescription defaults the analysis assumed - shown next to every exercise."""
+
+    rep_range_compound: tuple[int, int]
+    rep_range_isolation: tuple[int, int]
+    default_tempo: str
+
+
 class PlanAnalysis(BaseModel):
     source: AnalysisSource
     score: float
+    max_score: float
     volume_score: float
     time_penalty: float
+    assumptions: PlanAssumptions
     weeks: list[WeekAnalysis]
