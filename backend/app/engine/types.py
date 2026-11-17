@@ -82,6 +82,8 @@ class EngineConfig:
     rir_end: int = 1
     deload_volume_factor: float = 0.5
     deload_rir: int = 4
+    rep_range_compound: tuple[int, int] = (6, 10)
+    rep_range_isolation: tuple[int, int] = (10, 14)
 
     def weight(self, role: Role) -> float:
         """Effective-set weight of a role; a role missing from the config counts as 0."""

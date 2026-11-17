@@ -205,6 +205,11 @@ async def test_analysis_reports_landmarks_and_max_score(
     expected = len(catalog.muscles) * training_weeks * (1 - math.exp(-3))
     assert body["max_score"] == pytest.approx(expected, abs=0.01)
     assert body["score"] < body["max_score"]
+    assert body["assumptions"] == {
+        "rep_range_compound": [6, 10],
+        "rep_range_isolation": [10, 14],
+        "default_tempo": "2010",
+    }
 
 
 async def test_activation_archives_previous_active_plan(

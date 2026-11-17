@@ -26,8 +26,14 @@ def set_duration_s(exercise: ExerciseSpec, reps: int, config: EngineConfig) -> f
     return reps * per_rep * sides
 
 
+def rep_range(exercise: ExerciseSpec, config: EngineConfig) -> tuple[int, int]:
+    return config.rep_range_compound if exercise.is_compound else config.rep_range_isolation
+
+
 def working_reps(exercise: ExerciseSpec, config: EngineConfig) -> int:
-    return config.reps_compound if exercise.is_compound else config.reps_isolation
+    """Reps per working set for the time estimate: the middle of the rep range."""
+    low, high = rep_range(exercise, config)
+    return (low + high) // 2
 
 
 def warmup_duration_s(exercise: ExerciseSpec, config: EngineConfig) -> float:

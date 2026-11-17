@@ -9,7 +9,12 @@ from app.domains.model_config.models import ModelConfig
 from app.domains.plans.enums import AnalysisSource, VolumeZone
 from app.domains.plans.exceptions import UnsupportedConfigError
 from app.domains.plans.models import PlanSession, PlanWeek
-from app.domains.plans.schemas import MuscleAnalysis, PlanAnalysis, WeekAnalysis
+from app.domains.plans.schemas import (
+    MuscleAnalysis,
+    PlanAnalysis,
+    PlanAssumptions,
+    WeekAnalysis,
+)
 from app.engine.benefit import benefit
 from app.engine.evaluate import Evaluation
 from app.engine.types import (
@@ -144,4 +149,9 @@ def to_analysis(
         volume_score=_r(evaluation.volume_score),
         time_penalty=_r(evaluation.time_penalty),
         weeks=weeks,
+        assumptions=PlanAssumptions(
+            rep_range_compound=config.rep_range_compound,
+            rep_range_isolation=config.rep_range_isolation,
+            default_tempo=config.default_tempo,
+        ),
     )

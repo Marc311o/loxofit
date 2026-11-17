@@ -17,6 +17,7 @@ from app.engine.timing import (
     session_duration_s,
     set_duration_s,
     total_overtime_minutes,
+    working_reps,
 )
 from app.engine.types import PlannedExercise, Session
 from tests.engine.samples import (
@@ -102,6 +103,11 @@ def test_total_overtime_sums_sessions():
     over = session((BENCH, 3), (FLY, 2), max_minutes=15)
     ok = session((BENCH, 3), max_minutes=60)
     assert total_overtime_minutes([over, ok, over], CONFIG) == pytest.approx(2 * (1192 / 60 - 15))
+
+
+def test_working_reps_are_the_middle_of_the_rep_range():
+    assert working_reps(BENCH, CONFIG) == 8
+    assert working_reps(FLY, CONFIG) == 12
 
 
 def test_isolation_does_not_replace_compound_warmup():
