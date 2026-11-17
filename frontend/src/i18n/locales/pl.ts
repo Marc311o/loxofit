@@ -318,6 +318,8 @@ export const pl: Messages = {
       aboveMrv: "{{muscle}}: {{sets}} serii od tygodnia {{week}} - powyżej MRV",
       belowMev: "{{muscle}}: tylko {{sets}} serii - poniżej MEV",
       overtime: "{{session}} trwa {{minutes}} min w tygodniu {{week}} - ponad limit",
+      capped:
+        "{{muscle}}: {{sets}} serii od tygodnia {{week}} się nie liczy - za dużo na ten mięsień w jednej sesji",
       none: "Nie znaleziono problemów.",
       more_one: "i jeszcze {{count}}",
       more_few: "i jeszcze {{count}}",
@@ -350,6 +352,7 @@ export const pl: Messages = {
       issuesTitle: "Do poprawy",
       weekTitle: "Tydzień {{number}}",
       deloadNote: "Tydzień deloadu - nie wlicza się do oceny.",
+      effective: "{{sets}} efektywnie",
       ok: "Brak problemów",
       heatmapTitle: "Serie tygodniowo na mięsień",
       cellHint: "{{sets}} serii · MEV {{mev}}, MAV {{mav}}, MRV {{mrv}}",

@@ -7,7 +7,7 @@ from app.engine.evaluate import evaluate, evaluate_plan
 from app.engine.progression import build_mesocycle
 from app.engine.types import EngineConfig, MuscleTarget, PlannedExercise, Session
 from app.engine.volume import weekly_volume
-from tests.engine.samples import BENCH, CONFIG, FLY, ROW
+from tests.engine.samples import BENCH, CLOSE_GRIP, CONFIG, FLY, ROW
 
 PEC = MuscleTarget(mev=5, mav_upper=16, mrv=20)
 LATS = MuscleTarget(mev=5, mav_upper=16, mrv=20)  # same landmarks -> easy to compare
@@ -89,3 +89,18 @@ def test_time_penalty_weight_comes_from_config():
     assert evaluate_plan(base, 3, TARGETS, strict).time_penalty == pytest.approx(
         10 * evaluate_plan(base, 3, TARGETS, CONFIG).time_penalty
     )
+
+
+def test_splitting_a_muscle_over_sessions_beats_piling_it_into_one():
+    # 12 chest sets a week: in one session only 11 count towards the benefit.
+    piled = (Session((PlannedExercise(BENCH, 6), PlannedExercise(CLOSE_GRIP, 6)), 120),)
+    split = (
+        Session((PlannedExercise(BENCH, 6),), 120),
+        Session((PlannedExercise(CLOSE_GRIP, 6),), 120),
+    )
+    targets = {"pec_major": PEC}
+    piled_week = evaluate_plan(piled, 3, targets, CONFIG).weeks[0]
+    split_week = evaluate_plan(split, 3, targets, CONFIG).weeks[0]
+    assert piled_week.volume["pec_major"] == split_week.volume["pec_major"] == 12
+    assert piled_week.effective_volume["pec_major"] == 11
+    assert split_week.volume_score > piled_week.volume_score

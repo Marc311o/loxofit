@@ -8,12 +8,13 @@ from app.engine.benefit import MuscleScore, score_muscles
 from app.engine.progression import build_mesocycle
 from app.engine.timing import overtime_minutes, session_duration_s
 from app.engine.types import EngineConfig, Mesocycle, MuscleTargets, Session, Week
-from app.engine.volume import Volume, weekly_volume
+from app.engine.volume import Volume, effective_volume, weekly_volume
 
 
 @dataclass(frozen=True, slots=True)
 class WeekEvaluation:
     volume: Volume
+    effective_volume: Volume  # counts towards the benefit (per-session cap applied)
     muscles: dict[str, MuscleScore]  # empty for the deload week
     volume_score: float  # 0 for the deload week
     session_minutes: tuple[float, ...]
@@ -30,9 +31,11 @@ class Evaluation:
 
 def _evaluate_week(week: Week, targets: MuscleTargets, config: EngineConfig) -> WeekEvaluation:
     volume = weekly_volume(week.sessions, config)
-    muscles = {} if week.is_deload else score_muscles(volume, targets, config)
+    effective = effective_volume(week.sessions, config)
+    muscles = {} if week.is_deload else score_muscles(volume, targets, config, effective)
     return WeekEvaluation(
         volume=volume,
+        effective_volume=effective,
         muscles=muscles,
         volume_score=sum(m.score for m in muscles.values()),
         session_minutes=tuple(session_duration_s(s, config) / 60 for s in week.sessions),

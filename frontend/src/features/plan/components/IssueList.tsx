@@ -9,9 +9,7 @@ import type { PlanIssue } from "../insights";
 type IssueListProps = {
   issues: PlanIssue[];
   sessionNames: string[];
-  /** Light text on the dark analysis panel. */
   inverted?: boolean;
-  /** Show at most this many; the rest is summarised in one line. */
   limit?: number;
 };
 
@@ -19,6 +17,7 @@ const DOT: Record<PlanIssue["kind"], string> = {
   aboveMrv: zoneColors.aboveMrv,
   overtime: zoneColors.aboveMrv,
   belowMev: zoneColors.belowMev,
+  capped: zoneColors.belowMev
 };
 
 export function IssueList({ issues, sessionNames, inverted = false, limit }: IssueListProps) {
@@ -44,6 +43,12 @@ export function IssueList({ issues, sessionNames, inverted = false, limit }: Iss
         return t("issues.belowMev", {
           muscle: muscleName(issue.muscleId),
           sets: formatNumber(issue.volume, 1),
+        });
+      case "capped":
+        return t("issues.capped", {
+          muscle: muscleName(issue.muscleId),
+          sets: formatNumber(issue.lost, 1),
+          week: issue.week,
         });
       case "overtime":
         return t("issues.overtime", {

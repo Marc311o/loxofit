@@ -121,6 +121,7 @@ def to_analysis(
                     muscle_id=muscle_ids[code],
                     muscle_code=code,
                     volume=_r(volume),
+                    effective_volume=_r(ev.effective_volume.get(code, 0.0)),
                     zone=volume_zone(volume, target),
                     mev=target.mev,
                     mav_upper=target.mav_upper,
@@ -153,5 +154,6 @@ def to_analysis(
             rep_range_compound=config.rep_range_compound,
             rep_range_isolation=config.rep_range_isolation,
             default_tempo=config.default_tempo,
+            session_volume_cap=config.session_volume_cap,
         ),
     )

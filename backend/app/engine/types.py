@@ -61,6 +61,7 @@ class EngineConfig:
     # Benefit function and penalties
     curve_k: float = 3.0
     penalty_lambda: float = 0.05
+    session_volume_cap: float | None = 11.0
     time_penalty: float = 0.1  # per minute over the session limit
 
     # Timing (seconds)

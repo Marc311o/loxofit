@@ -311,6 +311,8 @@ export const en = {
       belowMev: "{{muscle}}: only {{sets}} sets - below MEV",
       overtime: "{{session}} takes {{minutes}} min in week {{week}} - over its limit",
       none: "No problems found.",
+      capped:
+        "{{muscle}}: {{sets}} sets from week {{week}} do not count - too many for this muscle in one session",
       more_one: "and {{count}} more",
       more_other: "and {{count}} more",
     },
@@ -338,6 +340,7 @@ export const en = {
       issuesTitle: "What to fix",
       weekTitle: "Week {{number}}",
       deloadNote: "Deload week - not scored.",
+      effective: "{{sets}} effective",
       ok: "No problems",
       heatmapTitle: "Weekly sets per muscle",
       cellHint: "{{sets}} sets · MEV {{mev}}, MAV {{mav}}, MRV {{mrv}}",

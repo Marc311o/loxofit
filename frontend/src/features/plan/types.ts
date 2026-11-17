@@ -87,6 +87,7 @@ export type MuscleAnalysis = {
   muscle_id: number;
   muscle_code: string;
   volume: number;
+  effective_volume: number;
   zone: VolumeZone;
   mev: number;
   mav_upper: number;
@@ -112,6 +113,7 @@ export type PlanAssumptions = {
   rep_range_compound: [number, number];
   rep_range_isolation: [number, number];
   default_tempo: string;
+  session_volume_cap: number | null;
 };
 
 export type PlanAnalysis = {

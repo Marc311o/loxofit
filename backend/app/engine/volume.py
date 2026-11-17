@@ -27,3 +27,17 @@ def weekly_volume(sessions: Iterable[Session], config: EngineConfig) -> Volume:
             for muscle, sets in exercise_volume(planned, config).items():
                 total[muscle] += sets
     return dict(total)
+
+
+def effective_volume(sessions: Iterable[Session], config: EngineConfig) -> Volume:
+    """
+    Weekly volume that counts towards the benefit: in every session a muscle
+    contributes at most `session_volume_cap` sets. Sets above the cap add fatigue
+    and time, but no growth - so they still count for MRV and session length.
+    """
+    cap = config.session_volume_cap
+    total: defaultdict[str, float] = defaultdict(float)
+    for session in sessions:
+        for muscle, sets in weekly_volume([session], config).items():
+            total[muscle] += sets if cap is None else min(sets, cap)
+    return dict(total)

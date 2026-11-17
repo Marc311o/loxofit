@@ -210,6 +210,7 @@ async def test_analysis_reports_landmarks_and_max_score(
         "rep_range_isolation": [10, 14],
         "default_tempo": "2010",
     }
+    assert muscle["effective_volume"] == muscle["volume"]  # no session over the cap
 
 
 async def test_activation_archives_previous_active_plan(

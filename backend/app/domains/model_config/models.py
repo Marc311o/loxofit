@@ -48,6 +48,7 @@ class ModelConfig(Base):
     global_mrv: Mapped[float | None] = mapped_column(Float)
     penalty_lambda: Mapped[float] = mapped_column(Float, default=0.05, server_default="0.05")
     curve_k: Mapped[float] = mapped_column(Float, default=3, server_default="3")
+    session_volume_cap: Mapped[float | None] = mapped_column(Float, default=11, server_default="11")
     rest_compound_s: Mapped[int] = mapped_column(Integer, default=150, server_default="150")
     rest_isolation_s: Mapped[int] = mapped_column(Integer, default=90, server_default="90")
     transitions_s: Mapped[int] = mapped_column(Integer, default=90, server_default="90")

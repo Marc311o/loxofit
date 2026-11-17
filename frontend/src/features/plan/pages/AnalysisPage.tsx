@@ -222,7 +222,7 @@ function MuscleVolumes({ week }: { week: WeekAnalysis }) {
                 display: "grid",
                 gridTemplateColumns: {
                   xs: "minmax(0, 1.3fr) minmax(0, 1fr) 36px",
-                  md: "200px minmax(0, 1fr) 48px 100px",
+                  md: "200px minmax(0, 1fr) 48px 170px",
                 },
                 alignItems: "center",
                 gap: 1.5,
@@ -251,6 +251,8 @@ function MuscleVolumes({ week }: { week: WeekAnalysis }) {
                 }}
               >
                 {t(`zones.${m.zone}`)}
+                {m.volume - m.effective_volume > 0.05 &&
+                ` · ${t("analysis.effective", { sets: formatNumber(m.effective_volume, 1) })}`}
               </Typography>
             </Box>
           );

@@ -90,3 +90,15 @@ def test_volume_score_ignores_untargeted_and_zero_priority_muscles():
 def test_curve_k_comes_from_config():
     steeper = EngineConfig(role_weights=CONFIG.role_weights, curve_k=4.0)
     assert muscle_score(12, PEC, steeper).benefit > muscle_score(12, PEC, CONFIG).benefit
+
+
+def test_benefit_uses_effective_volume_and_penalty_the_whole_volume():
+    # 24 sets in total, 18 of them effective: growth from 18, fatigue (MRV) from 24.
+    result = muscle_score(24, PEC, CONFIG, effective=18)
+    assert result.benefit == pytest.approx(benefit(18, PEC, K))
+    assert result.penalty == pytest.approx(mrv_penalty(24, PEC, CONFIG.penalty_lambda))
+    assert (result.volume, result.effective_volume) == (24, 18)
+
+
+def test_without_effective_volume_the_whole_volume_counts():
+    assert muscle_score(12, PEC, CONFIG) == muscle_score(12, PEC, CONFIG, effective=12)
