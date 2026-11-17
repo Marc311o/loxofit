@@ -18,7 +18,7 @@ export function ExerciseThumbnail({ imageUrl, size = 48 }: ExerciseThumbnailProp
         width: size,
         height: size,
         flexShrink: 0,
-        borderRadius: 3,
+        borderRadius: 2,
         overflow: "hidden",
         display: "grid",
         placeItems: "center",

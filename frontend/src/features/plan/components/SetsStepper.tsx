@@ -8,7 +8,6 @@ import { MAX_SETS } from "../types";
 
 type SetsStepperProps = {
   value: number;
-  /** Name of the exercise, for screen readers ("Fewer sets: Bench press"). */
   label: string;
   onChange: (sets: number) => void;
 };
@@ -25,7 +24,7 @@ export function SetsStepper({ value, label, onChange }: SetsStepperProps) {
         alignItems: "center",
         border: 1,
         borderColor: "divider",
-        borderRadius: 2.5,
+        borderRadius: 2,
         height: 36,
         flexShrink: 0,
       }}

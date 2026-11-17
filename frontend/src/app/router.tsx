@@ -9,13 +9,18 @@ import { EquipmentPage } from "@/features/catalog/equipment/pages/EquipmentPage.
 import { ExerciseDetailDialog } from "@/features/catalog/exercises/pages/ExerciseDetailDialog.tsx";
 import { ExercisesPage } from "@/features/catalog/exercises/pages/ExercisesPage.tsx";
 import { MusclesPage } from "@/features/catalog/muscles/pages/MusclesPage.tsx";
-import { PlanPage } from "@/features/plan/pages/PlanPage";
+import { AnalysisPage } from "@/features/plan/pages/AnalysisPage";
+import { BaseWeekPage } from "@/features/plan/pages/BaseWeekPage";
+import { PlanLayout } from "@/features/plan/pages/PlanLayout";
+import { PlansPage } from "@/features/plan/pages/PlansPage";
 import { StartPage } from "@/features/plan/pages/StartPage";
+import { WeeksPage } from "@/features/plan/pages/WeeksPage";
 import { ProfilePage } from "@/features/profile/pages/ProfilePage";
 import { WorkoutPage } from "@/features/workout/pages/WorkoutPage";
 import { AppLayout } from "@/layouts/AppLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { NotFoundPage } from "@/pages/NotFoundPage";
+
 
 export const router = createBrowserRouter([
   // Public
@@ -39,7 +44,16 @@ export const router = createBrowserRouter([
         element: <AppLayout />,
         children: [
           { path: "/", element: <StartPage /> },
-          { path: "/plans", element: <PlanPage /> },
+                    { path: "/plans", element: <PlansPage /> },
+          {
+            path: "/plans/:planId",
+            element: <PlanLayout />,
+            children: [
+              { index: true, element: <BaseWeekPage /> },
+              { path: "weeks", element: <WeeksPage /> },
+              { path: "analysis", element: <AnalysisPage /> },
+            ],
+          },
           {
             path: "/catalog",
             element: <CatalogLayout />,

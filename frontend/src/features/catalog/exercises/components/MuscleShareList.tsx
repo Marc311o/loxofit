@@ -49,7 +49,7 @@ export function MuscleShareList({ muscles }: { muscles: MuscleShare[] }) {
             sx={{
               mt: 0.75,
               height: 8,
-              borderRadius: 4,
+              borderRadius: 2,
               bgcolor: "divider",
               overflow: "hidden",
             }}
@@ -58,7 +58,7 @@ export function MuscleShareList({ muscles }: { muscles: MuscleShare[] }) {
               sx={{
                 width: `${Math.min(share.weight, 1) * 100}%`,
                 height: "100%",
-                borderRadius: 4,
+                borderRadius: 2,
                 bgcolor: ROLE_COLORS[share.role],
               }}
             />

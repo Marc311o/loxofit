@@ -21,7 +21,7 @@ export function MuscleFigure({ code, size = 72 }: MuscleFigureProps) {
         width: size,
         height: size,
         flexShrink: 0,
-        borderRadius: "16px",
+        borderRadius: "8px",
         overflow: "hidden",
         bgcolor: "background.default",
       }}

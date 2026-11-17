@@ -1,5 +1,4 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-
+import { keepPreviousData, queryOptions, useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import type { Page } from "@/lib/pagination";
 import { catalogKeys } from "../queryKeys";
@@ -66,11 +65,14 @@ export function useExerciseGroupCounts(
   });
 }
 
-export function useExercise(id: number | null) {
-  return useQuery({
-    queryKey: exerciseKeys.detail(id ?? 0),
+export function exerciseQueryOptions(id: number) {
+  return queryOptions({
+    queryKey: exerciseKeys.detail(id),
     queryFn: () => api.get<ExerciseDetail>(`/exercises/${id}`),
     staleTime: CATALOG_STALE_TIME,
-    enabled: id !== null,
   });
+}
+
+export function useExercise(id: number | null) {
+  return useQuery({ ...exerciseQueryOptions(id ?? 0), enabled: id !== null });
 }

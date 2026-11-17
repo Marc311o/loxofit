@@ -71,14 +71,14 @@ export function ActivePlanCard({ plan }: { plan: PlanDetail }) {
               <Box
                 sx={{
                   height: 6,
-                  borderRadius: 3,
+                  borderRadius: 2,
                   bgcolor: week.is_deload ? "divider" : "primary.light",
                 }}
               />
               <Typography sx={{ fontFamily: FONT_MONO, fontSize: 11, color: "text.secondary" }}>
                 {week.is_deload
                   ? t("week.deloadShort")
-                  : t("week.short", { number: week.week_number, rir: week.rir })}
+                  : t("week.short", { number: week.week_number })}
               </Typography>
             </Stack>
           ))}
@@ -101,7 +101,7 @@ export function ActivePlanCard({ plan }: { plan: PlanDetail }) {
               <Stack
                 key={session.id}
                 spacing={0.5}
-                sx={{ bgcolor: "background.default", borderRadius: 3.5, p: 1.5 }}
+                sx={{ bgcolor: "background.default", borderRadius: 2, p: 1.5 }}
               >
                 <Typography sx={{ fontFamily: FONT_MONO, fontSize: 11, color: "text.secondary" }}>
                   {session.weekday ? weekdayName(session.weekday).toUpperCase() : "—"}

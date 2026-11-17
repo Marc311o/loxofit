@@ -21,7 +21,7 @@ export function EmptyState({ title, description, icon, action }: EmptyStateProps
         border: 1,
         borderColor: "divider",
         borderStyle: "dashed",
-        borderRadius: 5,
+        borderRadius: 2,
       }}
     >
       {icon && (
@@ -29,7 +29,7 @@ export function EmptyState({ title, description, icon, action }: EmptyStateProps
           sx={{
             width: 48,
             height: 48,
-            borderRadius: 3.5,
+            borderRadius: 2,
             bgcolor: "primary.light",
             color: "primary.dark",
             alignItems: "center",

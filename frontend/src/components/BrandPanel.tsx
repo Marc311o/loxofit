@@ -19,7 +19,7 @@ export function BrandPanel() {
         px: { xs: 3, md: 8 },
         pt: { xs: 6, md: 7 },
         pb: { xs: 3.5, md: 7 },
-        borderRadius: { xs: "0 0 32px 32px", md: 0 },
+        borderRadius: { xs: "0 0 8px 8px", md: 0 },
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",

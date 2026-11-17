@@ -104,7 +104,7 @@ export function ExercisesPage() {
     results = (
       <Stack spacing={1.25} aria-busy="true">
         {Array.from({ length: 6 }, (_, index) => (
-          <Skeleton key={index} variant="rounded" height={82} sx={{ borderRadius: 5 }} />
+          <Skeleton key={index} variant="rounded" height={82} sx={{ borderRadius: 2 }} />
         ))}
       </Stack>
     );
@@ -216,7 +216,7 @@ export function ExercisesPage() {
             onClose={() => setFiltersOpen(false)}
             slotProps={{
               paper: {
-                sx: { borderRadius: "24px 24px 0 0", maxHeight: "88dvh" },
+                sx: { borderRadius: "8px 8px 0 0", maxHeight: "88dvh" },
               },
             }}
           >

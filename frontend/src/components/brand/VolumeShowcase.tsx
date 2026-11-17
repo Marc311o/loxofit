@@ -8,7 +8,6 @@ import { FONT_MONO } from "@/styles/theme";
 
 const SCALE = 22; // sets shown at full bar width
 const MRV = 16;
-/** Keys in `brand.muscles`. */
 const MUSCLES = ["chest", "lats", "quads", "glutes"] as const;
 
 type Week = {
@@ -97,7 +96,7 @@ export function VolumeShowcase({ animate }: { animate: boolean }) {
                 sx={{
                   width: i === index ? 16 : 6,
                   height: 6,
-                  borderRadius: 3,
+                  borderRadius: 2,
                   bgcolor: i === index ? "#F3F4F1" : "#2F665D",
                   transition: "width 400ms ease, background-color 400ms ease",
                   ...NO_MOTION,

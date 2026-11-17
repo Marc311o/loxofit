@@ -11,7 +11,7 @@ import type { Equipment } from "../../types";
 /** Saved and current selection combined - pending states get the moving dashed border. */
 export type TileState = "owned" | "off" | "adding" | "removing";
 
-const RADIUS = 20;
+const RADIUS = 8;
 const STROKE = 2;
 const DASH = 8;
 const GAP = 6;
@@ -61,7 +61,7 @@ function TileImage({ imageUrl }: { imageUrl: string | null }) {
     <Box
       sx={{
         aspectRatio: "1",
-        borderRadius: "14px",
+        borderRadius: "8px",
         overflow: "hidden",
         display: "grid",
         placeItems: "center",
