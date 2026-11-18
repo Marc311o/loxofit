@@ -5,7 +5,9 @@ from httpx import AsyncClient
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.domains.model_config.models import ModelConfig
+from app.domains.catalog.enums import MuscleRole
+from app.domains.model_config.enums import VolumeMode
+from app.domains.model_config.models import ConfigMuscleLandmark, ConfigRoleWeight, ModelConfig
 from app.domains.plans.models import PrescribedExercise
 from app.domains.users.service import UserService
 from tests.conftest import API
@@ -181,14 +183,6 @@ async def test_analysis_is_projected_before_progression(
     assert {m["muscle_code"] for m in body["weeks"][0]["muscles"]} == set(catalog.muscles)
 
 
-async def test_analysis_uses_stored_weeks_after_progression(
-    client: AsyncClient, auth_headers: dict, plan: dict, catalog: Catalog
-) -> None:
-    await _with_progression(client, auth_headers, plan, catalog)
-    response = await client.get(f"{PLANS}/{plan['id']}/analysis", headers=auth_headers)
-    assert response.json()["source"] == "stored"
-
-
 async def test_analysis_reports_landmarks_and_max_score(
     client: AsyncClient, auth_headers: dict, plan: dict, catalog: Catalog
 ) -> None:
@@ -200,6 +194,7 @@ async def test_analysis_reports_landmarks_and_max_score(
     muscle = body["weeks"][0]["muscles"][0]
     assert (muscle["mev"], muscle["mav_upper"], muscle["mrv"]) == (4, 13, 16)
     assert muscle["priority"] == 1.0
+    assert muscle["effective_volume"] == muscle["volume"]  # no session over the cap
     # 4 training weeks, every muscle at MAV: benefit 1 - e^(-k), k = curve_k (default 3)
     training_weeks = sum(not w["is_deload"] for w in body["weeks"])
     expected = len(catalog.muscles) * training_weeks * (1 - math.exp(-3))
@@ -209,8 +204,51 @@ async def test_analysis_reports_landmarks_and_max_score(
         "rep_range_compound": [6, 10],
         "rep_range_isolation": [10, 14],
         "default_tempo": "2010",
+        "session_volume_cap": None,  # test-v1 is a config without the cap
     }
-    assert muscle["effective_volume"] == muscle["volume"]  # no session over the cap
+
+
+async def test_per_muscle_config_scores_only_its_muscles_with_their_landmarks(
+    client: AsyncClient, auth_headers: dict, catalog: Catalog, db: AsyncSession
+) -> None:
+    m = catalog.muscles
+    db.add(
+        ModelConfig(
+            name="per-muscle-test",
+            is_default=True,
+            volume_mode=VolumeMode.PER_MUSCLE,
+            session_volume_cap=11,
+            role_weights=[
+                ConfigRoleWeight(role=MuscleRole.PRIMARY, weight=1.0),
+                ConfigRoleWeight(role=MuscleRole.SECONDARY, weight=0.5),
+                ConfigRoleWeight(role=MuscleRole.STABILIZER, weight=0.0),
+            ],
+            landmarks=[
+                ConfigMuscleLandmark(muscle_id=m["pec_major"].id, mev=10, mav_upper=20, mrv=22),
+                ConfigMuscleLandmark(muscle_id=m["delt_ant"].id, mev=0, mav_upper=8, mrv=12),
+            ],
+        )
+    )
+    await db.flush()
+    plan = (await client.post(PLANS, json={"name": "P"}, headers=auth_headers)).json()
+    url = f"{PLANS}/{plan['id']}"
+    await client.put(f"{url}/base-week", json=_week(catalog), headers=auth_headers)
+
+    body = (await client.get(f"{url}/analysis", headers=auth_headers)).json()
+
+    muscles = {x["muscle_code"]: x for x in body["weeks"][0]["muscles"]}
+    assert set(muscles) == {"pec_major", "delt_ant"}  # muscles without landmarks are not scored
+    assert (muscles["pec_major"]["mev"], muscles["pec_major"]["mav_upper"]) == (10, 20)
+    assert muscles["delt_ant"]["mrv"] == 12
+    assert body["assumptions"]["session_volume_cap"] == 11
+
+
+async def test_analysis_uses_stored_weeks_after_progression(
+    client: AsyncClient, auth_headers: dict, plan: dict, catalog: Catalog
+) -> None:
+    await _with_progression(client, auth_headers, plan, catalog)
+    response = await client.get(f"{PLANS}/{plan['id']}/analysis", headers=auth_headers)
+    assert response.json()["source"] == "stored"
 
 
 async def test_activation_archives_previous_active_plan(

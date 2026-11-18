@@ -48,14 +48,32 @@ def test_specs_take_roles_and_flags_from_catalog():
     assert specs["leg_ext_uni"].is_unilateral
 
 
-def test_default_config_maps_landmarks_and_role_weights():
-    version = get_config(DEFAULT_CONFIG_NAME)
+def test_global_config_maps_landmarks_and_role_weights():
+    version = get_config("global-v1")
     config = build_config(version)
     targets = build_targets(version, load_catalog())
 
     assert config.weight(Role.SECONDARY) == 0.5
+    assert config.session_volume_cap is None  # defined before the cap existed
     assert targets["pec_major"] == TARGET
     assert "erectors" not in targets  # is_volume_target = FALSE in the catalog
+
+
+def test_per_muscle_config_takes_landmarks_from_the_source():
+    version = get_config("per-muscle-v1")
+    targets = build_targets(version, load_catalog())
+
+    assert build_config(version).session_volume_cap == 11
+    assert targets["pec_major"] == MuscleTarget(mev=10, mav_upper=20, mrv=22)
+    assert targets["delt_ant"].mev == 0  # trained by every press
+    assert "ext_obl" not in targets and "erectors" not in targets  # no landmarks in RP
+
+
+def test_default_config_is_per_muscle_with_corrected_timing():
+    assert DEFAULT_CONFIG_NAME == "per-muscle-v2"
+    config = build_config(get_config(DEFAULT_CONFIG_NAME))
+    assert config.rest_before_next_exercise and config.transitions_s == 60
+    assert not build_config(get_config("per-muscle-v1")).rest_before_next_exercise
 
 
 def test_unknown_config_name_is_reported():
@@ -136,3 +154,10 @@ def test_every_registered_config_is_supported_by_the_cli():
     for version in CONFIGS:
         build_config(version)
         build_targets(version, catalog)
+
+
+def test_registry_is_consistent():
+    # Same check seed_config runs before writing - per-muscle configs have ordered landmarks.
+    from app.scripts.seed_config import check_registry
+
+    check_registry()

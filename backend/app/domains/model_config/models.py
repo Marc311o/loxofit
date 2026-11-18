@@ -48,10 +48,13 @@ class ModelConfig(Base):
     global_mrv: Mapped[float | None] = mapped_column(Float)
     penalty_lambda: Mapped[float] = mapped_column(Float, default=0.05, server_default="0.05")
     curve_k: Mapped[float] = mapped_column(Float, default=3, server_default="3")
-    session_volume_cap: Mapped[float | None] = mapped_column(Float, default=11, server_default="11")
+    session_volume_cap: Mapped[float | None] = mapped_column(Float)
     rest_compound_s: Mapped[int] = mapped_column(Integer, default=150, server_default="150")
     rest_isolation_s: Mapped[int] = mapped_column(Integer, default=90, server_default="90")
     transitions_s: Mapped[int] = mapped_column(Integer, default=90, server_default="90")
+    rest_before_next_exercise: Mapped[bool] = mapped_column(
+        Boolean, default=False, server_default=false()
+    )
     warmup_s: Mapped[int] = mapped_column(Integer, default=300, server_default="300")
     explosive_phase_s: Mapped[float] = mapped_column(Float, default=1.0, server_default="1.0")
     time_penalty: Mapped[float] = mapped_column(Float, default=0.1, server_default="0.1")
@@ -67,6 +70,9 @@ class ModelConfig(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     role_weights: Mapped[list["ConfigRoleWeight"]] = relationship(
+        back_populates="config", cascade="all, delete-orphan", lazy="raise"
+    )
+    landmarks: Mapped[list["ConfigMuscleLandmark"]] = relationship(
         back_populates="config", cascade="all, delete-orphan", lazy="raise"
     )
 
@@ -88,3 +94,23 @@ class ConfigRoleWeight(Base):
     )
     weight: Mapped[float] = mapped_column(Float)
     config: Mapped[ModelConfig] = relationship(back_populates="role_weights", lazy="raise")
+
+
+class ConfigMuscleLandmark(Base):
+    """MEV / upper MAV / MRV of one muscle in a per-muscle config (weekly fractional sets)."""
+
+    __tablename__ = "config_muscle_landmarks"
+    __table_args__ = (
+        CheckConstraint("mev >= 0 AND mev < mav_upper AND mav_upper <= mrv", name="ordered"),
+    )
+
+    config_id: Mapped[int] = mapped_column(
+        ForeignKey("model_configs.id", ondelete="CASCADE"), primary_key=True
+    )
+    muscle_id: Mapped[int] = mapped_column(
+        ForeignKey("muscles.id", ondelete="CASCADE"), primary_key=True
+    )
+    mev: Mapped[float] = mapped_column(Float)
+    mav_upper: Mapped[float] = mapped_column(Float)
+    mrv: Mapped[float] = mapped_column(Float)
+    config: Mapped[ModelConfig] = relationship(back_populates="landmarks", lazy="raise")

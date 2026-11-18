@@ -161,6 +161,24 @@ def build_base_week(plan: PlanFile, specs: dict[str, ExerciseSpec]) -> tuple[Ses
     )
 
 
+def build_targets(version: ConfigVersion, catalog: CatalogData) -> MuscleTargets:
+    """Global mode: every volume-target muscle gets the same landmarks.
+    Per-muscle mode: the muscles the config lists, with their own landmarks."""
+    mode = version.params.get("volume_mode", VolumeMode.GLOBAL)
+    if mode == VolumeMode.PER_MUSCLE:
+        known = {m.code for m in catalog.muscles}
+        if unknown := sorted(set(version.landmarks) - known):
+            raise PlanError([f"Config {version.name!r}: unknown muscles {unknown}"])
+        return {code: MuscleTarget(*lm) for code, lm in version.landmarks.items()}
+
+    target = MuscleTarget(
+        mev=version.params["global_mev"],
+        mav_upper=version.params["global_mav_upper"],
+        mrv=version.params["global_mrv"],
+    )
+    return {m.code: target for m in catalog.muscles if m.is_volume_target}
+
+
 # ---------------------------------------------------------------------------
 # Running and reporting
 # ---------------------------------------------------------------------------

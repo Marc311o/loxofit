@@ -53,20 +53,36 @@ def needs_warmup(exercise: ExerciseSpec, trained_primary: set[str]) -> bool:
     return exercise.is_compound and trained_primary.isdisjoint(exercise.primary_muscles())
 
 
-def exercise_duration_s(planned: PlannedExercise, config: EngineConfig, warm_up: bool) -> float:
+def rest_s(exercise: ExerciseSpec, config: EngineConfig) -> int:
+    """Rest after one working set of the exercise."""
+    return config.rest_compound_s if exercise.is_compound else config.rest_isolation_s
+
+
+def rests_after(sets: int, last_in_session: bool, config: EngineConfig) -> int:
+    """How many rests follow an exercise's working sets.
+
+    Original model: between its sets only (sets - 1). With rest_before_next_exercise:
+    after every set (sets), except for the last exercise of the session (sets - 1).
+    """
+    return sets if config.rest_before_next_exercise and not last_in_session else sets - 1
+
+
+def exercise_duration_s(
+    planned: PlannedExercise, config: EngineConfig, warm_up: bool, last_in_session: bool = False
+) -> float:
     exercise = planned.exercise
-    rest = config.rest_compound_s if exercise.is_compound else config.rest_isolation_s
     working = planned.sets * set_duration_s(exercise, working_reps(exercise, config), config)
-    rests = (planned.sets - 1) * rest
+    rests = rests_after(planned.sets, last_in_session, config) * rest_s(exercise, config)
     return working + rests + (warmup_duration_s(exercise, config) if warm_up else 0.0)
 
 
 def session_duration_s(session: Session, config: EngineConfig) -> float:
     total = float(config.warmup_s)
     trained_primary: set[str] = set()
-    for planned in session.exercises:
+    last = len(session.exercises) - 1
+    for k, planned in enumerate(session.exercises):
         warm_up = needs_warmup(planned.exercise, trained_primary)
-        total += exercise_duration_s(planned, config, warm_up)
+        total += exercise_duration_s(planned, config, warm_up, last_in_session=k == last)
         if planned.exercise.is_compound:
             trained_primary |= planned.exercise.primary_muscles()
     total += max(0, len(session.exercises) - 1) * config.transitions_s

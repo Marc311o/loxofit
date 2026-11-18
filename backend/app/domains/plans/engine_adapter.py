@@ -157,3 +157,35 @@ def to_analysis(
             session_volume_cap=config.session_volume_cap,
         ),
     )
+
+
+def build_targets(
+    config: ModelConfig, muscles: Iterable[MuscleRead], priorities: Mapping[int, float]
+) -> MuscleTargets:
+    """
+    Global mode: every volume-target muscle gets the same landmarks.
+    Per-muscle mode: exactly the muscles the config has landmarks for - a muscle
+    without landmarks in the source is not scored.
+    """
+    if config.volume_mode == VolumeMode.PER_MUSCLE:
+        if not config.landmarks:
+            raise UnsupportedConfigError(f"Config {config.name!r} has no muscle landmarks")
+        codes = {m.id: m.code for m in muscles}
+        return {
+            codes[lm.muscle_id]: MuscleTarget(
+                mev=lm.mev,
+                mav_upper=lm.mav_upper,
+                mrv=lm.mrv,
+                priority=priorities.get(lm.muscle_id, 1.0),
+            )
+            for lm in config.landmarks
+        }
+
+    mev, mav, mrv = config.global_mev, config.global_mav_upper, config.global_mrv
+    if mev is None or mav is None or mrv is None:
+        raise UnsupportedConfigError(f"Config {config.name!r} has no global landmarks")
+    return {
+        m.code: MuscleTarget(mev=mev, mav_upper=mav, mrv=mrv, priority=priorities.get(m.id, 1.0))
+        for m in muscles
+        if m.is_volume_target
+    }
