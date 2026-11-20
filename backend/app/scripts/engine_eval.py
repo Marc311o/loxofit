@@ -227,11 +227,16 @@ def zone(volume: float, target: MuscleTarget) -> str:
 
 def _muscle_table(result: Run, week_index: int) -> list[str]:
     evaluation = result.evaluation.weeks[week_index]
-    header = f"  {'muscle':<10} {'sets':>6}  {'zone':<8} {'benefit':>8} {'penalty':>8} {'score':>7}"
+    header = (
+        f"  {'muscle':<10} {'MEV/MAV/MRV':>12} {'sets':>6}  {'zone':<8}"
+        f" {'benefit':>8} {'penalty':>8} {'score':>7}"
+    )
     lines = [header]
     for muscle, s in sorted(evaluation.muscles.items(), key=lambda kv: -kv[1].volume):
+        t = result.targets[muscle]
+        landmarks = f"{t.mev:g}/{t.mav_upper:g}/{t.mrv:g}"
         lines.append(
-            f"  {muscle:<10} {s.volume:>6.1f}  {zone(s.volume, result.targets[muscle]):<8}"
+            f"  {muscle:<10} {landmarks:>12} {s.volume:>6.1f}  {zone(s.volume, t):<8}"
             f" {s.benefit:>8.2f} {s.penalty:>8.2f} {s.score:>7.2f}"
         )
     return lines
@@ -241,7 +246,7 @@ def format_report(result: Run) -> str:
     plan, meso, ev = result.plan, result.mesocycle, result.evaluation
     any_target = next(iter(result.targets.values()))
     lines = [
-        f"Config: {result.config_name}  (MEV {any_target.mev:g}, MAV {any_target.mav_upper:g},"
+        f"Config: {result.config_name}  (landmarks in effective sets / week, per muscle below)",
         f" MRV {any_target.mrv:g} effective sets / week)",
         f"Mesocycle: {plan.weeks - 1} training weeks + deload",
         "",

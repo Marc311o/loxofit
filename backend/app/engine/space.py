@@ -14,6 +14,11 @@ That keeps the search space smaller and the result readable.
 At least `min_sets` (2) sets per exercise: a single set is rarely worth the setup
 and the warm-up of a new exercise, and a plan of one-set exercises is hard to
 follow. It limits only what the generator proposes - the user may still set 1 set.
+
+At most `max_per_pattern` exercises of one movement pattern per session (the
+generator uses 1). The model does not count systemic fatigue, so without this
+limit a session could stack three deadlift variants: the second one needs no
+ramp-up sets and adds the same muscles.
 """
 
 import random
@@ -45,6 +50,10 @@ class SearchSpace:
     max_sets: int = 5
     max_exercises: int = 8  # per session
     similar_share: float = 0.8  # how often "swap" picks an exercise sharing a primary muscle
+    # Movement pattern of each exercise and how many exercises of one pattern a session
+    # may have; None - no limit.
+    patterns: tuple[str, ...] | None = None
+    max_per_pattern: int | None = None
     _similar: tuple[frozenset[int], ...] = field(init=False, repr=False)
     _allowed: tuple[frozenset[int], ...] = field(init=False, repr=False)
 
@@ -53,6 +62,10 @@ class SearchSpace:
             raise ValueError("rank needs one entry per exercise")
         if any(len(pool) == 0 for pool in self.pools):
             raise ValueError("every session needs at least one allowed exercise")
+        if self.max_per_pattern is not None and (
+            self.patterns is None or len(self.patterns) != len(self.exercises)
+        ):
+            raise ValueError("a pattern limit needs one pattern per exercise")
         primaries = [e.primary_muscles() for e in self.exercises]
         similar = tuple(
             frozenset(j for j, other in enumerate(primaries) if j != i and p & other)
@@ -70,12 +83,27 @@ class SearchSpace:
     def ordered(self, session: Sequence[Gene]) -> Session:
         return tuple(sorted(session, key=lambda gene: self.rank[gene[0]]))
 
+    def fits(self, s: int, genes: Sequence[Gene], i: int) -> bool:
+        """Exercise i may join session s, which already has `genes`."""
+        if i not in self._allowed[s] or any(e == i for e, _ in genes):
+            return False
+        if self.max_per_pattern is None:
+            return True
+        assert self.patterns is not None
+        same = sum(self.patterns[e] == self.patterns[i] for e, _ in genes)
+        return same < self.max_per_pattern
+
     def random_candidate(self, rng: random.Random) -> Candidate:
-        """Every session: a random number of distinct allowed exercises with random sets."""
+        """Every session: a random number of exercises that fit it, with random sets."""
         result = []
-        for pool in self.pools:
+        for s, pool in enumerate(self.pools):
             k = rng.randint(1, min(self.max_exercises, len(pool)))
-            genes = [(i, rng.randint(self.min_sets, self.max_sets)) for i in rng.sample(pool, k)]
+            genes: list[Gene] = []
+            for i in rng.sample(pool, len(pool)):
+                if len(genes) == k:
+                    break
+                if self.fits(s, genes, i):
+                    genes.append((i, rng.randint(self.min_sets, self.max_sets)))
             result.append(self.ordered(genes))
         return tuple(result)
 
@@ -83,13 +111,10 @@ class SearchSpace:
         """Make any candidate valid: allowed and distinct exercises, sets and size in bounds."""
         result = []
         for s, session in enumerate(candidate):
-            seen: set[int] = set()
-            genes = []
+            genes: list[Gene] = []
             for i, sets in session:
-                if i in self._allowed[s] and i not in seen:
-                    seen.add(i)
+                if len(genes) < self.max_exercises and self.fits(s, genes, i):
                     genes.append((i, min(self.max_sets, max(self.min_sets, sets))))
-            genes = genes[: self.max_exercises]
             if not genes:  # a session with nothing to do: put its best-ranked exercise back
                 first = min(self.pools[s], key=lambda i: self.rank[i])
                 genes = [(first, self.min_sets)]
@@ -133,8 +158,8 @@ class SearchSpace:
         session = list(candidate[s])
         g = rng.randrange(len(session))
         i, sets = session[g]
-        used = {e for e, _ in session}
-        free = [j for j in self.pools[s] if j not in used]
+        rest = session[:g] + session[g + 1 :]
+        free = [j for j in self.pools[s] if j != i and self.fits(s, rest, j)]
         similar = [j for j in free if j in self._similar[i]]
         options = similar if similar and rng.random() < self.similar_share else free
         if not options:
@@ -145,8 +170,7 @@ class SearchSpace:
     def _add(self, candidate: Candidate, rng: random.Random) -> Candidate | None:
         s = rng.randrange(self.sessions)
         session = list(candidate[s])
-        used = {e for e, _ in session}
-        free = [j for j in self.pools[s] if j not in used]
+        free = [j for j in self.pools[s] if self.fits(s, session, j)]
         if len(session) >= self.max_exercises or not free:
             return None
         session.append((rng.choice(free), rng.randint(self.min_sets, self.max_sets)))
@@ -169,7 +193,7 @@ class SearchSpace:
             return None
         g = rng.randrange(len(source))
         i, sets = source[g]
-        if i not in self._allowed[b] or any(e == i for e, _ in target):
+        if not self.fits(b, target, i):
             return None
         del source[g]
         target.append((i, sets))

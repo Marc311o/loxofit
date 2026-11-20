@@ -37,18 +37,36 @@ FRACTIONAL_SETS = {
 }
 
 RP_2017_LANDMARKS: dict[str, Landmarks] = {
-    "pec_major": (10, 20, 22),  # chest
-    "lats": (10, 22, 25),  # back
+    "pec_major": (10, 20, 22),
+    "lats": (10, 22, 25),
     "trapezius": (0, 20, 26),
-    "delt_ant": (0, 8, 12),  # front delts - trained by every press
-    "delt_mid": (8, 22, 26),  # side / rear delts
+    "delt_ant": (0, 8, 12),
+    "delt_mid": (8, 22, 26),
     "delt_post": (8, 22, 26),
     "biceps": (8, 20, 26),
     "triceps": (6, 14, 18),
     "quads": (8, 18, 20),
-    "bic_fem": (6, 16, 20),  # hamstrings
+    "bic_fem": (6, 16, 20),
     "glute_max": (0, 12, 16),
-    "rect_abd": (0, 20, 25),  # abs
+    "rect_abd": (0, 20, 25),
+}
+
+CATALOG_V1_LANDMARKS: dict[str, Landmarks] = {
+    "pec_major": (5, 16, 20),
+    "delt_ant": (1, 8, 10),
+    "delt_mid": (7, 24, 27),
+    "delt_post": (2, 12, 16),
+    "triceps": (5, 16, 18),
+    "biceps": (9, 20, 23),
+    "lats": (10, 20, 27.5),
+    "trapezius": (2, 12, 16),
+    "quads": (5, 14, 16),
+    "bic_fem": (3, 8, 11),
+    "glute_max": (7, 24, 27),
+    "rect_abd": (2, 12, 16),
+    "ext_obl": (2, 12, 16),
+    "int_obl": (2, 12, 16),
+    "calf": (8, 16, 20),
 }
 
 CONFIGS: list[ConfigVersion] = [
@@ -83,9 +101,21 @@ CONFIGS: list[ConfigVersion] = [
         role_weights=FRACTIONAL_SETS,
         landmarks=RP_2017_LANDMARKS,
     ),
+    ConfigVersion(
+        name="per-muscle-v3",
+        params={
+            "volume_mode": VolumeMode.PER_MUSCLE,
+            "session_volume_cap": 11.0,  # Remmert et al. 2025
+            "rest_before_next_exercise": True,
+            "transitions_s": 60,
+            "time_penalty": 1.0,
+        },
+        role_weights=FRACTIONAL_SETS,
+        landmarks=CATALOG_V1_LANDMARKS,
+    ),
 ]
 
-DEFAULT_CONFIG_NAME = "per-muscle-v2"
+DEFAULT_CONFIG_NAME = "per-muscle-v3"
 
 
 def get_config(name: str) -> ConfigVersion:

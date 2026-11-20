@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import pytest
+from openpyxl import load_workbook
 
 from app.engine.types import MuscleTarget, Role
 from app.scripts import engine_eval
@@ -69,11 +70,27 @@ def test_per_muscle_config_takes_landmarks_from_the_source():
     assert "ext_obl" not in targets and "erectors" not in targets  # no landmarks in RP
 
 
-def test_default_config_is_per_muscle_with_corrected_timing():
-    assert DEFAULT_CONFIG_NAME == "per-muscle-v2"
-    config = build_config(get_config(DEFAULT_CONFIG_NAME))
+def test_per_muscle_v2_corrects_the_timing():
+    config = build_config(get_config("per-muscle-v2"))
     assert config.rest_before_next_exercise and config.transitions_s == 60
     assert not build_config(get_config("per-muscle-v1")).rest_before_next_exercise
+
+
+def test_default_config_holds_the_time_limit_and_scores_calves():
+    assert DEFAULT_CONFIG_NAME == "per-muscle-v3"
+    version = get_config(DEFAULT_CONFIG_NAME)
+    targets = build_targets(version, load_catalog())
+    assert build_config(version).time_penalty == 1.0
+    assert targets["calf"] == MuscleTarget(mev=8, mav_upper=16, mrv=20)
+    assert "erectors" not in targets
+
+
+def test_default_landmarks_match_the_volumes_sheet():
+    # The registry copies the sheet (configs are immutable, the sheet may change later).
+    sheet = load_workbook(DATA_FILE, read_only=True)["volumes"]
+    rows = sheet.iter_rows(min_row=2, values_only=True)
+    expected = {m: (mev, mav, mrv) for m, mev, mav, mrv, *_ in rows if mev is not None}
+    assert get_config(DEFAULT_CONFIG_NAME).landmarks == expected
 
 
 def test_unknown_config_name_is_reported():

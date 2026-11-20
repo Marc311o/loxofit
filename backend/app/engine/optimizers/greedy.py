@@ -21,9 +21,8 @@ def _neighbours(candidate: Candidate, space: SearchSpace) -> list[Candidate]:
                 genes[g] = (i, sets + 1)
                 result.append(candidate[:s] + (space.ordered(genes),) + candidate[s + 1 :])
         if len(session) < space.max_exercises:
-            used = {i for i, _ in session}
             for i in space.pools[s]:
-                if i not in used:
+                if space.fits(s, session, i):
                     genes = [*session, (i, space.min_sets)]
                     result.append(candidate[:s] + (space.ordered(genes),) + candidate[s + 1 :])
     return result

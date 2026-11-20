@@ -76,6 +76,42 @@ def test_generator_never_proposes_a_single_set():
         assert all(sets >= 2 for session in candidate for _, sets in session)
 
 
+# Movement patterns of EXERCISES: bench and close-grip bench are both horizontal pushes.
+PATTERNS = ("h_push", "h_pull", "fly", "elbow_flexion", "core", "v_push", "h_push")
+ONE_PER_PATTERN = SearchSpace(
+    exercises=EXERCISES,
+    pools=SPACE.pools,
+    rank=SPACE.rank,
+    max_exercises=4,
+    patterns=PATTERNS,
+    max_per_pattern=1,
+)
+
+
+def test_one_exercise_per_movement_pattern():
+    rng = random.Random(4)
+    candidate = ONE_PER_PATTERN.random_candidate(rng)
+    for _ in range(1000):
+        candidate = ONE_PER_PATTERN.mutate(candidate, rng)
+        assert ONE_PER_PATTERN.is_valid(candidate)
+        for session in candidate:
+            patterns = [PATTERNS[i] for i, _ in session]
+            assert len(patterns) == len(set(patterns))
+
+
+def test_repair_keeps_the_first_exercise_of_a_pattern():
+    # Bench and close-grip bench in one session: the second horizontal push goes.
+    assert ONE_PER_PATTERN.repair([[(0, 3), (6, 3), (2, 2)], [(1, 3)]]) == (
+        ((0, 3), (2, 2)),
+        ((1, 3),),
+    )
+
+
+def test_a_pattern_limit_needs_patterns():
+    with pytest.raises(ValueError):
+        SearchSpace(EXERCISES, SPACE.pools, SPACE.rank, max_per_pattern=1)
+
+
 def test_a_session_without_allowed_exercises_is_rejected():
     with pytest.raises(ValueError):
         SearchSpace(EXERCISES, ((0,), ()), rank=tuple(range(7)))

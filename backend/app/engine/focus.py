@@ -31,7 +31,7 @@ CORE = frozenset({"rect_abd", "ext_obl", "int_obl"})
 
 PUSH_MUSCLES = frozenset({"pec_major", "delt_ant", "delt_mid", "triceps"})
 PULL_MUSCLES = frozenset({"lats", "trapezius", "delt_post", "biceps"})
-LOWER_MUSCLES = frozenset({"quads", "bic_fem", "glute_max", "erectors"})
+LOWER_MUSCLES = frozenset({"quads", "bic_fem", "glute_max", "erectors", "calf"})
 
 # Primary muscles allowed in a session of each focus; None - any muscle.
 FOCUS_MUSCLES: dict[Focus, frozenset[str] | None] = {

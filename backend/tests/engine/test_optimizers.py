@@ -133,3 +133,28 @@ def test_plain_genetic_does_no_local_search():
     explicit = GeneticParams(local_search_count=0, local_search_steps=99)
     plain = genetic(OBJECTIVE, SPACE, 2000, random.Random(5))
     assert genetic(OBJECTIVE, SPACE, 2000, random.Random(5), params=explicit) == plain
+
+
+# -- movement patterns ---------------------------------------------------------------------
+
+# Bench and close-grip bench are both horizontal pushes: at most one of them per session.
+PATTERNED = SearchSpace(
+    EXERCISES,
+    pools=SPACE.pools,
+    rank=SPACE.rank,
+    max_exercises=4,
+    patterns=("h_push", "h_pull", "fly", "elbow_flexion", "v_push", "h_push"),
+    max_per_pattern=1,
+)
+
+
+@pytest.mark.parametrize("name", OPTIMIZERS)
+def test_respects_the_movement_pattern_limit(name):
+    result = OPTIMIZERS[name](OBJECTIVE, PATTERNED, 2000, random.Random(0))
+    assert PATTERNED.is_valid(result.best)
+
+
+def test_greedy_searches_only_valid_plans():
+    # Its answer is the best plan it scored - repair has nothing to cut out of it.
+    result = greedy(OBJECTIVE, PATTERNED, 100_000)
+    assert result.score == pytest.approx(result.history[-1][1])
