@@ -6,11 +6,11 @@ from pathlib import Path
 import pytest
 from openpyxl import load_workbook
 
+from app.domains.model_config.versions import CONFIGS, DEFAULT_CONFIG_NAME, get_config
 from app.engine.types import MuscleTarget, Role
-from app.scripts import engine_eval
 from app.scripts.catalog_file import DATA_FILE, load_catalog
-from app.scripts.config_versions import CONFIGS, DEFAULT_CONFIG_NAME, get_config
-from app.scripts.engine_eval import PlanError, build_config, build_specs, build_targets, run, zone
+from research import engine_eval
+from research.engine_eval import PlanError, build_config, build_specs, build_targets, run, zone
 from tests.engine.test_independence import imported_modules
 
 EXAMPLE_PLAN = DATA_FILE.parent / "plans" / "example_upper_lower.json"
@@ -159,7 +159,7 @@ def test_main_returns_one_on_bad_plan(tmp_path, capsys):
 SCRIPTS_DIR = Path(engine_eval.__file__).parent
 
 
-@pytest.mark.parametrize("name", ["catalog_file.py", "config_versions.py", "engine_eval.py"])
+@pytest.mark.parametrize("name", ["catalog_file.py", "versions.py", "engine_eval.py"])
 def test_cli_modules_do_not_import_database(name):
     modules = imported_modules(SCRIPTS_DIR / name)
     assert not any(m.startswith(("app.core", "sqlalchemy")) for m in modules)

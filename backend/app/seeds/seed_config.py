@@ -1,7 +1,7 @@
 """
 Writes the model configurations from config_versions.CONFIGS to the database.
 
-The registry itself (and the rules for adding versions) lives in config_versions.py.
+The registry itself (and the rules for adding versions) lives in versions.py.
 """
 
 import asyncio
@@ -16,8 +16,8 @@ from app.domains.catalog.enums import MuscleRole
 from app.domains.catalog.models import Muscle
 from app.domains.model_config.enums import VolumeMode
 from app.domains.model_config.models import ConfigMuscleLandmark, ConfigRoleWeight, ModelConfig
+from app.domains.model_config.versions import CONFIGS, DEFAULT_CONFIG_NAME, ConfigVersion
 from app.engine.types import MuscleTarget
-from app.scripts.config_versions import CONFIGS, DEFAULT_CONFIG_NAME, ConfigVersion
 
 logger = logging.getLogger("seed")
 _MANAGED_COLUMNS = {"id", "name", "is_default", "created_at"}

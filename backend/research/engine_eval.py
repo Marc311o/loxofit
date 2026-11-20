@@ -2,8 +2,8 @@
 Evaluates a training plan with the engine - no server, no database.
 
 Usage:
-    python -m app.scripts.engine_eval data/plans/example_upper_lower.json
-    python -m app.scripts.engine_eval PLAN [--config NAME] [--weeks N] [--catalog XLSX] [--json]
+    python -m app.seeds.engine_eval data/plans/example_upper_lower.json
+    python -m app.seeds.engine_eval PLAN [--config NAME] [--weeks N] [--catalog XLSX] [--json]
 
 The plan file describes ONE base week; the engine progresses it into a mesocycle
 (weeks - 1 training weeks + deload) and prints volume, benefit and session times:
@@ -30,6 +30,7 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from app.domains.model_config.enums import VolumeMode
+from app.domains.model_config.versions import DEFAULT_CONFIG_NAME, ConfigVersion, get_config
 from app.engine.evaluate import Evaluation, evaluate
 from app.engine.progression import build_mesocycle
 from app.engine.types import (
@@ -42,8 +43,7 @@ from app.engine.types import (
     Role,
     Session,
 )
-from app.scripts.catalog_file import DATA_FILE, CatalogData, SeedDataError, load_catalog
-from app.scripts.config_versions import DEFAULT_CONFIG_NAME, ConfigVersion, get_config
+from app.seeds.catalog_file import DATA_FILE, CatalogData, SeedDataError, load_catalog
 
 
 class PlanError(Exception):
