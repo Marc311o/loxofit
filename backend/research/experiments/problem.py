@@ -8,9 +8,10 @@ database, so every experiment can be repeated from the repository alone.
 from dataclasses import dataclass
 
 from app.domains.model_config.versions import ConfigVersion
-from app.engine.focus import Focus, session_pools, template_focuses
+from app.engine.focus import Focus, template_focuses
+from app.engine.generator import CandidateExercise, build_search
 from app.engine.objective import Candidate, Objective
-from app.engine.space import SearchSpace, recommended_rank
+from app.engine.space import SearchSpace
 from app.engine.types import MuscleTargets
 from app.seeds.catalog_file import CatalogData
 from research.engine_eval import build_config, build_specs, build_targets
@@ -48,26 +49,23 @@ def build_problem(scenario: Scenario, catalog: CatalogData, version: ConfigVersi
     specs = build_specs(catalog)
     rows = {e.code: e for e in catalog.exercises}
     codes = tuple(available_exercises(catalog, scenario.equipment))
-    exercises = tuple(specs[c] for c in codes)
-
+    exercises = [
+        CandidateExercise(
+            spec=specs[c],
+            complexity=rows[c].complexity,
+            fatigue_cost=rows[c].fatigue_cost,
+            movement_pattern=rows[c].movement_pattern.value,
+        )
+        for c in codes
+    ]
     focuses = template_focuses(scenario.template, scenario.sessions)
-    space = SearchSpace(
-        exercises,
-        pools=session_pools(exercises, focuses),
-        rank=recommended_rank(
-            exercises,
-            complexity=[rows[c].complexity for c in codes],
-            fatigue_cost=[rows[c].fatigue_cost for c in codes],
-        ),
-        patterns=tuple(rows[c].movement_pattern.value for c in codes),
-        max_per_pattern=1,
-    )
     targets = build_targets(version, catalog)
-    objective = Objective(
+    objective, space = build_search(
         exercises,
+        focuses,
+        [scenario.minutes] * scenario.sessions,
         targets,
         build_config(version),
         scenario.weeks,
-        [scenario.minutes] * scenario.sessions,
     )
     return Problem(scenario, objective, space, targets, codes, focuses)

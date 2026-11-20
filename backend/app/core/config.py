@@ -28,6 +28,9 @@ class Settings(BaseSettings):
     REFRESH_COOKIE_NAME: str = "refresh_token"
     REFRESH_COOKIE_SAMESITE: str = "lax"
 
+    # GENERATOR
+    GENERATOR_WORKERS: int = 2  # processes running plan generations at the same time
+
     # SEED
     FIRST_SUPERUSER_EMAIL: str | None = None
     FIRST_SUPERUSER_PASSWORD: str | None = None

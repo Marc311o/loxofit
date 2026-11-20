@@ -35,6 +35,7 @@ from app.domains.plans.repository import PlanRepository
 from app.domains.plans.schemas import (
     BaseWeekWrite,
     MuscleTargetsWrite,
+    MuscleTargetWrite,
     PlanAnalysis,
     PlanCreate,
     PlanDetail,
@@ -128,6 +129,53 @@ class PlanService:
             num_weeks=data.num_weeks,
             weeks=[PlanWeek(week_number=1, rir=config.rir_start, sessions=[])],
             muscle_targets=[],
+        )
+        self.repo.add(plan)
+        await self.db.commit()
+        return await self.get_plan(user, plan.id)
+
+    async def create_with_base_week(
+        self,
+        user: User,
+        data: PlanCreate,
+        config_id: int,
+        week: BaseWeekWrite,
+        targets: list[MuscleTargetWrite],
+    ) -> PlanDetail:
+        """A draft plan with its base week and muscle priorities in one go - for a plan
+        made by the generator, scored with the config it was generated with."""
+        await self._ensure_exercises_exist(week)
+        config = await self.model_configs.get(config_id)
+        sessions = [
+            PlanSession(
+                position=position,
+                name=s.name,
+                max_minutes=s.max_minutes,
+                weekday=s.weekday,
+                exercises=[
+                    PrescribedExercise(
+                        exercise_id=e.exercise_id,
+                        slot=slot,
+                        sets=e.sets,
+                        rep_min=e.rep_min,
+                        rep_max=e.rep_max,
+                    )
+                    for slot, e in enumerate(s.exercises, start=1)
+                ],
+            )
+            for position, s in enumerate(week.sessions, start=1)
+        ]
+        plan = Plan(
+            user_id=user.id,
+            config_id=config.id,
+            name=data.name,
+            num_weeks=data.num_weeks,
+            weeks=[PlanWeek(week_number=1, rir=config.rir_start, sessions=sessions)],
+            muscle_targets=[
+                PlanMuscleTarget(muscle_id=t.muscle_id, priority=t.priority)
+                for t in targets
+                if t.priority != 1.0
+            ],
         )
         self.repo.add(plan)
         await self.db.commit()

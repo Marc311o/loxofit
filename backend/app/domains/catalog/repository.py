@@ -124,6 +124,18 @@ class CatalogRepository:
         )
         return (await self.db.execute(stmt)).scalars().all()
 
+    async def exercises_for_generator(self) -> Sequence[Exercise]:
+        """Every exercise with its muscle roles and equipment, in catalog order."""
+        stmt = (
+            select(Exercise)
+            .order_by(Exercise.id)
+            .options(
+                selectinload(Exercise.muscle_roles).joinedload(ExerciseMuscleRole.muscle),
+                selectinload(Exercise.equipment),
+            )
+        )
+        return (await self.db.execute(stmt)).scalars().all()
+
     async def equipment_by_ids(self, ids: Collection[int]) -> Sequence[Equipment]:
         stmt = (
             select(Equipment)

@@ -92,3 +92,12 @@ class ExerciseRoles(BaseModel):
     is_unilateral: bool
     default_tempo: str | None
     roles: dict[str, MuscleRole]
+
+
+class GeneratorExercise(ExerciseRoles):
+    """ExerciseRoles plus what the plan generator needs: exercise order, variety, equipment."""
+
+    complexity: int
+    fatigue_cost: int
+    movement_pattern: MovementPattern
+    equipment_ids: frozenset[int]  # all of it is needed to do the exercise
