@@ -15,7 +15,7 @@ from app.domains.plans.schemas import (
     PlanAssumptions,
     WeekAnalysis,
 )
-from app.engine.benefit import benefit
+from app.engine.benefit import max_volume_score
 from app.engine.evaluate import Evaluation
 from app.engine.types import (
     EngineConfig,
@@ -96,8 +96,7 @@ def _r(x: float) -> float:
 
 def max_score(mesocycle: Mesocycle, targets: MuscleTargets, config: EngineConfig) -> float:
     """Every muscle at the upper bound of MAV in every training week, with no time penalty."""
-    per_week = sum(t.priority * benefit(t.mav_upper, t, config.curve_k) for t in targets.values())
-    return per_week * len(mesocycle.training_weeks)
+    return max_volume_score(targets, config.curve_k, len(mesocycle.training_weeks))
 
 
 def to_analysis(

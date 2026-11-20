@@ -158,3 +158,10 @@ def test_greedy_searches_only_valid_plans():
     # Its answer is the best plan it scored - repair has nothing to cut out of it.
     result = greedy(OBJECTIVE, PATTERNED, 100_000)
     assert result.score == pytest.approx(result.history[-1][1])
+
+
+def test_memetic_refines_more_candidates_than_the_elite():
+    # Local search runs once per generation, on a full one - not after every child.
+    params = GeneticParams(population=10, local_search_count=5, local_search_steps=5)
+    result = genetic(OBJECTIVE, SPACE, 2000, random.Random(0), params=params)
+    assert SPACE.is_valid(result.best)

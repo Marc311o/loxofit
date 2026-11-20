@@ -63,7 +63,7 @@ class CatalogRepository:
             select(Exercise), filters.model_copy(update={"muscle_group": None})
         ).subquery()
         stmt = select(matching.c.main_group, func.count()).group_by(matching.c.main_group)
-        rows = (await self.db.execute(stmt)).tuples().all()
+        rows = (await self.db.execute(stmt)).all()
         return {group: count for group, count in rows}
 
     async def get_exercise_detail(self, exercise_id: int) -> Exercise | None:

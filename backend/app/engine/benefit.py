@@ -30,6 +30,15 @@ def benefit(volume: float, target: MuscleTarget, curve_k: float) -> float:
     return x
 
 
+def max_volume_score(targets: MuscleTargets, curve_k: float, training_weeks: int) -> float:
+    """Every muscle at the upper bound of MAV in every training week, with no time penalty.
+
+    An upper bound, not a reachable goal - a yardstick to compare plans and algorithms.
+    """
+    per_week = sum(t.priority * benefit(t.mav_upper, t, curve_k) for t in targets.values())
+    return per_week * training_weeks
+
+
 def mrv_penalty(volume: float, target: MuscleTarget, penalty_lambda: float) -> float:
     excess = max(0.0, volume - target.mrv)
     return penalty_lambda * excess**2

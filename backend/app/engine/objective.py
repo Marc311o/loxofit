@@ -20,6 +20,7 @@ import math
 from collections.abc import Sequence
 from dataclasses import dataclass
 
+from app.engine.benefit import max_volume_score
 from app.engine.progression import deload_sets, progressed_sets
 from app.engine.timing import rest_s, set_duration_s, warmup_duration_s, working_reps
 from app.engine.types import EngineConfig, ExerciseSpec, MuscleTargets, PlannedExercise, Session
@@ -58,7 +59,7 @@ class Objective:
         self.weeks = weeks
         self.training_weeks = weeks - 1
         self.session_limits = tuple(session_limits)
-
+        self.max_score = max_volume_score(targets, config.curve_k, self.training_weeks)
         # Only muscles with priority > 0 affect the score.
         scored = [(code, t) for code, t in targets.items() if t.priority > 0]
         index = {code: i for i, (code, _) in enumerate(scored)}

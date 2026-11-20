@@ -1,5 +1,6 @@
 """The fast objective must give the same score as the reference evaluate_plan."""
 
+import math
 import random
 
 import pytest
@@ -99,3 +100,10 @@ def test_sets_per_week_follow_the_progression():
     objective = Objective([BENCH], {}, CAPPED, 5, [60])
     # +15% a week, capped at 5, then the deload halves the base: 3 -> 3, 3, 4, 5 | 2
     assert objective.sets_per_week(3) == (3, 3, 4, 5, 2)
+
+
+def test_max_score_is_every_muscle_at_mav_in_every_training_week():
+    targets = {"pec_major": MuscleTarget(4, 13, 16), "lats": MuscleTarget(4, 13, 16, priority=2)}
+    objective = Objective([BENCH], targets, CAPPED, 5, [60])
+    # (1 + 2) priority x 4 training weeks x (1 - e^-3)
+    assert objective.max_score == pytest.approx(3 * 4 * (1 - math.exp(-3)))

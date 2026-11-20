@@ -1,0 +1,99 @@
+{
+  "suite": "compare",
+  "started": "2026-11-20T18:21:45+00:00",
+  "config": "per-muscle-v3",
+  "catalog_data_version": 1,
+  "budget": 30000,
+  "seeds": 30,
+  "scenarios": [
+    {
+      "name": "ul-4x60-gym",
+      "template": "upper_lower",
+      "sessions": 4,
+      "minutes": 60,
+      "split": "test",
+      "equipment": null,
+      "weeks": 5
+    },
+    {
+      "name": "ppl-3x45-gym",
+      "template": "push_pull_legs",
+      "sessions": 3,
+      "minutes": 45,
+      "split": "test",
+      "equipment": null,
+      "weeks": 5
+    },
+    {
+      "name": "ppl-6x60-gym",
+      "template": "push_pull_legs",
+      "sessions": 6,
+      "minutes": 60,
+      "split": "test",
+      "equipment": null,
+      "weeks": 5
+    },
+    {
+      "name": "fbw-3x45-home",
+      "template": "full_body",
+      "sessions": 3,
+      "minutes": 45,
+      "split": "test",
+      "equipment": "frozenset({'pullup_bar', 'adj_bench', 'swiss_ball', 'flat_bench', 'dumbbells'})",
+      "weeks": 5
+    }
+  ],
+  "algorithms": [
+    {
+      "family": "random",
+      "variant": "default",
+      "params": {}
+    },
+    {
+      "family": "greedy",
+      "variant": "default",
+      "params": {}
+    },
+    {
+      "family": "hill",
+      "variant": "tuned",
+      "params": {
+        "patience": 1000
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "tuned",
+      "params": {
+        "population": 120,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "tuned",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 2,
+        "local_search_steps": 25
+      }
+    }
+  ],
+  "workers": 12,
+  "python": "3.11.9",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "git_commit": "a82338878a04e903cf5a1bd673fe389de4627e88",
+  "finished": "2026-11-20T18:27:49+00:00",
+  "seconds": 364.4
+}

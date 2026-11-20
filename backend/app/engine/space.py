@@ -41,6 +41,21 @@ MOVE_WEIGHTS: dict[str, float] = {
 }
 
 
+def recommended_rank(
+    exercises: Sequence[ExerciseSpec], complexity: Sequence[int], fatigue_cost: Sequence[int]
+) -> tuple[int, ...]:
+    """Position of each exercise in the order the plan editor recommends: compound
+    first, then technically harder, then more fatiguing; ties keep the given order."""
+    order = sorted(
+        range(len(exercises)),
+        key=lambda i: (not exercises[i].is_compound, -complexity[i], -fatigue_cost[i], i),
+    )
+    rank = [0] * len(exercises)
+    for position, i in enumerate(order):
+        rank[i] = position
+    return tuple(rank)
+
+
 @dataclass(frozen=True)
 class SearchSpace:
     exercises: tuple[ExerciseSpec, ...]

@@ -6,14 +6,16 @@ from pathlib import Path
 import pytest
 from openpyxl import load_workbook
 
+from app.domains.model_config import versions
 from app.domains.model_config.versions import CONFIGS, DEFAULT_CONFIG_NAME, get_config
 from app.engine.types import MuscleTarget, Role
-from app.scripts.catalog_file import DATA_FILE, load_catalog
+from app.seeds import catalog_file
+from app.seeds.catalog_file import DATA_FILE, load_catalog
 from research import engine_eval
 from research.engine_eval import PlanError, build_config, build_specs, build_targets, run, zone
 from tests.engine.test_independence import imported_modules
 
-EXAMPLE_PLAN = DATA_FILE.parent / "plans" / "example_upper_lower.json"
+EXAMPLE_PLAN = Path(engine_eval.__file__).parent / "plans" / "example_upper_lower.json"
 TARGET = MuscleTarget(mev=4, mav_upper=13, mrv=16)
 
 
@@ -156,12 +158,12 @@ def test_main_returns_one_on_bad_plan(tmp_path, capsys):
 # Standalone: the CLI and the modules it uses never touch the database
 # ---------------------------------------------------------------------------
 
-SCRIPTS_DIR = Path(engine_eval.__file__).parent
 
-
-@pytest.mark.parametrize("name", ["catalog_file.py", "versions.py", "engine_eval.py"])
-def test_cli_modules_do_not_import_database(name):
-    modules = imported_modules(SCRIPTS_DIR / name)
+@pytest.mark.parametrize(
+    "module", [catalog_file, versions, engine_eval], ids=lambda module: module.__name__
+)
+def test_cli_modules_do_not_import_database(module):
+    modules = imported_modules(Path(module.__file__))
     assert not any(m.startswith(("app.core", "sqlalchemy")) for m in modules)
     assert "app.domains.catalog.models" not in modules
 
@@ -175,6 +177,6 @@ def test_every_registered_config_is_supported_by_the_cli():
 
 def test_registry_is_consistent():
     # Same check seed_config runs before writing - per-muscle configs have ordered landmarks.
-    from app.scripts.seed_config import check_registry
+    from app.seeds.seed_config import check_registry
 
     check_registry()

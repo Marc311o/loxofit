@@ -125,13 +125,13 @@ def genetic(
                 while rng.random() < params.mutation_rate:
                     child = space.mutate(child, rng)
                 next_generation.append((evaluator.score(child), child))
-                if params.local_search_count:
-                    next_generation.sort(key=lambda item: item[0], reverse=True)
-                    for k in range(params.local_search_count):
-                        score, candidate = next_generation[k]
-                        next_generation[k] = _local_search(
-                            candidate, score, params.local_search_steps, space, evaluator, rng
-                        )
+            if params.local_search_count:
+                next_generation.sort(key=lambda item: item[0], reverse=True)
+                for k in range(params.local_search_count):
+                    score, candidate = next_generation[k]
+                    next_generation[k] = _local_search(
+                        candidate, score, params.local_search_steps, space, evaluator, rng
+                    )
             scored = next_generation
     except BudgetExhausted:
         pass

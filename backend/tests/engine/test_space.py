@@ -4,7 +4,7 @@ import random
 
 import pytest
 
-from app.engine.space import SearchSpace
+from app.engine.space import SearchSpace, recommended_rank
 from tests.engine.samples import BENCH, CLOSE_GRIP, CURL, FLY, PLANK_LIKE, ROW, SHOULDER_PRESS
 
 EXERCISES = (BENCH, ROW, FLY, CURL, PLANK_LIKE, SHOULDER_PRESS, CLOSE_GRIP)
@@ -115,3 +115,17 @@ def test_a_pattern_limit_needs_patterns():
 def test_a_session_without_allowed_exercises_is_rejected():
     with pytest.raises(ValueError):
         SearchSpace(EXERCISES, ((0,), ()), rank=tuple(range(7)))
+
+
+def test_recommended_rank_puts_compounds_first_then_harder_then_more_fatiguing():
+    # BENCH, ROW, FLY, CURL, PLANK_LIKE, SHOULDER_PRESS, CLOSE_GRIP
+    complexity = [3, 3, 1, 1, 2, 3, 3]
+    fatigue = [3, 4, 1, 1, 1, 2, 3]
+    rank = recommended_rank(EXERCISES, complexity, fatigue)
+    order = sorted(range(len(EXERCISES)), key=lambda i: rank[i])
+    # compounds by fatigue (row, bench, close grip - catalog order on a tie, press);
+    # then isolation by complexity (plank-like), ties in catalog order (fly, curl)
+    assert [EXERCISES[i].code for i in order] == [
+        ROW.code, BENCH.code, CLOSE_GRIP.code, SHOULDER_PRESS.code,
+        PLANK_LIKE.code, FLY.code, CURL.code,
+    ]  # fmt: skip
