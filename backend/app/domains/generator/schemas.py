@@ -126,3 +126,4 @@ class GenerationRunRead(BaseModel):
     created_at: datetime
     started_at: datetime | None
     finished_at: datetime | None
+    max_score: float | None  # from the start - the score can be shown as % of it

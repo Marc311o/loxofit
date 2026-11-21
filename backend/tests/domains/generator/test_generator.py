@@ -74,11 +74,13 @@ async def test_generates_a_plan_in_the_background(
     assert run["status"] == "done", run["error"]
     assert run["progress"] is None
     assert run["evaluations"] == run["budget"]
+    assert run["max_score"] == body["max_score"]  # the search does not change it
     assert [s["name"] for s in run["sessions"]] == ["Full body A", "Full body B"]
     assert [s["weekday"] for s in run["sessions"]] == [1, 4]
     assert all(2 <= e["sets"] <= 5 for s in run["sessions"] for e in s["exercises"])
     scores = [score for _, score in run["history"]]
     assert scores == sorted(scores) and scores[-1] == run["score"]
+    assert body["max_score"] > 0
 
 
 async def test_only_exercises_the_user_has_equipment_for(

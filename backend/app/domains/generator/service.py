@@ -83,6 +83,7 @@ class GeneratorService:
             seed=task.seed,
             algorithm=ALGORITHM,
             budget=task.budget,
+            max_score=max_score,
         )
         self.repo.add(run)
         try:
@@ -164,9 +165,9 @@ class GeneratorService:
 
     async def _task(
         self, user: User, request: GenerationRequest
-    ) -> tuple[GenerationTask, list[int], int]:
-        """The engine task, the exercise id of every task index and the config id.
-        Raises before anything is saved when the request cannot be generated."""
+    ) -> tuple[GenerationTask, list[int], int, float]:
+        """The engine task, the exercise id of every task index, the config id and the
+        max score. Raises before anything is saved when the request cannot be generated."""
         config = await self.model_configs.get_default()
         muscles = await self.catalog.list_muscles()
         priorities = {t.muscle_id: t.priority for t in request.targets}
@@ -197,7 +198,7 @@ class GeneratorService:
             seed=request.seed if request.seed is not None else random.randint(0, SEED_MAX),
         )
         try:  # fail fast: a session no exercise fits
-            build_search(
+            objective, _ = build_search(
                 task.exercises, task.focuses, task.session_minutes,
                 task.targets, task.config, task.weeks,
             )  # fmt: skip
@@ -206,7 +207,7 @@ class GeneratorService:
             raise NoExercisesForSessionError(
                 f"No exercise with your equipment fits session {exc.session + 1} ({focus})"
             ) from None
-        return task, [e.id for e in exercises], config.id
+        return task, [e.id for e in exercises], config.id, objective.max_score
 
     async def _get_owned(self, user: User, run_id: uuid.UUID) -> GenerationRun:
         run = await self.repo.get_for_user(run_id, user.id)
