@@ -74,7 +74,7 @@ class GeneratorService:
     async def start(self, user: User, request: GenerationRequest) -> GenerationRunRead:
         if await self.repo.has_active(user.id):
             raise GenerationInProgressError()
-        task, exercise_ids, config_id = await self._task(user, request)
+        task, exercise_ids, config_id, max_score = await self._task(user, request)
 
         run = GenerationRun(
             user_id=user.id,
