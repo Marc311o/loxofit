@@ -13,14 +13,21 @@ import { LandmarkLegend, VolumeBar } from "./VolumeBar";
 
 type AnalysisPanelProps = {
   analysis: PlanAnalysis | undefined;
+  /** Saving or re-analysing - the numbers on screen are about to change. */
   updating: boolean;
   sessionNames: string[];
   sessionLimits: number[];
-  numWeeks: number;
-  canGenerate: boolean;
-  generateHint: string;
-  generating: boolean;
-  onGenerate: () => void;
+  /** The big button at the bottom - computing the weeks, saving a generated plan. */
+  action?: PanelAction;
+};
+
+export type PanelAction = {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  /** Why the action is disabled. */
+  hint?: string;
+  loading?: boolean;
 };
 
 /** Live feedback next to the editor: score, what to fix and volume per muscle at the peak week. */
@@ -29,11 +36,7 @@ export function AnalysisPanel({
   updating,
   sessionNames,
   sessionLimits,
-  numWeeks,
-  canGenerate,
-  generateHint,
-  generating,
-  onGenerate,
+  action,
 }: AnalysisPanelProps) {
   const { t } = useTranslation("plans");
   const muscles = useMuscles();
@@ -170,25 +173,30 @@ export function AnalysisPanel({
       )}
       {peak && <LandmarkLegend />}
 
-      <Tooltip title={canGenerate ? "" : generateHint}>
-        <span>
-          <Button
-            fullWidth
-            size="large"
-            disabled={!canGenerate}
-            loading={generating}
-            onClick={onGenerate}
-            sx={{
-              bgcolor: "#F3F4F1",
-              color: "primary.dark",
-              "&:hover": { bgcolor: "#FFFFFF" },
-              "&.Mui-disabled": { bgcolor: "rgba(243,244,241,0.3)", color: "rgba(18,64,58,0.6)" },
-            }}
-          >
-            {t("actions.computeWeeks", { last: numWeeks })}
-          </Button>
-        </span>
-      </Tooltip>
+      {action && (
+        <Tooltip title={action.disabled ? (action.hint ?? "") : ""}>
+          <span>
+            <Button
+              fullWidth
+              size="large"
+              disabled={action.disabled}
+              loading={action.loading}
+              onClick={action.onClick}
+              sx={{
+                bgcolor: "#F3F4F1",
+                color: "primary.dark",
+                "&:hover": { bgcolor: "#FFFFFF" },
+                "&.Mui-disabled": {
+                  bgcolor: "rgba(243,244,241,0.3)",
+                  color: "rgba(18,64,58,0.6)",
+                },
+              }}
+            >
+              {action.label}
+            </Button>
+          </span>
+        </Tooltip>
+      )}
     </Box>
   );
 }

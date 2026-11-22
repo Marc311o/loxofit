@@ -228,7 +228,7 @@ export function SessionCard({
 }
 
 /** Week-1 minutes, plus the peak week when progression makes the session longer. */
-function SessionTimeBadge({ time, limit }: { time: SessionTime; limit: number }) {
+export function SessionTimeBadge({ time, limit }: { time: SessionTime; limit: number }) {
   const { t } = useTranslation("plans");
   const base = Math.round(time.base);
   const peak = Math.round(time.peak);
