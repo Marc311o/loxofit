@@ -276,17 +276,16 @@ function BaseWeekEditor({ plan }: { plan: PlanDetail }) {
           updating={updating}
           sessionNames={saved.map((s) => s.name)}
           sessionLimits={saved.map((s) => s.max_minutes)}
-          numWeeks={plan.num_weeks}
-          canGenerate={canGenerate}
-          generateHint={
-            hasExercises(draft) ? t("editor.waitForSave") : t("editor.addExercisesFirst")
-          }
-          generating={generate.isPending}
-          onGenerate={() =>
-            generate.mutate(undefined, {
-              onSuccess: () => toast.success(t("editor.weeksComputed", { last: plan.num_weeks })),
-            })
-          }
+          action={{
+            label: t("actions.computeWeeks", { last: plan.num_weeks }),
+            disabled: !canGenerate,
+            hint: hasExercises(draft) ? t("editor.waitForSave") : t("editor.addExercisesFirst"),
+            loading: generate.isPending,
+            onClick: () =>
+              generate.mutate(undefined, {
+                onSuccess: () => toast.success(t("editor.weeksComputed", { last: plan.num_weeks })),
+              }),
+          }}
         />
       </Box>
 

@@ -23,6 +23,8 @@ services:
     container_name: loxofit-api
     build:
       context: ./backend
+      args:
+        REQUIREMENTS: requirements-dev.txt
     ports:
       - "8000:8000"
     env_file:

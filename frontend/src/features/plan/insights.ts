@@ -32,6 +32,7 @@ export function zoneCounts(week: WeekAnalysis): ZoneCounts {
 export type PlanIssue =
   | { kind: "aboveMrv"; muscleId: number; week: number; volume: number }
   | { kind: "belowMev"; muscleId: number; volume: number }
+  | { kind: "capped"; muscleId: number; week: number; lost: number }
   | { kind: "overtime"; session: number; week: number; minutes: number };
 
 
@@ -69,6 +70,17 @@ export function planIssues(analysis: PlanAnalysis, sessionLimits: number[]): Pla
   peak?.muscles
     .filter((m) => m.zone === "below_mev" && m.priority > 0)
     .forEach((m) => issues.push({ kind: "belowMev", muscleId: m.muscle_id, volume: m.volume }));
+
+  const capped = new Set<number>();
+  for (const week of weeks) {
+    for (const m of week.muscles) {
+      const lost = m.volume - m.effective_volume;
+      if (lost > 0.05 && m.priority > 0 && !capped.has(m.muscle_id)) {
+        capped.add(m.muscle_id);
+        issues.push({ kind: "capped", muscleId: m.muscle_id, week: week.week_number, lost });
+      }
+    }
+  }
 
   return issues;
 }

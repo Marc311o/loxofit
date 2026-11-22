@@ -117,24 +117,24 @@ downgrade:
 # Seeds catalog data
 [group('db')]
 seed-catalog:
-    docker compose exec api python -m app.scripts.seed_catalog
+    docker compose exec api python -m app.seeds.seed_catalog
 
 # Seeds superuser
 [group('db')]
 seed-admin:
-    docker compose exec api python -m app.scripts.seed_admin
+    docker compose exec api python -m app.seeds.seed_admin
 
 # Seeds available model configs
 [group('db')]
 seed-config:
-    docker compose exec api python -m app.scripts.seed_config
+    docker compose exec api python -m app.seeds.seed_config
 
 # Seeds all
 [group('db')]
 seed-all:
-    docker compose exec api python -m app.scripts.seed_admin
-    docker compose exec api python -m app.scripts.seed_catalog
-    docker compose exec api python -m app.scripts.seed_config
+    docker compose exec api python -m app.seeds.seed_admin
+    docker compose exec api python -m app.seeds.seed_catalog
+    docker compose exec api python -m app.seeds.seed_config
 
 [group('db')]
 [confirm("This action will clear ALL data from the database. Continue?")]
@@ -142,17 +142,7 @@ reset-db:
     docker compose --profile tools down -v
     docker compose up --build -d --wait
     just migrate
-    just seed
-
-# =======================================================
-# ENGINE
-# =======================================================
-
-# evaluates a plan file with the engine (no database)
-[group('engine')]
-engine-eval plan *args:
-    docker compose exec api python -m app.scripts.engine_eval {{plan}} {{args}}
-
+    seed-all
 
 # =======================================================
 # SHELLS
@@ -165,3 +155,39 @@ psql:
 [group('shell')]
 shell-api:
     docker compose exec api bash
+
+# =======================================================
+# RESEARCH
+# =======================================================
+
+py := if os_family() == "windows" { "../.venv/Scripts/python.exe" } else { "../.venv/bin/python" }
+# creates the local research venv (experiments, notebooks, engine CLI)
+[group('research')]
+[working-directory: 'backend']
+research-setup:
+    python -m venv .venv
+    {{py}} -m pip install -r requirements-research.txt
+
+# runs the algorithm experiments -> research/experiments/results
+[group('research')]
+[working-directory: 'backend']
+experiments *args:
+    {{py}} -m research.experiments.run {{args}}
+
+# opens Jupyter in the experiments folder
+[group('research')]
+[working-directory: 'backend']
+notebook:
+    {{py}} -m jupyter lab research/experiments
+
+# evaluates a plan file with the engine (no database)
+[group('research')]
+[working-directory: 'backend']
+engine-eval plan *args:
+    {{py}} -m research.engine_eval {{plan}} {{args}}
+
+# fast vs reference evaluator
+[group('research')]
+[working-directory: 'backend']
+bench:
+    {{py}} -m research.bench_objective

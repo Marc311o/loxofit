@@ -1,7 +1,7 @@
 """
 Writes the model configurations from config_versions.CONFIGS to the database.
 
-The registry itself (and the rules for adding versions) lives in config_versions.py.
+The registry itself (and the rules for adding versions) lives in versions.py.
 """
 
 import asyncio
@@ -13,8 +13,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import SessionLocal, engine
 from app.domains.catalog.enums import MuscleRole
-from app.domains.model_config.models import ConfigRoleWeight, ModelConfig
-from app.scripts.config_versions import CONFIGS, DEFAULT_CONFIG_NAME, ConfigVersion
+from app.domains.catalog.models import Muscle
+from app.domains.model_config.enums import VolumeMode
+from app.domains.model_config.models import ConfigMuscleLandmark, ConfigRoleWeight, ModelConfig
+from app.domains.model_config.versions import CONFIGS, DEFAULT_CONFIG_NAME, ConfigVersion
+from app.engine.types import MuscleTarget
 
 logger = logging.getLogger("seed")
 _MANAGED_COLUMNS = {"id", "name", "is_default", "created_at"}
@@ -34,6 +37,11 @@ def check_registry() -> None:
             raise ValueError(f"{version.name}: unknown parameters {sorted(unknown)}")
         if missing := set(MuscleRole) - set(version.role_weights):
             raise ValueError(f"{version.name}: no weights set for roles {sorted(missing)}")
+        per_muscle = version.params.get("volume_mode") == VolumeMode.PER_MUSCLE
+        if per_muscle != bool(version.landmarks):
+            raise ValueError(f"{version.name}: landmarks belong to per-muscle configs only")
+        for landmarks in version.landmarks.values():
+            MuscleTarget(*landmarks)  # raises if MEV < MAV <= MRV does not hold
 
 
 async def upsert_version(db: AsyncSession, version: ConfigVersion) -> int:
@@ -48,7 +56,31 @@ async def upsert_version(db: AsyncSession, version: ConfigVersion) -> int:
         [{"config_id": config_id, "role": r, "weight": w} for r, w in version.role_weights.items()]
     )
     await db.execute(weights.on_conflict_do_nothing(index_elements=["config_id", "role"]))
+    if version.landmarks:
+        ids = await _muscle_ids(db, version)
+        rows = [
+            {
+                "config_id": config_id,
+                "muscle_id": ids[code],
+                "mev": mev,
+                "mav_upper": mav,
+                "mrv": mrv,
+            }
+            for code, (mev, mav, mrv) in version.landmarks.items()
+        ]
+        stmt = insert(ConfigMuscleLandmark).values(rows)
+        await db.execute(stmt.on_conflict_do_nothing(index_elements=["config_id", "muscle_id"]))
     return config_id
+
+
+async def _muscle_ids(db: AsyncSession, version: ConfigVersion) -> dict[str, int]:
+    result = await db.execute(
+        select(Muscle.code, Muscle.id).where(Muscle.code.in_(version.landmarks))
+    )
+    ids = dict(result.all())
+    if missing := sorted(set(version.landmarks) - set(ids)):
+        raise ValueError(f"{version.name}: muscles {missing} not in the catalog - seed it first")
+    return ids
 
 
 async def config_drift(db: AsyncSession, config_id: int, version: ConfigVersion) -> list[str]:
@@ -71,6 +103,16 @@ async def config_drift(db: AsyncSession, config_id: int, version: ConfigVersion)
         for role, weight in version.role_weights.items()
         if saved_weights.get(role) != weight
     ]
+    result = await db.execute(
+        select(Muscle.code, ConfigMuscleLandmark.mev, ConfigMuscleLandmark.mav_upper,
+               ConfigMuscleLandmark.mrv)
+        .join(Muscle, Muscle.id == ConfigMuscleLandmark.muscle_id)
+        .where(ConfigMuscleLandmark.config_id == config_id)
+    )  # fmt: skip
+    saved_landmarks = {code: (mev, mav, mrv) for code, mev, mav, mrv in result.all()}
+    expected = {code: tuple(map(float, lm)) for code, lm in version.landmarks.items()}
+    if saved_landmarks != expected:
+        diffs.append(f"landmarks: base {saved_landmarks!r}, code {expected!r}")
     return diffs
 
 

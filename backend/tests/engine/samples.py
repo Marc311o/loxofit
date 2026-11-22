@@ -18,3 +18,11 @@ CLOSE_GRIP = ExerciseSpec("bb_bench_close", True, {"triceps": P, "pec_major": P,
 LEG_EXT_UNI = ExerciseSpec("leg_ext_uni", False, {"quads": P}, is_unilateral=True)
 
 CONFIG = EngineConfig(role_weights={P: 1.0, S: 0.5})
+CAPPED = EngineConfig(role_weights={P: 1.0, S: 0.5}, session_volume_cap=11.0)
+
+RESTED = EngineConfig(
+    role_weights={P: 1.0, S: 0.5},
+    session_volume_cap=11.0,
+    rest_before_next_exercise=True,
+    transitions_s=60,
+)

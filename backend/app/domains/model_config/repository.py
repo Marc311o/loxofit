@@ -13,7 +13,7 @@ class ModelConfigRepository:
         stmt = (
             select(ModelConfig)
             .where(ModelConfig.is_default)
-            .options(selectinload(ModelConfig.role_weights))
+            .options(selectinload(ModelConfig.role_weights), selectinload(ModelConfig.landmarks))
         )
         return (await self.db.execute(stmt)).scalar_one_or_none()
 
@@ -21,6 +21,6 @@ class ModelConfigRepository:
         stmt = (
             select(ModelConfig)
             .where(ModelConfig.id == config_id)
-            .options(selectinload(ModelConfig.role_weights))
+            .options(selectinload(ModelConfig.role_weights), selectinload(ModelConfig.landmarks))
         )
         return (await self.db.execute(stmt)).scalar_one_or_none()

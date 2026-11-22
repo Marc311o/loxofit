@@ -2,8 +2,8 @@
 Evaluates a training plan with the engine - no server, no database.
 
 Usage:
-    python -m app.scripts.engine_eval data/plans/example_upper_lower.json
-    python -m app.scripts.engine_eval PLAN [--config NAME] [--weeks N] [--catalog XLSX] [--json]
+    python -m app.seeds.engine_eval data/plans/example_upper_lower.json
+    python -m app.seeds.engine_eval PLAN [--config NAME] [--weeks N] [--catalog XLSX] [--json]
 
 The plan file describes ONE base week; the engine progresses it into a mesocycle
 (weeks - 1 training weeks + deload) and prints volume, benefit and session times:
@@ -30,6 +30,7 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from app.domains.model_config.enums import VolumeMode
+from app.domains.model_config.versions import DEFAULT_CONFIG_NAME, ConfigVersion, get_config
 from app.engine.evaluate import Evaluation, evaluate
 from app.engine.progression import build_mesocycle
 from app.engine.types import (
@@ -42,8 +43,7 @@ from app.engine.types import (
     Role,
     Session,
 )
-from app.scripts.catalog_file import DATA_FILE, CatalogData, SeedDataError, load_catalog
-from app.scripts.config_versions import DEFAULT_CONFIG_NAME, ConfigVersion, get_config
+from app.seeds.catalog_file import DATA_FILE, CatalogData, SeedDataError, load_catalog
 
 
 class PlanError(Exception):
@@ -161,6 +161,24 @@ def build_base_week(plan: PlanFile, specs: dict[str, ExerciseSpec]) -> tuple[Ses
     )
 
 
+def build_targets(version: ConfigVersion, catalog: CatalogData) -> MuscleTargets:
+    """Global mode: every volume-target muscle gets the same landmarks.
+    Per-muscle mode: the muscles the config lists, with their own landmarks."""
+    mode = version.params.get("volume_mode", VolumeMode.GLOBAL)
+    if mode == VolumeMode.PER_MUSCLE:
+        known = {m.code for m in catalog.muscles}
+        if unknown := sorted(set(version.landmarks) - known):
+            raise PlanError([f"Config {version.name!r}: unknown muscles {unknown}"])
+        return {code: MuscleTarget(*lm) for code, lm in version.landmarks.items()}
+
+    target = MuscleTarget(
+        mev=version.params["global_mev"],
+        mav_upper=version.params["global_mav_upper"],
+        mrv=version.params["global_mrv"],
+    )
+    return {m.code: target for m in catalog.muscles if m.is_volume_target}
+
+
 # ---------------------------------------------------------------------------
 # Running and reporting
 # ---------------------------------------------------------------------------
@@ -209,11 +227,16 @@ def zone(volume: float, target: MuscleTarget) -> str:
 
 def _muscle_table(result: Run, week_index: int) -> list[str]:
     evaluation = result.evaluation.weeks[week_index]
-    header = f"  {'muscle':<10} {'sets':>6}  {'zone':<8} {'benefit':>8} {'penalty':>8} {'score':>7}"
+    header = (
+        f"  {'muscle':<10} {'MEV/MAV/MRV':>12} {'sets':>6}  {'zone':<8}"
+        f" {'benefit':>8} {'penalty':>8} {'score':>7}"
+    )
     lines = [header]
     for muscle, s in sorted(evaluation.muscles.items(), key=lambda kv: -kv[1].volume):
+        t = result.targets[muscle]
+        landmarks = f"{t.mev:g}/{t.mav_upper:g}/{t.mrv:g}"
         lines.append(
-            f"  {muscle:<10} {s.volume:>6.1f}  {zone(s.volume, result.targets[muscle]):<8}"
+            f"  {muscle:<10} {landmarks:>12} {s.volume:>6.1f}  {zone(s.volume, t):<8}"
             f" {s.benefit:>8.2f} {s.penalty:>8.2f} {s.score:>7.2f}"
         )
     return lines
@@ -223,7 +246,7 @@ def format_report(result: Run) -> str:
     plan, meso, ev = result.plan, result.mesocycle, result.evaluation
     any_target = next(iter(result.targets.values()))
     lines = [
-        f"Config: {result.config_name}  (MEV {any_target.mev:g}, MAV {any_target.mav_upper:g},"
+        f"Config: {result.config_name}  (landmarks in effective sets / week, per muscle below)",
         f" MRV {any_target.mrv:g} effective sets / week)",
         f"Mesocycle: {plan.weeks - 1} training weeks + deload",
         "",

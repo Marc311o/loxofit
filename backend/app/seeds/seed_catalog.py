@@ -21,7 +21,7 @@ from app.domains.catalog.models import (
     ExerciseSubstitute,
     Muscle,
 )
-from app.scripts.catalog_file import DATA_FILE, CatalogData, SeedDataError, SeedRow, load_catalog
+from app.seeds.catalog_file import DATA_FILE, CatalogData, SeedDataError, SeedRow, load_catalog
 
 logger = logging.getLogger("seed")
 

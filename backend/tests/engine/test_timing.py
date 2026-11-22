@@ -7,6 +7,10 @@ bench, compound, tempo 3010 -> 4 s/rep x 8 reps = 32 s per set
 pec deck, isolation, default tempo 2010 -> 3 s/rep x 12 reps = 36 s per set
     2 working sets + 1 rest  2 x 36 + 90      = 162 s (no warm-up: isolation)
 session = 300 general warm-up + 640 + 90 transition + 162 = 1192 s = 19.87 min
+
+The same session with rest_before_next_exercise and a 60 s setup (per-muscle-v2):
+the bench's last set is followed by its rest too, the fly's - the session's last - not:
+    bench 640 + 150 = 790, fly 162, setup 60 -> 300 + 790 + 60 + 162 = 1312 s = 21.87 min
 """
 
 import pytest
@@ -24,8 +28,10 @@ from tests.engine.samples import (
     BENCH,
     CLOSE_GRIP,
     CONFIG,
+    CURL,
     FLY,
     LEG_EXT_UNI,
+    RESTED,
     ROW,
     SHOULDER_PRESS,
 )
@@ -113,3 +119,32 @@ def test_working_reps_are_the_middle_of_the_rep_range():
 def test_isolation_does_not_replace_compound_warmup():
     fly_first = session_duration_s(session((FLY, 2), (BENCH, 3)), CONFIG)
     assert fly_first == pytest.approx(1192)
+
+
+# -- rest before the next exercise (per-muscle-v2) -----------------------------------------
+
+
+def test_worked_example_with_rest_before_next_exercise():
+    assert session_duration_s(session((BENCH, 3), (FLY, 2)), RESTED) == pytest.approx(1312)
+
+
+def test_last_exercise_of_the_session_has_no_rest_after_it():
+    # One exercise: nothing follows its last set - the same time in both models.
+    alone = session((BENCH, 3))
+    assert session_duration_s(alone, RESTED) == session_duration_s(alone, CONFIG)
+
+
+def test_one_more_exercise_costs_more_than_one_more_set():
+    # Fly and curl: both isolation, tempo 2010, 12 reps -> 36 s per set, 90 s rest.
+    base = session((BENCH, 3), (FLY, 2))
+    more_sets = session((BENCH, 3), (FLY, 3))
+    more_exercises = session((BENCH, 3), (FLY, 2), (CURL, 1))
+
+    def extra(s: Session, config) -> float:
+        return session_duration_s(s, config) - session_duration_s(base, config)
+
+    # Original model: the same 126 s (36 + 90) - splitting sets cost nothing extra.
+    assert extra(more_sets, CONFIG) == pytest.approx(extra(more_exercises, CONFIG))
+    # Corrected model: a set 36 + 90 = 126; an exercise 90 (rest) + 60 (setup) + 36 = 186.
+    assert extra(more_sets, RESTED) == pytest.approx(126)
+    assert extra(more_exercises, RESTED) == pytest.approx(186)

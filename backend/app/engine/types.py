@@ -61,12 +61,14 @@ class EngineConfig:
     # Benefit function and penalties
     curve_k: float = 3.0
     penalty_lambda: float = 0.05
+    session_volume_cap: float | None = None
     time_penalty: float = 0.1  # per minute over the session limit
 
     # Timing (seconds)
     rest_compound_s: int = 150
     rest_isolation_s: int = 90
     transitions_s: int = 90
+    rest_before_next_exercise: bool = False
     warmup_s: int = 300  # general warm-up time
     explosive_phase_s: float = 1.0  # duration of X
     default_tempo: str = "2010"

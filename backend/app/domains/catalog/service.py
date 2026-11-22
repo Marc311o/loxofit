@@ -17,6 +17,7 @@ from app.domains.catalog.schemas import (
     ExerciseFilters,
     ExerciseListItem,
     ExerciseRoles,
+    GeneratorExercise,
     MuscleRead,
     MuscleShare,
 )
@@ -90,6 +91,23 @@ class CatalogService:
             )
             for e in await self.repo.exercises_with_roles(ids)
         }
+
+    async def list_generator_exercises(self) -> list[GeneratorExercise]:
+        return [
+            GeneratorExercise(
+                id=e.id,
+                code=e.code,
+                is_compound=e.is_compound,
+                is_unilateral=e.is_unilateral,
+                default_tempo=e.default_tempo,
+                roles={r.muscle.code: r.role for r in e.muscle_roles},
+                complexity=e.complexity,
+                fatigue_cost=e.fatigue_cost,
+                movement_pattern=e.movement_pattern,
+                equipment_ids=frozenset(eq.id for eq in e.equipment),
+            )
+            for e in await self.repo.exercises_for_generator()
+        ]
 
     async def get_equipment_by_ids(self, ids: Collection[int]) -> list[EquipmentRead]:
         return [EquipmentRead.model_validate(e) for e in await self.repo.equipment_by_ids(ids)]

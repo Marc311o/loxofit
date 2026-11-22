@@ -1,0 +1,7958 @@
+{
+  "fbw-2x60-gym | ga:pop=120 mut=0.3 cx=gene": {
+    "score": 3.754015659468619,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            4
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=120 mut=0.3 cx=session": {
+    "score": 4.808316515273885,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_nordic_curl",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=120 mut=0.6 cx=gene": {
+    "score": 0.37762616529077775,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            4
+          ],
+          [
+            "bw_row_inverted",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=120 mut=0.6 cx=session": {
+    "score": 5.933386213108804,
+    "seed": 8,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=120 mut=0.9 cx=gene": {
+    "score": -1.1865147956853255,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "glute_kickback_uni",
+            4
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            3
+          ],
+          [
+            "lat_pulldown_pron",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=120 mut=0.9 cx=session": {
+    "score": 2.6136887158753206,
+    "seed": 8,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "cable_oh_ext",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "seated_leg_curl",
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=30 mut=0.3 cx=gene": {
+    "score": 3.754015659468619,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            4
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=30 mut=0.3 cx=session": {
+    "score": 4.706950050532429,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=30 mut=0.6 cx=gene": {
+    "score": 4.7993116413542705,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=30 mut=0.6 cx=session": {
+    "score": 5.933386213108804,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=30 mut=0.9 cx=gene": {
+    "score": 2.318352440467026,
+    "seed": 4,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_squat",
+            5
+          ],
+          [
+            "landmine_rdl",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            3
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=30 mut=0.9 cx=session": {
+    "score": 5.933386213108804,
+    "seed": 7,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=60 mut=0.3 cx=gene": {
+    "score": 3.790125759966081,
+    "seed": 3,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=60 mut=0.3 cx=session": {
+    "score": 4.780311608964905,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "seated_leg_curl",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=60 mut=0.6 cx=gene": {
+    "score": 3.790125759966081,
+    "seed": 3,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "pullup_pron",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=60 mut=0.6 cx=session": {
+    "score": 5.933386213108804,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=60 mut=0.9 cx=gene": {
+    "score": -0.04445222823214667,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_sup",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "cable_lateral_raise",
+            4
+          ],
+          [
+            "pec_deck_fly",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | ga:pop=60 mut=0.9 cx=session": {
+    "score": 4.869640618403462,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "glute_kickback_uni",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | hill:patience=1000": {
+    "score": 5.933386213108804,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | hill:patience=200": {
+    "score": 5.386731845623956,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | hill:patience=2000": {
+    "score": 5.933386213108804,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | hill:patience=500": {
+    "score": 5.386731845623956,
+    "seed": 7,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | memetic:ls=1x10": {
+    "score": 4.947880100475002,
+    "seed": 4,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_nordic_curl",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | memetic:ls=1x25": {
+    "score": 5.469670690840353,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | memetic:ls=1x50": {
+    "score": 5.469670690840353,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | memetic:ls=2x10": {
+    "score": 4.8403772497948045,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "pec_deck_fly",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | memetic:ls=2x25": {
+    "score": 5.933386213108804,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | memetic:ls=2x50": {
+    "score": 4.8403772497948045,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | memetic:ls=5x10": {
+    "score": 5.933386213108804,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | memetic:ls=5x25": {
+    "score": 5.046788178862718,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_nordic_curl",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-2x60-gym | memetic:ls=5x50": {
+    "score": 5.469670690840353,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=120 mut=0.3 cx=gene": {
+    "score": 24.95209323012339,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            3
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "cable_pushdown",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "ball_pike",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=120 mut=0.3 cx=session": {
+    "score": 30.227837123992337,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=120 mut=0.6 cx=gene": {
+    "score": 22.018858480730806,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            4
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            3
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            4
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "glute_kickback_uni",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_squat_overhead",
+            5
+          ],
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "hex_deadlift",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=120 mut=0.6 cx=session": {
+    "score": 31.569258602572603,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "ball_pike",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=120 mut=0.9 cx=gene": {
+    "score": 18.104048815048138,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "lat_pulldown_pron",
+            2
+          ],
+          [
+            "cable_row_seated",
+            3
+          ],
+          [
+            "db_skullcrusher",
+            4
+          ],
+          [
+            "cable_lateral_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            4
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "landmine_rdl",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=120 mut=0.9 cx=session": {
+    "score": 26.3111939062942,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            2
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_lateral_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "db_curl",
+            3
+          ],
+          [
+            "glute_kickback_uni",
+            3
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=30 mut=0.3 cx=gene": {
+    "score": 24.911064046953154,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            2
+          ],
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            3
+          ],
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=30 mut=0.3 cx=session": {
+    "score": 30.62703315853777,
+    "seed": 3,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=30 mut=0.6 cx=gene": {
+    "score": 26.297098136300264,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "cable_bench",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_squat",
+            5
+          ],
+          [
+            "bb_rdl",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=30 mut=0.6 cx=session": {
+    "score": 31.259818141203503,
+    "seed": 4,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_lateral_raise",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=30 mut=0.9 cx=gene": {
+    "score": 23.269801139689292,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_hip_thrust",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            4
+          ],
+          [
+            "ball_rollout",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_fly",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=30 mut=0.9 cx=session": {
+    "score": 30.05555678176251,
+    "seed": 4,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "pec_deck_fly",
+            3
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=60 mut=0.3 cx=gene": {
+    "score": 21.643536532943322,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "pullup_pron",
+            4
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "db_lunge",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "pullup_pron",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "seated_leg_curl",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=60 mut=0.3 cx=session": {
+    "score": 30.483871388803024,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=60 mut=0.6 cx=gene": {
+    "score": 25.11890703658818,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            2
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "seated_leg_curl",
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=60 mut=0.6 cx=session": {
+    "score": 30.40985450229001,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "pec_deck_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=60 mut=0.9 cx=gene": {
+    "score": 22.561312786869756,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_curl_bayesian",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            4
+          ],
+          [
+            "pullup_pron",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift",
+            4
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | ga:pop=60 mut=0.9 cx=session": {
+    "score": 30.227837123992337,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_curl_bayesian",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | hill:patience=1000": {
+    "score": 30.98360436088705,
+    "seed": 4,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_curl",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | hill:patience=200": {
+    "score": 30.311476911666304,
+    "seed": 7,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_lateral_raise",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | hill:patience=2000": {
+    "score": 31.445258032360023,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | hill:patience=500": {
+    "score": 30.249272734969153,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "pec_deck_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "cable_curl_bayesian",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | memetic:ls=1x10": {
+    "score": 30.249272734969153,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_lateral_raise",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | memetic:ls=1x25": {
+    "score": 30.227837123992337,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | memetic:ls=1x50": {
+    "score": 30.311476911666304,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_curl_bayesian",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | memetic:ls=2x10": {
+    "score": 30.72884999362875,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            3
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_lateral_raise",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | memetic:ls=2x25": {
+    "score": 30.483871388803024,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_lateral_raise",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | memetic:ls=2x50": {
+    "score": 30.40985450229001,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "pec_deck_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_curl_bayesian",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | memetic:ls=5x10": {
+    "score": 30.35339579048059,
+    "seed": 3,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            4
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | memetic:ls=5x25": {
+    "score": 30.369916378020903,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_hip_thrust",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_curl",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_curl",
+            2
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "fbw-3x60-gym | memetic:ls=5x50": {
+    "score": 31.259818141203503,
+    "seed": 8,
+    "plan": [
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "pec_deck_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "full_body",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=120 mut=0.3 cx=gene": {
+    "score": 3.815076952192463,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            4
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_split_squat",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=120 mut=0.3 cx=session": {
+    "score": 5.881017187449947,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_lunge",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=120 mut=0.6 cx=gene": {
+    "score": 5.57867873924917,
+    "seed": 7,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            4
+          ],
+          [
+            "db_fly",
+            4
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            3
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_split_squat",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=120 mut=0.6 cx=session": {
+    "score": 5.928139145452096,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_bulgarian_split_squat",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=120 mut=0.9 cx=gene": {
+    "score": 3.9117336026380105,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_shoulder_press",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            4
+          ],
+          [
+            "db_lateral_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            3
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_curl",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_lunge",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=120 mut=0.9 cx=session": {
+    "score": 5.881017187449947,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_split_squat",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=30 mut=0.3 cx=gene": {
+    "score": 5.881017187449947,
+    "seed": 8,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_lunge_reverse",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=30 mut=0.3 cx=session": {
+    "score": 5.881017187449947,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_lunge_reverse",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=30 mut=0.6 cx=gene": {
+    "score": 5.881017187449947,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_bulgarian_split_squat",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=30 mut=0.6 cx=session": {
+    "score": 5.928139145452096,
+    "seed": 4,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_split_squat",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=30 mut=0.9 cx=gene": {
+    "score": 5.861185972785581,
+    "seed": 8,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_lunge_reverse",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=30 mut=0.9 cx=session": {
+    "score": 5.928139145452096,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_lunge",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=60 mut=0.3 cx=gene": {
+    "score": 5.078822318236533,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            4
+          ],
+          [
+            "db_fly",
+            4
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_lunge_reverse",
+            4
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=60 mut=0.3 cx=session": {
+    "score": 5.928139145452096,
+    "seed": 3,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_lunge",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=60 mut=0.6 cx=gene": {
+    "score": 5.881017187449947,
+    "seed": 7,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_bulgarian_split_squat",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=60 mut=0.6 cx=session": {
+    "score": 5.928139145452096,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_lunge_reverse",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=60 mut=0.9 cx=gene": {
+    "score": 5.88095340100233,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_bulgarian_split_squat",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | ga:pop=60 mut=0.9 cx=session": {
+    "score": 5.928139145452096,
+    "seed": 7,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_lunge",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | hill:patience=1000": {
+    "score": 5.928139145452096,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_bulgarian_split_squat",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | hill:patience=200": {
+    "score": 5.928139145452096,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_bulgarian_split_squat",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | hill:patience=2000": {
+    "score": 5.928139145452096,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_split_squat",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | hill:patience=500": {
+    "score": 5.928139145452096,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_lunge_reverse",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | memetic:ls=1x10": {
+    "score": 5.928139145452096,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_split_squat",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | memetic:ls=1x25": {
+    "score": 5.928139145452096,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_lunge",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | memetic:ls=1x50": {
+    "score": 5.881017187449947,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_bulgarian_split_squat",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | memetic:ls=2x10": {
+    "score": 5.928139145452096,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_lunge",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | memetic:ls=2x25": {
+    "score": 5.881017187449947,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_lunge_reverse",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | memetic:ls=2x50": {
+    "score": 5.881017187449947,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_bulgarian_split_squat",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | memetic:ls=5x10": {
+    "score": 5.928139145452096,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "db_lunge",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | memetic:ls=5x25": {
+    "score": 5.928139145452096,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            2
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_lunge_reverse",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ppl-3x60-home | memetic:ls=5x50": {
+    "score": 5.881017187449947,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "push",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "pull",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bw_bulgarian_split_squat",
+            5
+          ],
+          [
+            "ball_pike",
+            2
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_calf_raise_uni",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=120 mut=0.3 cx=gene": {
+    "score": 25.00521210783173,
+    "seed": 7,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ],
+          [
+            "cable_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            4
+          ],
+          [
+            "ball_pike",
+            4
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=120 mut=0.3 cx=session": {
+    "score": 32.37474086725345,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "pec_deck_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=120 mut=0.6 cx=gene": {
+    "score": 21.719430393458374,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_hip_thrust",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "lat_pulldown_sup",
+            4
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=120 mut=0.6 cx=session": {
+    "score": 32.37474086725345,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=120 mut=0.9 cx=gene": {
+    "score": 19.603115810504036,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "pec_deck_fly",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift",
+            3
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            3
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            2
+          ],
+          [
+            "pec_deck_fly",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            3
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=120 mut=0.9 cx=session": {
+    "score": 28.935778610223025,
+    "seed": 3,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "db_fly",
+            4
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=30 mut=0.3 cx=gene": {
+    "score": 23.761451442950374,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "bw_nordic_curl",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "cable_curl_bayesian",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=30 mut=0.3 cx=session": {
+    "score": 32.37474086725345,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "pec_deck_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=30 mut=0.6 cx=gene": {
+    "score": 25.864621898678706,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_ext",
+            4
+          ],
+          [
+            "seated_leg_curl",
+            2
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_squat",
+            2
+          ],
+          [
+            "bb_rdl",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=30 mut=0.6 cx=session": {
+    "score": 32.37474086725345,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=30 mut=0.9 cx=gene": {
+    "score": 26.740154837930916,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            4
+          ],
+          [
+            "cable_row_seated",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            4
+          ],
+          [
+            "cable_oh_ext",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "leg_press_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=30 mut=0.9 cx=session": {
+    "score": 30.311476911666304,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "bb_bench_close",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=60 mut=0.3 cx=gene": {
+    "score": 25.260162342343065,
+    "seed": 3,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            4
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_squat",
+            2
+          ],
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            2
+          ],
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=60 mut=0.3 cx=session": {
+    "score": 32.26445374730786,
+    "seed": 8,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=60 mut=0.6 cx=gene": {
+    "score": 26.95832906182097,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            3
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "db_curl",
+            4
+          ],
+          [
+            "pec_deck_fly",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            3
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=60 mut=0.6 cx=session": {
+    "score": 31.137630117030632,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "reverse_pec_deck",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=60 mut=0.9 cx=gene": {
+    "score": 20.536098923665094,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "db_bench",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "db_curl",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift",
+            5
+          ],
+          [
+            "belt_squat",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            2
+          ],
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "machine_chest_press",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_rdl",
+            5
+          ],
+          [
+            "ball_rollout",
+            4
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | ga:pop=60 mut=0.9 cx=session": {
+    "score": 30.488827895808072,
+    "seed": 9,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_skullcrusher",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            4
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_fly",
+            4
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            4
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | hill:patience=1000": {
+    "score": 32.37474086725345,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | hill:patience=200": {
+    "score": 30.505934876748263,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_curl",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "cable_pushdown",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | hill:patience=2000": {
+    "score": 32.37474086725345,
+    "seed": 4,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | hill:patience=500": {
+    "score": 30.979564075068176,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_fly",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_curl",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | memetic:ls=1x10": {
+    "score": 31.137630117030632,
+    "seed": 1,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "reverse_pec_deck",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | memetic:ls=1x25": {
+    "score": 32.37474086725345,
+    "seed": 6,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | memetic:ls=1x50": {
+    "score": 31.137630117030632,
+    "seed": 2,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ],
+          [
+            "reverse_pec_deck",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | memetic:ls=2x10": {
+    "score": 32.37474086725345,
+    "seed": 4,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | memetic:ls=2x25": {
+    "score": 32.37474086725345,
+    "seed": 3,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | memetic:ls=2x50": {
+    "score": 31.137630117030632,
+    "seed": 0,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "reverse_pec_deck",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bw_row_inverted",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | memetic:ls=5x10": {
+    "score": 32.37474086725345,
+    "seed": 8,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "pullup_pron",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | memetic:ls=5x25": {
+    "score": 31.137630117030632,
+    "seed": 5,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "reverse_pec_deck",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_row_bent",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "smith_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  },
+  "ul-4x45-gym | memetic:ls=5x50": {
+    "score": 32.37474086725345,
+    "seed": 7,
+    "plan": [
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "bb_bench_close",
+            5
+          ],
+          [
+            "db_lateral_raise",
+            5
+          ],
+          [
+            "db_curl",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "hex_deadlift",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      },
+      {
+        "focus": "upper",
+        "exercises": [
+          [
+            "lat_pulldown_pron",
+            5
+          ],
+          [
+            "cable_row_seated",
+            5
+          ],
+          [
+            "db_fly",
+            2
+          ]
+        ]
+      },
+      {
+        "focus": "lower",
+        "exercises": [
+          [
+            "bb_deadlift_sumo",
+            5
+          ],
+          [
+            "ball_rollout",
+            5
+          ],
+          [
+            "leg_press_calf_raise",
+            5
+          ]
+        ]
+      }
+    ]
+  }
+}

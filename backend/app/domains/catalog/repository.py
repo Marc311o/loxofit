@@ -63,7 +63,7 @@ class CatalogRepository:
             select(Exercise), filters.model_copy(update={"muscle_group": None})
         ).subquery()
         stmt = select(matching.c.main_group, func.count()).group_by(matching.c.main_group)
-        rows = (await self.db.execute(stmt)).tuples().all()
+        rows = (await self.db.execute(stmt)).all()
         return {group: count for group, count in rows}
 
     async def get_exercise_detail(self, exercise_id: int) -> Exercise | None:
@@ -121,6 +121,18 @@ class CatalogRepository:
             select(Exercise)
             .where(Exercise.id.in_(ids))
             .options(selectinload(Exercise.muscle_roles).joinedload(ExerciseMuscleRole.muscle))
+        )
+        return (await self.db.execute(stmt)).scalars().all()
+
+    async def exercises_for_generator(self) -> Sequence[Exercise]:
+        """Every exercise with its muscle roles and equipment, in catalog order."""
+        stmt = (
+            select(Exercise)
+            .order_by(Exercise.id)
+            .options(
+                selectinload(Exercise.muscle_roles).joinedload(ExerciseMuscleRole.muscle),
+                selectinload(Exercise.equipment),
+            )
         )
         return (await self.db.execute(stmt)).scalars().all()
 

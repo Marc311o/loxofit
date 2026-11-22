@@ -15,7 +15,7 @@ from app.domains.plans.schemas import (
     PlanAssumptions,
     WeekAnalysis,
 )
-from app.engine.benefit import benefit
+from app.engine.benefit import max_volume_score
 from app.engine.evaluate import Evaluation
 from app.engine.types import (
     EngineConfig,
@@ -96,8 +96,7 @@ def _r(x: float) -> float:
 
 def max_score(mesocycle: Mesocycle, targets: MuscleTargets, config: EngineConfig) -> float:
     """Every muscle at the upper bound of MAV in every training week, with no time penalty."""
-    per_week = sum(t.priority * benefit(t.mav_upper, t, config.curve_k) for t in targets.values())
-    return per_week * len(mesocycle.training_weeks)
+    return max_volume_score(targets, config.curve_k, len(mesocycle.training_weeks))
 
 
 def to_analysis(
@@ -121,6 +120,7 @@ def to_analysis(
                     muscle_id=muscle_ids[code],
                     muscle_code=code,
                     volume=_r(volume),
+                    effective_volume=_r(ev.effective_volume.get(code, 0.0)),
                     zone=volume_zone(volume, target),
                     mev=target.mev,
                     mav_upper=target.mav_upper,
@@ -153,5 +153,38 @@ def to_analysis(
             rep_range_compound=config.rep_range_compound,
             rep_range_isolation=config.rep_range_isolation,
             default_tempo=config.default_tempo,
+            session_volume_cap=config.session_volume_cap,
         ),
     )
+
+
+def build_targets(
+    config: ModelConfig, muscles: Iterable[MuscleRead], priorities: Mapping[int, float]
+) -> MuscleTargets:
+    """
+    Global mode: every volume-target muscle gets the same landmarks.
+    Per-muscle mode: exactly the muscles the config has landmarks for - a muscle
+    without landmarks in the source is not scored.
+    """
+    if config.volume_mode == VolumeMode.PER_MUSCLE:
+        if not config.landmarks:
+            raise UnsupportedConfigError(f"Config {config.name!r} has no muscle landmarks")
+        codes = {m.id: m.code for m in muscles}
+        return {
+            codes[lm.muscle_id]: MuscleTarget(
+                mev=lm.mev,
+                mav_upper=lm.mav_upper,
+                mrv=lm.mrv,
+                priority=priorities.get(lm.muscle_id, 1.0),
+            )
+            for lm in config.landmarks
+        }
+
+    mev, mav, mrv = config.global_mev, config.global_mav_upper, config.global_mrv
+    if mev is None or mav is None or mrv is None:
+        raise UnsupportedConfigError(f"Config {config.name!r} has no global landmarks")
+    return {
+        m.code: MuscleTarget(mev=mev, mav_upper=mav, mrv=mrv, priority=priorities.get(m.id, 1.0))
+        for m in muscles
+        if m.is_volume_target
+    }

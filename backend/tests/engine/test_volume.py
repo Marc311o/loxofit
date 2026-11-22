@@ -3,8 +3,8 @@
 import pytest
 
 from app.engine.types import EngineConfig, PlannedExercise, Session
-from app.engine.volume import exercise_volume, weekly_volume
-from tests.engine.samples import BENCH, CONFIG, CURL, FLY, PLANK_LIKE, ROW, P, S
+from app.engine.volume import effective_volume, exercise_volume, weekly_volume
+from tests.engine.samples import BENCH, CAPPED, CLOSE_GRIP, CONFIG, CURL, FLY, PLANK_LIKE, ROW, P, S
 
 
 def session(*items: tuple, max_minutes: int = 90) -> Session:
@@ -56,3 +56,24 @@ def test_weights_come_from_config():
 
 def test_empty_week_has_no_volume():
     assert weekly_volume([], CONFIG) == {}
+
+
+def test_effective_volume_caps_each_session_separately():
+    # 12 chest sets in one session -> 11 count; the same 12 over two sessions all count.
+    piled = [session((BENCH, 6), (CLOSE_GRIP, 6))]
+    split = [session((BENCH, 6)), session((CLOSE_GRIP, 6))]
+    assert weekly_volume(piled, CONFIG)["pec_major"] == 12.0
+    assert effective_volume(piled, CAPPED)["pec_major"] == 11.0
+    assert effective_volume(split, CAPPED)["pec_major"] == 12.0
+
+
+def test_effective_volume_below_the_cap_equals_volume():
+    week = [session((BENCH, 3), (ROW, 3)), session((BENCH, 2), (CURL, 3))]
+    assert effective_volume(week, CAPPED) == weekly_volume(week, CAPPED)
+
+
+def test_no_cap_counts_everything():
+    # The default config has no cap - older configs keep scoring the same.
+    assert CONFIG.session_volume_cap is None
+    piled = [session((BENCH, 6), (CLOSE_GRIP, 6))]
+    assert effective_volume(piled, CONFIG) == weekly_volume(piled, CONFIG)

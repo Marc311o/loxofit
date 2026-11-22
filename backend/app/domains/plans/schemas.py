@@ -151,6 +151,7 @@ class MuscleAnalysis(BaseModel):
     muscle_id: int
     muscle_code: str
     volume: float
+    effective_volume: float
     zone: VolumeZone
     mev: float
     mav_upper: float
@@ -177,6 +178,7 @@ class PlanAssumptions(BaseModel):
     rep_range_compound: tuple[int, int]
     rep_range_isolation: tuple[int, int]
     default_tempo: str
+    session_volume_cap: float | None
 
 
 class PlanAnalysis(BaseModel):
