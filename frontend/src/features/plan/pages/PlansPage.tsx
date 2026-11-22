@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import AddRounded from "@mui/icons-material/AddRounded";
 import AutoAwesomeRounded from "@mui/icons-material/AutoAwesomeRounded";
 import EventNoteRounded from "@mui/icons-material/EventNoteRounded";
-import { Box, Button, Skeleton, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Skeleton, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
+import { Link as RouterLink, useNavigate } from "react-router";
 
 import { EmptyState } from "@/components/EmptyState";
 import { PageHeader } from "@/components/PageHeader";
@@ -30,13 +30,14 @@ export function PlansPage() {
 
   const actions = (
     <>
-      <Tooltip title={t("list.generateSoon")}>
-        <span>
-          <Button variant="outlined" startIcon={<AutoAwesomeRounded />} disabled>
-            {t("actions.generate")}
-          </Button>
-        </span>
-      </Tooltip>
+      <Button
+        variant="outlined"
+        startIcon={<AutoAwesomeRounded />}
+        component={RouterLink}
+        to="/plans/generate"
+      >
+        {t("actions.generate")}
+      </Button>
       <Button
         variant="contained"
         startIcon={<AddRounded />}

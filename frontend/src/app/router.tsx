@@ -20,7 +20,7 @@ import { WorkoutPage } from "@/features/workout/pages/WorkoutPage";
 import { AppLayout } from "@/layouts/AppLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { NotFoundPage } from "@/pages/NotFoundPage";
-
+import { GeneratorPage } from "@/features/generator/pages/GeneratorPage";
 
 export const router = createBrowserRouter([
   // Public
@@ -44,7 +44,8 @@ export const router = createBrowserRouter([
         element: <AppLayout />,
         children: [
           { path: "/", element: <StartPage /> },
-                    { path: "/plans", element: <PlansPage /> },
+          { path: "/plans", element: <PlansPage /> },
+          { path: "/plans/generate", element: <GeneratorPage /> },
           {
             path: "/plans/:planId",
             element: <PlanLayout />,
