@@ -113,3 +113,11 @@ def test_refresh_token_hash_is_deterministic_sha256():
     assert len(hashed) == 64  # SHA-256 hex digest
     assert hashed == security.hash_refresh_token(token)
     assert hashed != token
+
+
+@pytest.mark.parametrize("now", [None, datetime(2026, 1, 1, tzinfo=UTC)])
+def test_refresh_token_expires_after_its_lifetime(now):
+    issued = now or datetime.now(UTC)
+    expires = security.refresh_token_expires_at(now)
+    lifetime = timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
+    assert abs(expires - issued - lifetime) < timedelta(seconds=5)

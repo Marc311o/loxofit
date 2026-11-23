@@ -26,6 +26,10 @@ class CatalogRepository:
         stmt = select(Muscle).order_by(Muscle.muscle_group, Muscle.name_en)
         return (await self.db.execute(stmt)).scalars().all()
 
+    async def equipment_ids_by_code(self) -> dict[str, int]:
+        rows = (await self.db.execute(select(Equipment.code, Equipment.id))).all()
+        return {code: equipment_id for code, equipment_id in rows}
+
     async def list_equipment(self, filters: EquipmentFilters) -> Sequence[Equipment]:
         stmt = select(Equipment)
         if filters.category is not None:

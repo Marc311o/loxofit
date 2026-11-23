@@ -238,3 +238,15 @@ async def test_detail_without_default_config_returns_500(client, auth_headers, c
     response = await client.get(f"{API}/exercises/{bench}", headers=auth_headers)
     assert response.status_code == 500
     assert response.json()["code"] == "DEFAULT_CONFIG_MISSING"
+
+
+async def test_equipment_presets(client, auth_headers, catalog: Catalog):
+    response = await client.get(f"{API}/equipment/presets", headers=auth_headers)
+
+    assert response.status_code == 200
+    presets = {p["code"]: set(p["equipment_ids"]) for p in response.json()}
+    assert presets["gym"] == {e.id for e in catalog.equipment.values()}  # everything
+    assert presets["home_barbell"] == {
+        catalog.equipment["barbell"].id,
+        catalog.equipment["flat_bench"].id,
+    }  # what the test catalog has of the preset

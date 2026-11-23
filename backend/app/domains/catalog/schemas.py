@@ -9,6 +9,7 @@ from app.domains.catalog.enums import (
     MuscleGroup,
     MuscleRole,
 )
+from app.domains.catalog.presets import EquipmentPreset
 
 
 class ORMSchema(BaseModel):
@@ -60,6 +61,11 @@ class ExerciseDetail(ExerciseListItem):
     instructions_pl: str | None
     instructions_en: str | None
     muscles: list[MuscleShare] = []
+
+
+class EquipmentPresetRead(BaseModel):
+    code: EquipmentPreset
+    equipment_ids: list[int]
 
 
 class ExerciseFilters(PageParams):

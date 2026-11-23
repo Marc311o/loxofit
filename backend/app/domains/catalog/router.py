@@ -8,6 +8,7 @@ from app.domains.auth.dependencies import get_current_user
 from app.domains.catalog.enums import MuscleGroup
 from app.domains.catalog.schemas import (
     EquipmentFilters,
+    EquipmentPresetRead,
     EquipmentRead,
     ExerciseDetail,
     ExerciseFilters,
@@ -33,6 +34,12 @@ async def list_equipment(
     catalog: CatalogServiceDep, filters: Annotated[EquipmentFilters, Query()]
 ) -> list[EquipmentRead]:
     return await catalog.list_equipment(filters)
+
+
+@router.get("/equipment/presets")
+async def list_equipment_presets(catalog: CatalogServiceDep) -> list[EquipmentPresetRead]:
+    """Ready-made sets of equipment (gym, home) - one click in onboarding."""
+    return await catalog.list_equipment_presets()
 
 
 @router.get("/exercises")
