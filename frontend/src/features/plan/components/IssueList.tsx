@@ -17,7 +17,7 @@ const DOT: Record<PlanIssue["kind"], string> = {
   aboveMrv: zoneColors.aboveMrv,
   overtime: zoneColors.aboveMrv,
   belowMev: zoneColors.belowMev,
-  capped: zoneColors.belowMev
+  capped: zoneColors.belowMev,
 };
 
 export function IssueList({ issues, sessionNames, inverted = false, limit }: IssueListProps) {

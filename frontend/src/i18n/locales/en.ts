@@ -1,4 +1,3 @@
-// Source of truth for translation keys - every other locale must match this shape.
 export const en = {
   common: {
     moreInfo: "More information",
@@ -47,6 +46,7 @@ export const en = {
       INVALID_GENERATION: "The plan cannot be generated with these settings.",
       NO_EXERCISES_FOR_SESSION:
         "With your equipment there is no exercise for one of the sessions. Add equipment or change the split.",
+      INCORRECT_PASSWORD: "Incorrect password.",
     },
   },
   nav: {
@@ -142,7 +142,7 @@ export const en = {
       },
     },
   },
-    plans: {
+  plans: {
     title: "Plans",
     status: {
       draft: "Draft",
@@ -151,7 +151,8 @@ export const en = {
     },
     score: {
       label: "Plan score",
-      hint: "How close the plan gets to the best volume for every muscle, minus a penalty for sessions over their time limit. 100% would mean every muscle at the top of its productive range (MAV) in every training week - out of reach within a real time limit. Compare plans with each other, not with 100%.",    },
+      hint: "How close the plan gets to the best volume for every muscle, minus a penalty for sessions over their time limit. 100% would mean every muscle at the top of its productive range (MAV) in every training week - out of reach within a real time limit. Compare plans with each other, not with 100%.",
+    },
     zones: {
       below_mev: "Below MEV",
       mev_mav: "MEV-MAV",
@@ -354,7 +355,7 @@ export const en = {
       minutesOf: "{{minutes}} / {{limit}} min",
     },
   },
-    generator: {
+  generator: {
     title: "Plan generator",
     intro:
       "Set the split and the time you have - Loxofit picks the exercises and sets for your equipment.",
@@ -426,6 +427,119 @@ export const en = {
       defaultName: "{{template}} plan",
       body: "The plan goes to your drafts. There you can edit it, compute its weeks and activate it.",
       saved: "Plan saved.",
+    },
+  },
+  profile: {
+    actions: {
+      cancel: "Cancel",
+      save: "Save",
+    },
+    page: {
+      title: "Profile",
+      training: "Training profile",
+      trainingHint:
+        "The generator starts from these settings - you can still change them for each plan.",
+      equipment: "Equipment",
+      editEquipment: "Change equipment",
+      account: "Account",
+      saved: "Profile saved.",
+    },
+    fields: {
+      experience: "Training experience",
+      experienceRequired: "Choose your experience.",
+      weight: "Body weight (optional)",
+      weightHint: "Helps to estimate loads later on.",
+      weightInvalid: "Enter a weight between 30 and 300 kg.",
+      daysPerWeek: "Sessions per week",
+      fewerDays: "Fewer sessions",
+      moreDays: "More sessions",
+      weekdays: "Preferred days (optional)",
+      weekdaysHint: "Leave empty if any day works.",
+      weekdaysMismatch_one:
+        "You train {{count}} day a week - pick as many days or leave them empty.",
+      weekdaysMismatch_other:
+        "You train {{count}} days a week - pick as many days or leave them empty.",
+    },
+    experience: {
+      beginner: {
+        label: "Beginner",
+        description: "Less than a year of regular strength training.",
+      },
+      intermediate: {
+        label: "Intermediate",
+        description: "1-3 years, you know the basic lifts and train regularly.",
+      },
+      advanced: {
+        label: "Advanced",
+        description: "Over 3 years of structured training.",
+      },
+    },
+    equipment: {
+      label: "Your equipment",
+      presets: {
+        gym: { label: "Gym", description: "Free weights, cables and machines" },
+        home_barbell: {
+          label: "Home with a barbell",
+          description: "Barbell, rack, dumbbells, bench, pull-up bar",
+        },
+        home_dumbbells: {
+          label: "Home with dumbbells",
+          description: "Dumbbells, bench, pull-up bar",
+        },
+      },
+      custom: { label: "Custom", description: "Pick item by item" },
+      none: "Nothing selected yet.",
+      selected_one: "{{count}} item selected",
+      selected_other: "{{count}} items selected",
+      exercises_one: "{{count}} exercise available",
+      exercises_other: "{{count}} exercises available",
+      required: "Choose at least one item - the generator picks exercises for your equipment.",
+    },
+    onboarding: {
+      progress: "Step {{step}} of {{total}}",
+      progressLabel: "Onboarding progress",
+      back: "Back",
+      next: "Next",
+      finish: "Finish",
+      about: {
+        title: "Tell us about yourself",
+        subtitle: "A few things about you - you can change them in your profile any time.",
+      },
+      training: {
+        title: "How do you train?",
+        subtitle: "Plans fit into your week and your time.",
+      },
+      equipment: {
+        title: "What equipment do you have?",
+        subtitle: "Plans use only exercises you can do.",
+      },
+      done: {
+        title: "All set!",
+        subtitle:
+          "Generate your first plan or build one yourself. You can change these settings in your profile any time.",
+        generate: "Generate my first plan",
+        manual: "Build a plan myself",
+        later: "Later",
+      },
+    },
+    account: {
+      email: "E-mail",
+      password: "Password",
+      changePassword: "Change password",
+      currentPassword: "Current password",
+      newPassword: "New password",
+      confirmPassword: "Repeat the new password",
+      incorrectPassword: "Incorrect password.",
+      passwordChanged: "Password changed. Other devices have been signed out.",
+      language: "Language",
+      deleteLabel: "Delete account",
+      deleteHint: "Removes your account, plans and all your data for good.",
+      delete: "Delete account",
+      deleteTitle: "Delete your account?",
+      deleteBody:
+        "Your plans, profile and all your data will be removed for good. This cannot be undone. Enter your password to confirm.",
+      deleteConfirm: "Delete for good",
+      deleted: "Your account has been deleted.",
     },
   },
   catalog: {
