@@ -1,4 +1,4 @@
-from app.core.errors import AppError, ConflictError, NotFoundError
+from app.core.errors import AppError, ConflictError, NotFoundError, PermissionDeniedError
 
 
 class EmailAlreadyTakenError(ConflictError):
@@ -15,3 +15,8 @@ class InvalidEquipmentError(AppError):
     status_code = 422
     code = "INVALID_EQUIPMENT"
     detail = "Unknown equipment"
+
+
+class IncorrectPasswordError(PermissionDeniedError):
+    code = "INCORRECT_PASSWORD"
+    detail = "Incorrect password"

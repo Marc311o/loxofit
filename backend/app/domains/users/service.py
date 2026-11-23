@@ -7,9 +7,9 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import SessionDep
-from app.core.security import hash_password
+from app.core.security import hash_password, verify_password
 from app.domains.users.enums import UserRole
-from app.domains.users.exceptions import EmailAlreadyTakenError
+from app.domains.users.exceptions import EmailAlreadyTakenError, IncorrectPasswordError
 from app.domains.users.models import User
 from app.domains.users.repository import UserRepository
 
@@ -56,6 +56,19 @@ class UserService:
             raise EmailAlreadyTakenError() from e
 
         return user
+
+    def check_password(self, user: User, password: str) -> None:
+        """Raises when the password confirming a sensitive change is wrong."""
+        if not verify_password(password, user.password_hash):
+            raise IncorrectPasswordError()
+
+    def set_password(self, user: User, password: str) -> None:
+        user.password_hash = hash_password(password)
+
+    async def delete_account(self, user: User, password: str) -> None:
+        self.check_password(user, password)
+        await self.repo.delete(user.id)
+        await self.db.commit()
 
     def record_login(self, user: User, *, new_password_hash: str | None = None) -> None:
         user.last_login_at = datetime.datetime.now(datetime.UTC)

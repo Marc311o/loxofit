@@ -7,7 +7,7 @@ from app.core.config import settings
 from app.core.errors import ErrorResponse
 from app.domains.auth.cookies import clear_refresh_cookie, set_refresh_cookie
 from app.domains.auth.dependencies import AuthServiceDep, CurrentUser
-from app.domains.auth.schemas import RegisterRequest, TokenResponse
+from app.domains.auth.schemas import PasswordChange, RegisterRequest, TokenResponse
 from app.domains.auth.service import IssuedTokens
 from app.domains.users.schemas import UserRead
 
@@ -59,6 +59,18 @@ async def logout(
 ) -> None:
     await auth.logout(refresh_token)
     clear_refresh_cookie(response)
+
+
+@router.post(
+    path="/password",
+    responses={**_401, status.HTTP_403_FORBIDDEN: {"model": ErrorResponse}},
+)
+async def change_password(
+    data: PasswordChange, response: Response, user: CurrentUser, auth: AuthServiceDep
+) -> TokenResponse:
+    """Changes the password, ends the other sessions and returns new tokens for this one."""
+    tokens = await auth.change_password(user, data)
+    return _token_response(response, tokens)
 
 
 @router.get(path="/me", responses=_401)

@@ -103,5 +103,5 @@ def hash_refresh_token(token: str) -> str:
 
 
 def refresh_token_expires_at(now: datetime | None = None) -> datetime:
-    """Refreshes refresh token"""
-    return now or datetime.now(UTC) + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
+    """Expiry of a refresh token issued at `now`."""
+    return (now or datetime.now(UTC)) + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
