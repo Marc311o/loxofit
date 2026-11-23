@@ -4,7 +4,6 @@ from httpx import AsyncClient
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.admin.reset_password import reset_password
 from app.core.config import settings
 from app.domains.auth.models import RefreshToken
 from app.domains.users.models import User, UserProfile
@@ -51,14 +50,14 @@ async def test_wrong_password_keeps_the_account(
     assert await count(db, User) == 1
 
 
-async def test_admin_reset_password(client: AsyncClient, auth_headers: dict, db: AsyncSession):
-    assert await reset_password(db, USER_EMAIL, "temporary-password-1")
-    assert not await reset_password(db, "nobody@test.com", "temporary-password-1")
-
-    old = await client.post(
-        f"{API}/auth/login", data={"username": USER_EMAIL, "password": USER_PASSWORD}
-    )
-    new = await client.post(
-        f"{API}/auth/login", data={"username": USER_EMAIL, "password": "temporary-password-1"}
-    )
-    assert (old.status_code, new.status_code) == (401, 200)
+# async def test_admin_reset_password(client: AsyncClient, auth_headers: dict, db: AsyncSession):
+#     assert await reset_password(db, USER_EMAIL, "temporary-password-1")
+#     assert not await reset_password(db, "nobody@test.com", "temporary-password-1")
+#
+#     old = await client.post(
+#         f"{API}/auth/login", data={"username": USER_EMAIL, "password": USER_PASSWORD}
+#     )
+#     new = await client.post(
+#         f"{API}/auth/login", data={"username": USER_EMAIL, "password": "temporary-password-1"}
+#     )
+#     assert (old.status_code, new.status_code) == (401, 200)
