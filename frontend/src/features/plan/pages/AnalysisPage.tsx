@@ -70,9 +70,7 @@ export function AnalysisPage() {
           onChange={setSelected}
           options={data.weeks.map((w) => ({
             value: w.week_number,
-            label: w.is_deload
-              ? t("week.deloadShort")
-              : t("week.short", { number: w.week_number }),
+            label: w.is_deload ? t("week.deloadShort") : t("week.short", { number: w.week_number }),
           }))}
         />
       </Stack>
@@ -252,7 +250,7 @@ function MuscleVolumes({ week }: { week: WeekAnalysis }) {
               >
                 {t(`zones.${m.zone}`)}
                 {m.volume - m.effective_volume > 0.05 &&
-                ` · ${t("analysis.effective", { sets: formatNumber(m.effective_volume, 1) })}`}
+                  ` · ${t("analysis.effective", { sets: formatNumber(m.effective_volume, 1) })}`}
               </Typography>
             </Box>
           );

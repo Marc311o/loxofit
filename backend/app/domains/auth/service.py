@@ -20,7 +20,7 @@ from app.domains.auth.exceptions import (
 )
 from app.domains.auth.models import RefreshToken
 from app.domains.auth.repository import RefreshTokenRepository
-from app.domains.auth.schemas import RegisterRequest
+from app.domains.auth.schemas import PasswordChange, RegisterRequest
 from app.domains.users.models import User
 from app.domains.users.service import UserService
 
@@ -97,6 +97,17 @@ class AuthService:
         stored.revoked_at = now
         tokens = self._issue_tokens(user, now=now)
 
+        await self.db.commit()
+        return tokens
+
+    async def change_password(self, user: User, data: PasswordChange) -> IssuedTokens:
+        """Ends every session of the user - other devices log in again - and starts a new one
+        here, so the user stays logged in where the password was changed."""
+        self.users.check_password(user, data.current_password)
+        self.users.set_password(user, data.new_password)
+        now = datetime.now(UTC)
+        await self.tokens.revoke_all_for_user(user.id, now)
+        tokens = self._issue_tokens(user, now=now)
         await self.db.commit()
         return tokens
 

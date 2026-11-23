@@ -26,3 +26,11 @@ async def test_me_returns_logged_in_user(client: AsyncClient, auth_headers: dict
 
     assert response.status_code == 200
     assert response.json()["email"] == USER_EMAIL
+
+
+async def test_session_survives_repeated_refreshes(
+    client: AsyncClient, auth_headers: dict[str, str]
+) -> None:
+    """Every page reload refreshes the session - the rotated token must stay valid."""
+    for _ in range(3):
+        assert (await client.post(f"{API}/auth/refresh")).status_code == 200

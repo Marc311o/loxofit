@@ -81,6 +81,31 @@ export function useRegister() {
   });
 }
 
+/** Changes the password. The other sessions end; this one goes on with the new tokens. */
+export function useChangePassword() {
+  return useMutation<TokenResponse, ApiError, { current_password: string; new_password: string }>({
+    mutationFn: (data) => api.post<TokenResponse>("/auth/password", data),
+    onSuccess: (tokens) => session.setAccessToken(tokens.access_token),
+    meta: { silent: true }, // the dialog shows the error
+  });
+}
+
+/** Deletes the account with all its data, then leaves the app. */
+export function useDeleteAccount() {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation<void, ApiError, string>({
+    mutationFn: (password) => api.delete<void>("/users/me", { password }),
+    onSuccess: () => {
+      session.clear();
+      queryClient.clear();
+      toast.success(i18n.t("profile:account.deleted"));
+      navigate("/login", { replace: true });
+    },
+    meta: { silent: true }, // the dialog shows the error
+  });
+}
+
 export function useLogout() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();

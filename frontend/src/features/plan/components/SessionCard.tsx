@@ -30,9 +30,9 @@ import { type DragData, sessionDropId } from "../dnd";
 import type { DraftExercise, DraftSession } from "../draft";
 import { useWeekdayName } from "../format";
 import { orderHints, recommendedOrder } from "../insights";
-import {MAX_EXERCISES_PER_SESSION, type PlanAssumptions} from "../types";
+import { MAX_EXERCISES_PER_SESSION, type PlanAssumptions } from "../types";
 import { SetsStepper } from "./SetsStepper";
-import {prescriptionFor} from "@/features/plan/prescription.ts";
+import { prescriptionFor } from "@/features/plan/prescription.ts";
 
 export type SessionTime = {
   base: number;
@@ -69,7 +69,7 @@ export function SessionCard({
   onRemoveExercise,
   onReorder,
   rir,
-  assumptions
+  assumptions,
 }: SessionCardProps) {
   const { t } = useTranslation("plans");
   const localizedName = useLocalizedName();
@@ -280,7 +280,7 @@ function ExerciseLine({
   onSetSets,
   onRemove,
   rir,
-  assumptions
+  assumptions,
 }: ExerciseLineProps) {
   const { t } = useTranslation(["plans", "catalog"]);
   const localizedName = useLocalizedName();

@@ -95,7 +95,8 @@ export const api = {
   put: <T>(path: string, body?: unknown) => request<T>(path, { method: "PUT", body: json(body) }),
   patch: <T>(path: string, body?: unknown) =>
     request<T>(path, { method: "PATCH", body: json(body) }),
-  delete: <T>(path: string) => request<T>(path, { method: "DELETE" }),
+  delete: <T>(path: string, body?: unknown) =>
+    request<T>(path, { method: "DELETE", body: json(body) }),
   /** application/x-www-form-urlencoded - the OAuth2 login form */
   postForm: <T>(path: string, form: Record<string, string>) =>
     request<T>(path, { method: "POST", body: new URLSearchParams(form) }),

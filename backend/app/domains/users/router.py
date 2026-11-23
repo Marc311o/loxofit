@@ -1,16 +1,19 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Response, status
 
 from app.core.errors import ErrorResponse
+from app.domains.auth.cookies import clear_refresh_cookie
 from app.domains.auth.dependencies import CurrentUser
 from app.domains.catalog.schemas import EquipmentRead
 from app.domains.users.profile_service import ProfileServiceDep
 from app.domains.users.schemas import (
+    AccountDelete,
     EquipmentIdsWrite,
     ProfileRead,
     ProfileWrite,
     UserRead,
     UserUpdate,
 )
+from app.domains.users.service import UserServiceDep
 
 router = APIRouter(
     prefix="/users/me",
@@ -22,6 +25,19 @@ router = APIRouter(
 @router.patch("")
 async def update_me(data: UserUpdate, user: CurrentUser, profiles: ProfileServiceDep) -> UserRead:
     return await profiles.update_user(user, data)
+
+
+@router.delete(
+    "",
+    status_code=status.HTTP_204_NO_CONTENT,
+    responses={status.HTTP_403_FORBIDDEN: {"model": ErrorResponse}},
+)
+async def delete_me(
+    data: AccountDelete, response: Response, user: CurrentUser, users: UserServiceDep
+) -> None:
+    """Deletes the account with all its data; the password confirms it."""
+    await users.delete_account(user, data.password)
+    clear_refresh_cookie(response)
 
 
 @router.get("/profile", responses={status.HTTP_404_NOT_FOUND: {"model": ErrorResponse}})

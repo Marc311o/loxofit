@@ -47,6 +47,7 @@ export const pl: Messages = {
       INVALID_GENERATION: "Z tymi ustawieniami nie da się wygenerować planu.",
       NO_EXERCISES_FOR_SESSION:
         "Z Twoim sprzętem nie ma ćwiczeń dla jednej z sesji. Dodaj sprzęt albo zmień podział.",
+      INCORRECT_PASSWORD: "Nieprawidłowe hasło.",
     },
   },
   nav: {
@@ -142,7 +143,7 @@ export const pl: Messages = {
       },
     },
   },
-    plans: {
+  plans: {
     title: "Plany",
     status: {
       draft: "Szkic",
@@ -151,7 +152,8 @@ export const pl: Messages = {
     },
     score: {
       label: "Ocena planu",
-      hint: "Jak blisko plan jest najlepszej objętości dla każdego mięśnia, minus kara za sesje ponad limit czasu. 100% oznaczałoby każdy mięsień na górnej granicy zakresu produktywnego (MAV) w każdym tygodniu treningowym - w realnym limicie czasu to nieosiągalne. Porównuj plany między sobą, a nie z setką.",    },
+      hint: "Jak blisko plan jest najlepszej objętości dla każdego mięśnia, minus kara za sesje ponad limit czasu. 100% oznaczałoby każdy mięsień na górnej granicy zakresu produktywnego (MAV) w każdym tygodniu treningowym - w realnym limicie czasu to nieosiągalne. Porównuj plany między sobą, a nie z setką.",
+    },
     zones: {
       below_mev: "Poniżej MEV",
       mev_mav: "MEV-MAV",
@@ -366,7 +368,7 @@ export const pl: Messages = {
       minutesOf: "{{minutes}} / {{limit}} min",
     },
   },
-    generator: {
+  generator: {
     title: "Generator planów",
     intro: "Ustaw podział i czas, a Loxofit dobierze ćwiczenia i serie pod Twój sprzęt.",
     back: "Wróć do planów",
@@ -439,6 +441,127 @@ export const pl: Messages = {
       defaultName: "Plan {{template}}",
       body: "Plan trafi do szkiców. Tam możesz go dalej edytować, wyliczyć tygodnie i aktywować.",
       saved: "Zapisano plan.",
+    },
+  },
+  profile: {
+    actions: {
+      cancel: "Anuluj",
+      save: "Zapisz",
+    },
+    page: {
+      title: "Profil",
+      training: "Profil treningowy",
+      trainingHint: "Od tych ustawień startuje generator - przy każdym planie możesz je zmienić.",
+      equipment: "Sprzęt",
+      editEquipment: "Zmień sprzęt",
+      account: "Konto",
+      saved: "Zapisano profil.",
+    },
+    fields: {
+      experience: "Staż treningowy",
+      experienceRequired: "Wybierz swój staż.",
+      weight: "Masa ciała (opcjonalnie)",
+      weightHint: "Przyda się później do szacowania ciężarów.",
+      weightInvalid: "Podaj masę od 30 do 300 kg.",
+      daysPerWeek: "Treningi w tygodniu",
+      fewerDays: "Mniej treningów",
+      moreDays: "Więcej treningów",
+      weekdays: "Preferowane dni (opcjonalnie)",
+      weekdaysHint: "Zostaw puste, jeśli pasuje każdy dzień.",
+      weekdaysMismatch_one:
+        "Trenujesz {{count}} dzień w tygodniu - wybierz tyle dni albo zostaw puste.",
+      weekdaysMismatch_few:
+        "Trenujesz {{count}} dni w tygodniu - wybierz tyle dni albo zostaw puste.",
+      weekdaysMismatch_many:
+        "Trenujesz {{count}} dni w tygodniu - wybierz tyle dni albo zostaw puste.",
+      weekdaysMismatch_other:
+        "Trenujesz {{count}} dni w tygodniu - wybierz tyle dni albo zostaw puste.",
+    },
+    experience: {
+      beginner: {
+        label: "Początkujący",
+        description: "Mniej niż rok regularnego treningu siłowego.",
+      },
+      intermediate: {
+        label: "Średniozaawansowany",
+        description: "1-3 lata, znasz podstawowe ćwiczenia i trenujesz regularnie.",
+      },
+      advanced: {
+        label: "Zaawansowany",
+        description: "Ponad 3 lata zaplanowanego treningu.",
+      },
+    },
+    equipment: {
+      label: "Twój sprzęt",
+      presets: {
+        gym: { label: "Siłownia", description: "Wolne ciężary, wyciągi i maszyny" },
+        home_barbell: {
+          label: "Dom ze sztangą",
+          description: "Sztanga, stojak, hantle, ławka, drążek",
+        },
+        home_dumbbells: {
+          label: "Dom z hantlami",
+          description: "Hantle, ławka, drążek",
+        },
+      },
+      custom: { label: "Własny wybór", description: "Zaznacz sprzęt po kolei" },
+      none: "Nic jeszcze nie wybrano.",
+      selected_one: "Wybrano {{count}} pozycję",
+      selected_few: "Wybrano {{count}} pozycje",
+      selected_many: "Wybrano {{count}} pozycji",
+      selected_other: "Wybrano {{count}} pozycji",
+      exercises_one: "{{count}} dostępne ćwiczenie",
+      exercises_few: "{{count}} dostępne ćwiczenia",
+      exercises_many: "{{count}} dostępnych ćwiczeń",
+      exercises_other: "{{count}} dostępnych ćwiczeń",
+      required:
+        "Wybierz co najmniej jedną pozycję - generator dobiera ćwiczenia do Twojego sprzętu.",
+    },
+    onboarding: {
+      progress: "Krok {{step}} z {{total}}",
+      progressLabel: "Postęp konfiguracji",
+      back: "Wstecz",
+      next: "Dalej",
+      finish: "Zakończ",
+      about: {
+        title: "Opowiedz o sobie",
+        subtitle: "Kilka informacji o Tobie - zmienisz je w każdej chwili w profilu.",
+      },
+      training: {
+        title: "Jak trenujesz?",
+        subtitle: "Plany dopasują się do Twojego tygodnia i czasu.",
+      },
+      equipment: {
+        title: "Jaki masz sprzęt?",
+        subtitle: "Plany wykorzystają tylko ćwiczenia, które możesz wykonać.",
+      },
+      done: {
+        title: "Gotowe!",
+        subtitle:
+          "Wygeneruj pierwszy plan albo ułóż go samodzielnie. Ustawienia zmienisz w każdej chwili w profilu.",
+        generate: "Wygeneruj pierwszy plan",
+        manual: "Ułóż plan samodzielnie",
+        later: "Później",
+      },
+    },
+    account: {
+      email: "E-mail",
+      password: "Hasło",
+      changePassword: "Zmień hasło",
+      currentPassword: "Obecne hasło",
+      newPassword: "Nowe hasło",
+      confirmPassword: "Powtórz nowe hasło",
+      incorrectPassword: "Nieprawidłowe hasło.",
+      passwordChanged: "Hasło zmienione. Pozostałe urządzenia zostały wylogowane.",
+      language: "Język",
+      deleteLabel: "Usunięcie konta",
+      deleteHint: "Trwale usuwa konto, plany i wszystkie Twoje dane.",
+      delete: "Usuń konto",
+      deleteTitle: "Usunąć konto?",
+      deleteBody:
+        "Twoje plany, profil i wszystkie dane zostaną trwale usunięte. Tej operacji nie da się cofnąć. Podaj hasło, aby potwierdzić.",
+      deleteConfirm: "Usuń na zawsze",
+      deleted: "Konto zostało usunięte.",
     },
   },
   catalog: {

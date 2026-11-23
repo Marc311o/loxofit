@@ -35,7 +35,6 @@ export type PlanIssue =
   | { kind: "capped"; muscleId: number; week: number; lost: number }
   | { kind: "overtime"; session: number; week: number; minutes: number };
 
-
 export function planIssues(analysis: PlanAnalysis, sessionLimits: number[]): PlanIssue[] {
   const weeks = trainingWeeks(analysis);
   const issues: PlanIssue[] = [];

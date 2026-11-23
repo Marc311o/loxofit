@@ -20,6 +20,9 @@ class UserRepository:
     def add(self, user: User) -> None:
         self.db.add(user)
 
+    async def delete(self, user_id: uuid.UUID) -> None:
+        await self.db.execute(delete(User).where(User.id == user_id))
+
     async def get_profile(self, user_id: uuid.UUID) -> UserProfile | None:
         return await self.db.get(UserProfile, user_id)
 

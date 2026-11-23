@@ -9,9 +9,11 @@ from app.core.pagination import Page
 from app.domains.catalog.enums import MuscleGroup, MuscleRole
 from app.domains.catalog.exceptions import ExerciseNotFoundError
 from app.domains.catalog.models import ExerciseMuscleRole
+from app.domains.catalog.presets import PRESET_EQUIPMENT
 from app.domains.catalog.repository import CatalogRepository
 from app.domains.catalog.schemas import (
     EquipmentFilters,
+    EquipmentPresetRead,
     EquipmentRead,
     ExerciseDetail,
     ExerciseFilters,
@@ -54,6 +56,18 @@ class CatalogService:
 
     async def list_equipment(self, filters: EquipmentFilters) -> list[EquipmentRead]:
         return [EquipmentRead.model_validate(e) for e in await self.repo.list_equipment(filters)]
+
+    async def list_equipment_presets(self) -> list[EquipmentPresetRead]:
+        ids = await self.repo.equipment_ids_by_code()
+        return [
+            EquipmentPresetRead(
+                code=preset,
+                equipment_ids=sorted(
+                    ids.values() if codes is None else (ids[c] for c in codes if c in ids)
+                ),
+            )
+            for preset, codes in PRESET_EQUIPMENT.items()
+        ]
 
     async def list_exercises(self, filters: ExerciseFilters) -> Page[ExerciseListItem]:
         items, total = await self.repo.list_exercises(filters)

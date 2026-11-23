@@ -21,6 +21,8 @@ import { AppLayout } from "@/layouts/AppLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { GeneratorPage } from "@/features/generator/pages/GeneratorPage";
+import { RequireProfile } from "@/features/profile/components/RequireProfile";
+import { OnboardingPage } from "@/features/profile/pages/OnboardingPage";
 
 export const router = createBrowserRouter([
   // Public
@@ -40,37 +42,43 @@ export const router = createBrowserRouter([
   {
     element: <RequireAuth />,
     children: [
+      { path: "/onboarding", element: <OnboardingPage /> },
       {
-        element: <AppLayout />,
+        element: <RequireProfile />,
         children: [
-          { path: "/", element: <StartPage /> },
-          { path: "/plans", element: <PlansPage /> },
-          { path: "/plans/generate", element: <GeneratorPage /> },
           {
-            path: "/plans/:planId",
-            element: <PlanLayout />,
+            element: <AppLayout />,
             children: [
-              { index: true, element: <BaseWeekPage /> },
-              { path: "weeks", element: <WeeksPage /> },
-              { path: "analysis", element: <AnalysisPage /> },
-            ],
-          },
-          {
-            path: "/catalog",
-            element: <CatalogLayout />,
-            children: [
-              { index: true, element: <Navigate to="exercises" replace /> },
+              { path: "/", element: <StartPage /> },
+              { path: "/plans", element: <PlansPage /> },
+              { path: "/plans/generate", element: <GeneratorPage /> },
               {
-                path: "exercises",
-                element: <ExercisesPage />,
-                children: [{ path: ":exerciseId", element: <ExerciseDetailDialog /> }],
+                path: "/plans/:planId",
+                element: <PlanLayout />,
+                children: [
+                  { index: true, element: <BaseWeekPage /> },
+                  { path: "weeks", element: <WeeksPage /> },
+                  { path: "analysis", element: <AnalysisPage /> },
+                ],
               },
-              { path: "muscles", element: <MusclesPage /> },
-              { path: "equipment", element: <EquipmentPage /> },
+              {
+                path: "/catalog",
+                element: <CatalogLayout />,
+                children: [
+                  { index: true, element: <Navigate to="exercises" replace /> },
+                  {
+                    path: "exercises",
+                    element: <ExercisesPage />,
+                    children: [{ path: ":exerciseId", element: <ExerciseDetailDialog /> }],
+                  },
+                  { path: "muscles", element: <MusclesPage /> },
+                  { path: "equipment", element: <EquipmentPage /> },
+                ],
+              },
+              { path: "/workout", element: <WorkoutPage /> },
+              { path: "/profile", element: <ProfilePage /> },
             ],
           },
-          { path: "/workout", element: <WorkoutPage /> },
-          { path: "/profile", element: <ProfilePage /> },
         ],
       },
       { path: "/workout/:sessionId", element: <WorkoutPage /> },
