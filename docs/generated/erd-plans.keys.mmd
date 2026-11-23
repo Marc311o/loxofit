@@ -1,0 +1,40 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction TB
+  plans {
+    uuid id PK
+    uuid user_id FK
+    integer config_id FK
+  }
+  plan_muscle_targets {
+    uuid plan_id PK,FK
+    integer muscle_id PK,FK
+  }
+  plan_weeks {
+    uuid id PK
+    uuid plan_id FK
+  }
+  plan_sessions {
+    uuid id PK
+    uuid week_id FK
+  }
+  prescribed_exercises {
+    uuid id PK
+    uuid session_id FK
+    integer exercise_id FK
+  }
+  exercises
+  model_configs
+  muscles
+  users
+  exercises ||--o{ prescribed_exercises : "exercise_id"
+  model_configs ||--o{ plans : "config_id"
+  muscles ||--o{ plan_muscle_targets : "muscle_id"
+  plan_sessions ||--o{ prescribed_exercises : "session_id"
+  plan_weeks ||--o{ plan_sessions : "week_id"
+  plans ||--o{ plan_muscle_targets : "plan_id"
+  plans ||--o{ plan_weeks : "plan_id"
+  users ||--o{ plans : "user_id"

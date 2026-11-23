@@ -1,0 +1,17 @@
+flowchart TB
+  subgraph browser["{{browser}}"]
+    spa["{{spa}}"]
+  end
+  subgraph server["{{server}}"]
+    api["{{api}}"]
+    workers["{{workers}}"]
+    progress[("{{progress}}")]
+  end
+  db[("{{db}}")]
+
+  spa -- "{{rest}}" --> api
+  api -- "{{sql}}" --> db
+  api -- "{{task}}" --> workers
+  workers -- "{{report}}" --> progress
+  api -. "{{reads}}" .-> progress
+  workers -. "{{result}}" .-> api

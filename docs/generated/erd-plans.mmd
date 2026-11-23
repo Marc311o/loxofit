@@ -1,0 +1,58 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction TB
+  plans {
+    uuid id PK
+    uuid user_id FK
+    integer config_id FK
+    varchar name
+    plan_status status
+    smallint num_weeks
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  plan_muscle_targets {
+    uuid plan_id PK,FK
+    integer muscle_id PK,FK
+    float priority
+  }
+  plan_weeks {
+    uuid id PK
+    uuid plan_id FK
+    smallint week_number
+    smallint rir
+    boolean is_deload
+  }
+  plan_sessions {
+    uuid id PK
+    uuid week_id FK
+    smallint position
+    varchar name
+    smallint max_minutes
+    smallint weekday
+  }
+  prescribed_exercises {
+    uuid id PK
+    uuid session_id FK
+    integer exercise_id FK
+    smallint slot
+    smallint sets
+    smallint rep_min
+    smallint rep_max
+    timestamptz deleted_at
+  }
+  exercises
+  model_configs
+  muscles
+  users
+  exercises ||--o{ prescribed_exercises : "exercise_id"
+  model_configs ||--o{ plans : "config_id"
+  muscles ||--o{ plan_muscle_targets : "muscle_id"
+  plan_sessions ||--o{ prescribed_exercises : "session_id"
+  plan_weeks ||--o{ plan_sessions : "week_id"
+  plans ||--o{ plan_muscle_targets : "plan_id"
+  plans ||--o{ plan_weeks : "plan_id"
+  users ||--o{ plans : "user_id"

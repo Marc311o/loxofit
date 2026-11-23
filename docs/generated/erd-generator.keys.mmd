@@ -1,0 +1,18 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction TB
+  generation_runs {
+    uuid id PK
+    uuid user_id FK
+    integer config_id FK
+    uuid plan_id FK
+  }
+  model_configs
+  plans
+  users
+  model_configs ||--o{ generation_runs : "config_id"
+  plans |o--o{ generation_runs : "plan_id"
+  users ||--o{ generation_runs : "user_id"
