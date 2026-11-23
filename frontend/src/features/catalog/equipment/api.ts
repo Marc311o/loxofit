@@ -6,8 +6,12 @@ import type { Equipment } from "../types";
 
 export const equipmentKeys = {
   all: [...catalogKeys.all, "equipment"] as const,
+  presets: [...catalogKeys.all, "equipment", "presets"] as const,
 };
 
+export type EquipmentPresetCode = "gym" | "home_barbell" | "home_dumbbells";
+
+export type EquipmentPreset = { code: EquipmentPresetCode; equipment_ids: number[] };
 /**
  * The user's own equipment is user data, not catalog data, so it does not live
  * under the catalog root - refreshing the catalog must not refetch it and vice versa.
@@ -19,6 +23,15 @@ export function useEquipmentCatalog() {
   return useQuery({
     queryKey: equipmentKeys.all,
     queryFn: () => api.get<Equipment[]>("/equipment"),
+    staleTime: CATALOG_STALE_TIME,
+  });
+}
+
+/** Ready-made sets of equipment - gym, home - for a quick start. */
+export function useEquipmentPresets() {
+  return useQuery({
+    queryKey: equipmentKeys.presets,
+    queryFn: () => api.get<EquipmentPreset[]>("/equipment/presets"),
     staleTime: CATALOG_STALE_TIME,
   });
 }
