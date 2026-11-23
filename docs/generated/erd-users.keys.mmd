@@ -1,0 +1,27 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction TB
+  users {
+    uuid id PK
+    varchar email UK
+  }
+  refresh_tokens {
+    uuid id PK
+    uuid user_id FK
+    varchar token_hash UK
+  }
+  user_equipment {
+    uuid user_id PK,FK
+    integer equipment_id PK,FK
+  }
+  user_profiles {
+    uuid user_id PK,FK
+  }
+  equipment
+  equipment ||--o{ user_equipment : "equipment_id"
+  users ||--o{ refresh_tokens : "user_id"
+  users ||--o{ user_equipment : "user_id"
+  users ||--o| user_profiles : "user_id"

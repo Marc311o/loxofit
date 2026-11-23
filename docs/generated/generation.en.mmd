@@ -1,0 +1,27 @@
+sequenceDiagram
+  autonumber
+  participant web as Web app
+  participant api as API
+  participant db as Database
+  participant worker as Worker process
+
+  web ->> api: POST /generator/runs
+  api ->> api: validation
+  api ->> db: insert run (queued)
+  api ->> worker: submit the task
+  api -->> web: 202 run
+  api ->> db: status = running
+  activate worker
+  Note over worker: hill climbing<br/>30 000 evaluations
+  loop while running
+    worker -->> api: progress
+    web ->> api: GET /generator/runs/{id} (300 ms)
+    api -->> web: status, progress
+  end
+  worker -->> api: result
+  deactivate worker
+  api ->> db: status = done, result
+  web ->> api: GET …/runs/{id}/analysis
+  web ->> api: POST …/runs/{id}/plan
+  api ->> db: plan + base week
+  api -->> web: 201 draft plan

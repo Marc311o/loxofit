@@ -1,0 +1,22 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction TB
+  model_configs {
+    integer id PK
+    varchar name UK
+  }
+  config_muscle_landmarks {
+    integer config_id PK,FK
+    integer muscle_id PK,FK
+  }
+  config_role_weights {
+    integer config_id PK,FK
+    muscle_role role PK
+  }
+  muscles
+  model_configs ||--o{ config_muscle_landmarks : "config_id"
+  model_configs ||--o{ config_role_weights : "config_id"
+  muscles ||--o{ config_muscle_landmarks : "muscle_id"

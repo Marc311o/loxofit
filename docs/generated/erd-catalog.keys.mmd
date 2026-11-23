@@ -1,0 +1,40 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction TB
+  equipment {
+    integer id PK
+    varchar code UK
+    varchar name_en UK
+    varchar name_pl UK
+  }
+  exercises {
+    integer id PK
+    varchar code UK
+    varchar name_en UK
+    varchar name_pl UK
+  }
+  muscles {
+    integer id PK
+    varchar code UK
+  }
+  exercise_equipment {
+    integer exercise_id PK,FK
+    integer equipment_id PK,FK
+  }
+  exercise_muscle_roles {
+    integer exercise_id PK,FK
+    integer muscle_id PK,FK
+  }
+  exercise_substitutes {
+    integer exercise_id PK,FK
+    integer substitute_exercise_id PK,FK
+  }
+  equipment ||--o{ exercise_equipment : "equipment_id"
+  exercises ||--o{ exercise_equipment : "exercise_id"
+  exercises ||--o{ exercise_muscle_roles : "exercise_id"
+  exercises ||--o{ exercise_substitutes : "exercise_id"
+  exercises ||--o{ exercise_substitutes : "substitute_exercise_id"
+  muscles ||--o{ exercise_muscle_roles : "muscle_id"

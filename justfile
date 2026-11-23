@@ -191,3 +191,13 @@ engine-eval plan *args:
 [working-directory: 'backend']
 bench:
     {{py}} -m research.bench_objective
+
+# =======================================================
+# DOCS
+# =======================================================
+
+# generates docs/ from the code: ERD, API map, error codes, diagrams, PDFs
+[group('docs')]
+[working-directory: 'backend']
+docs *args:
+    {{py}} ../docs/generate.py {{args}}

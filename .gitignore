@@ -19,3 +19,6 @@ dist/
 
 # Temporary source folder
 temp
+
+# PDF documentation
+docs/figures/

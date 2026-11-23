@@ -1,0 +1,19 @@
+flowchart TB
+  subgraph domain["Domain module, e.g. plans"]
+    router["router<br/>HTTP, validation, auth"]
+    schemas["schemas<br/>request / response"]
+    service["service<br/>business rules, transactions"]
+    repository["repository<br/>queries"]
+    models["models<br/>tables"]
+    adapter["engine adapter<br/>DB rows to engine types"]
+  end
+  engine["engine<br/>pure Python: model, scoring, search"]
+  db[("PostgreSQL")]
+
+  router --> service
+  router -.-> schemas
+  service --> repository
+  repository --> models
+  models --> db
+  service --> adapter
+  adapter --> engine
