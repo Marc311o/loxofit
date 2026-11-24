@@ -340,7 +340,8 @@ def api_markdown(t: Texts, items: list[Endpoint]) -> str:
     by_tag: dict[str, list[Endpoint]] = defaultdict(list)
     for e in items:
         by_tag[e.tag].append(e)
-    for tag, group in by_tag.values():
+    for tag, group in by_tag.items():
+        lines += [f"## {t.get(f'api.tags.{tag}', tag)}", ""]
         header = (
             f"| {t.get('api.headers.method')} | {t.get('api.headers.path')} "
             f"| {t.get('api.headers.description')} | {t.get('api.headers.responses')} |"

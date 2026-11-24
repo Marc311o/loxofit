@@ -73,9 +73,15 @@ lint:
     docker compose exec frontend npx oxlint src
     docker compose exec frontend npx tsc -b
 
+# docs/generated matches the code - as in CI
+[group('quality')]
+docs-check:
+    just docs --no-render
+    git diff --exit-code -- docs/generated
+
 # everything CI checks, tests included
 [group('quality')]
-ci: lint test
+ci: lint test docs-check
 
 # backend tests
 [group('test')]
