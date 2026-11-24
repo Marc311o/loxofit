@@ -14,6 +14,7 @@ Każda odpowiedź z błędem ma postać `{"detail": ..., "code": ...}`; frontend
 | `INVALID_CREDENTIALS` | 401 | Nieprawidłowy e-mail lub hasło |
 | `INVALID_REFRESH_TOKEN` | 401 | Sesja wygasła - konieczne ponowne logowanie |
 | `ACCOUNT_INACTIVE` | 403 | Konto jest nieaktywne |
+| `INCORRECT_PASSWORD` | 403 | Nieprawidłowe hasło potwierdzające zmianę |
 | `PROFILE_NOT_FOUND` | 404 | Użytkownik nie uzupełnił jeszcze profilu |
 | `EMAIL_TAKEN` | 409 | Konto z tym adresem e-mail już istnieje |
 | `INVALID_EQUIPMENT` | 422 | Nieznany sprzęt |

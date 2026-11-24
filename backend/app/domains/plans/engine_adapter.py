@@ -39,22 +39,6 @@ def build_config(config: ModelConfig) -> EngineConfig:
     return EngineConfig(role_weights=weights, **params)
 
 
-def build_targets(
-    config: ModelConfig, muscles: Iterable[MuscleRead], priorities: Mapping[int, float]
-) -> MuscleTargets:
-    """Global mode: every volume-target muscle gets the same landmarks."""
-    if config.volume_mode != VolumeMode.GLOBAL:
-        raise UnsupportedConfigError(f"Volume mode {config.volume_mode!r} is not supported yet")
-    mev, mav, mrv = config.global_mev, config.global_mav_upper, config.global_mrv
-    if mev is None or mav is None or mrv is None:
-        raise UnsupportedConfigError(f"Config {config.name!r} has no global landmarks")
-    return {
-        m.code: MuscleTarget(mev=mev, mav_upper=mav, mrv=mrv, priority=priorities.get(m.id, 1.0))
-        for m in muscles
-        if m.is_volume_target
-    }
-
-
 def build_spec(exercise: ExerciseRoles) -> ExerciseSpec:
     return ExerciseSpec(
         code=exercise.code,

@@ -129,19 +129,6 @@ def build_config(version: ConfigVersion) -> EngineConfig:
     return EngineConfig(role_weights=weights, **params)
 
 
-def build_targets(version: ConfigVersion, catalog: CatalogData) -> MuscleTargets:
-    """Global mode: every volume-target muscle gets the same landmarks."""
-    mode = version.params.get("volume_mode", VolumeMode.GLOBAL)
-    if mode != VolumeMode.GLOBAL:
-        raise PlanError([f"Config {version.name!r}: volume mode {mode!r} is not supported yet"])
-    target = MuscleTarget(
-        mev=version.params["global_mev"],
-        mav_upper=version.params["global_mav_upper"],
-        mrv=version.params["global_mrv"],
-    )
-    return {m.code: target for m in catalog.muscles if m.is_volume_target}
-
-
 def build_base_week(plan: PlanFile, specs: dict[str, ExerciseSpec]) -> tuple[Session, ...]:
     unknown = [
         f"sessions.{i}.exercises.{j}.exercise: unknown code {entry.exercise!r}"

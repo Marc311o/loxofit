@@ -16,6 +16,7 @@ All paths are under `/api/v1`. Every endpoint needs a JWT access token unless ma
 | `POST` | `/auth/refresh` ¹ | Issues a new access token from the refresh cookie | 200, 401, 422 |
 | `POST` | `/auth/login` ¹ | Logs in; returns an access token and sets the refresh cookie | 200, 401, 403, 422 |
 | `POST` | `/auth/logout` ¹ | Revokes the refresh token | 204, 422 |
+| `POST` | `/auth/password` | Changes the password; ends the other sessions | 200, 401, 403, 422 |
 | `GET` | `/auth/me` | The logged-in user | 200, 401 |
 
 ## Catalog
@@ -24,6 +25,7 @@ All paths are under `/api/v1`. Every endpoint needs a JWT access token unless ma
 |---|---|---|---|
 | `GET` | `/muscles` | Muscles with their groups | 200, 401 |
 | `GET` | `/equipment` | Equipment, filtered by category | 200, 401, 422 |
+| `GET` | `/equipment/presets` | Ready-made sets of equipment | 200, 401 |
 | `GET` | `/exercises` | Exercises - filters, search, pagination | 200, 401, 422 |
 | `GET` | `/exercises/group-counts` | Exercises per muscle group for the given filters | 200, 401, 422 |
 | `GET` | `/exercises/{exercise_id}` | Exercise details: muscle roles, equipment, substitutes | 200, 401, 422 |
@@ -57,6 +59,7 @@ All paths are under `/api/v1`. Every endpoint needs a JWT access token unless ma
 
 | Method | Path | Description | Responses |
 |---|---|---|---|
+| `DELETE` | `/users/me` | Deletes the account with all its data | 204, 401, 403, 422 |
 | `PATCH` | `/users/me` | Changes the account data | 200, 401, 422 |
 | `GET` | `/users/me/profile` | The training profile | 200, 401, 404 |
 | `PUT` | `/users/me/profile` | Creates or replaces the training profile | 200, 401, 422 |

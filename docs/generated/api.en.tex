@@ -20,11 +20,13 @@ Method & Path & Description & Responses \\
 \texttt{POST} & \texttt{/\allowbreak{}auth/\allowbreak{}refresh}$^{*}$ & Issues a new access token from the refresh cookie & 200, 401 \\
 \texttt{POST} & \texttt{/\allowbreak{}auth/\allowbreak{}login}$^{*}$ & Logs in; returns an access token and sets the refresh cookie & 200, 401, 403 \\
 \texttt{POST} & \texttt{/\allowbreak{}auth/\allowbreak{}logout}$^{*}$ & Revokes the refresh token & 204 \\
+\texttt{POST} & \texttt{/\allowbreak{}auth/\allowbreak{}password} & Changes the password; ends the other sessions & 200, 401, 403 \\
 \texttt{GET} & \texttt{/\allowbreak{}auth/\allowbreak{}me} & The logged-in user & 200, 401 \\
 \addlinespace
 \multicolumn{4}{@{}l}{\textbf{Catalog}} \\
 \texttt{GET} & \texttt{/\allowbreak{}muscles} & Muscles with their groups & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}equipment} & Equipment, filtered by category & 200, 401 \\
+\texttt{GET} & \texttt{/\allowbreak{}equipment/\allowbreak{}presets} & Ready-made sets of equipment & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}exercises} & Exercises - filters, search, pagination & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}exercises/\allowbreak{}group-counts} & Exercises per muscle group for the given filters & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}exercises/\allowbreak{}\{exercise\_id\}} & Exercise details: muscle roles, equipment, substitutes & 200, 401 \\
@@ -49,6 +51,7 @@ Method & Path & Description & Responses \\
 \texttt{GET} & \texttt{/\allowbreak{}plans/\allowbreak{}\{plan\_id\}/\allowbreak{}analysis} & Scores the plan: volume per muscle, time, issues & 200, 401, 404, 409 \\
 \addlinespace
 \multicolumn{4}{@{}l}{\textbf{Users}} \\
+\texttt{DELETE} & \texttt{/\allowbreak{}users/\allowbreak{}me} & Deletes the account with all its data & 204, 401, 403 \\
 \texttt{PATCH} & \texttt{/\allowbreak{}users/\allowbreak{}me} & Changes the account data & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}users/\allowbreak{}me/\allowbreak{}profile} & The training profile & 200, 401, 404 \\
 \texttt{PUT} & \texttt{/\allowbreak{}users/\allowbreak{}me/\allowbreak{}profile} & Creates or replaces the training profile & 200, 401 \\
