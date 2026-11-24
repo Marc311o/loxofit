@@ -56,18 +56,26 @@ logs service="":
 # CODE QUALITY
 # =======================================================
 
-# linter (ruff + oxlint)
-[group('quality')]
-lint:
-    docker compose exec api ruff check .
-    docker compose exec frontend npm run lint
-
-# linter (Ruff + Prettier)
+# formats the code the way CI expects it
 [group('quality')]
 format:
     docker compose exec api ruff check . --fix
     docker compose exec api ruff format .
-    docker compose exec frontend npm run format
+    docker compose exec frontend npx prettier --write src
+
+# the same checks as CI, without the tests - run before pushing
+[group('quality')]
+lint:
+    docker compose exec api ruff check .
+    docker compose exec api ruff format --check .
+    docker compose exec api alembic check
+    docker compose exec frontend npx prettier --check src
+    docker compose exec frontend npx oxlint src
+    docker compose exec frontend npx tsc -b
+
+# everything CI checks, tests included
+[group('quality')]
+ci: lint test
 
 # backend tests
 [group('test')]
