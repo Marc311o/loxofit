@@ -31,6 +31,13 @@ class MovementPattern(enum.StrEnum):
     CORE_FLEXION = "core_flexion"
     CORE_ANTI_EXTENSION = "core_anti_extension"
     CALF_RAISE = "calf_raise"
+    SHOULDER_FLEXION = "shoulder_flexion"
+    SHOULDER_EXTENSION = "shoulder_extension"
+    SCAPULAR_ELEVATION = "scapular_elevation"
+    HIP_ADDUCTION = "hip_adduction"
+    HIP_ABDUCTION = "hip_abduction"
+    CORE_ROTATION = "core_rotation"
+    CORE_ANTI_ROTATION = "core_anti_rotation"
 
 
 class MuscleRole(enum.StrEnum):

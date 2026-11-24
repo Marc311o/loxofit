@@ -17,7 +17,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_valida
 
 from app.domains.catalog.enums import EquipmentCategory, MovementPattern, MuscleGroup, MuscleRole
 
-DATA_VERSION = 1
+DATA_VERSION = 2
 DATA_FILE = Path(__file__).resolve().parents[2] / "data" / f"catalog_data_v{DATA_VERSION}.xlsx"
 
 
