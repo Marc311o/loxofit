@@ -18,7 +18,7 @@ docker compose logs -f api         # the API's logs (web, db likewise)
 docker compose exec api python -m app.admin.reset_password user@example.com
 ```
 
-`.env` on the server sets `COMPOSE_FILE=compose.prod.yaml`, so plain `docker compose` uses
+`.env` on the server sets `COMPOSE_FILE=docker-compose.prod.yaml`, so plain `docker compose` uses
 the production file. Template: `.env.prod.example`.
 
 ## Continuous deployment

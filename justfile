@@ -158,6 +158,10 @@ reset-db:
     just migrate
     seed-all
 
+[group('db')]
+reset-password email:
+    docker compose exec api python -m app.admin.reset_password {{email}}
+
 # =======================================================
 # SHELLS
 # =======================================================
