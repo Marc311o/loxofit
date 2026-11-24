@@ -1,0 +1,48 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction TB
+  model_configs {
+    integer id PK
+    varchar name UK
+    volume_mode volume_mode
+    float global_mev
+    float global_mav_upper
+    float global_mrv
+    float penalty_lambda
+    float curve_k
+    float session_volume_cap
+    integer rest_compound_s
+    integer rest_isolation_s
+    integer transitions_s
+    boolean rest_before_next_exercise
+    integer warmup_s
+    float explosive_phase_s
+    float time_penalty
+    float weekly_volume_increase
+    integer max_sets_per_exercise
+    integer rir_start
+    integer rir_end
+    float deload_volume_factor
+    integer deload_rir
+    boolean is_default
+    timestamptz created_at
+  }
+  config_muscle_landmarks {
+    integer config_id PK,FK
+    integer muscle_id PK,FK
+    float mev
+    float mav_upper
+    float mrv
+  }
+  config_role_weights {
+    integer config_id PK,FK
+    muscle_role role PK
+    float weight
+  }
+  muscles
+  model_configs ||--o{ config_muscle_landmarks : "config_id"
+  model_configs ||--o{ config_role_weights : "config_id"
+  muscles ||--o{ config_muscle_landmarks : "muscle_id"

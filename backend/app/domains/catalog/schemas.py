@@ -1,0 +1,109 @@
+from pydantic import BaseModel, ConfigDict, Field
+
+from app.core.pagination import PageParams
+from app.domains.catalog.enums import (
+    EquipmentCategory,
+    EquipmentSort,
+    ExerciseSort,
+    MovementPattern,
+    MuscleGroup,
+    MuscleRole,
+)
+from app.domains.catalog.presets import EquipmentPreset
+
+
+class ORMSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+
+class MuscleRead(ORMSchema):
+    id: int
+    code: str
+    name_pl: str
+    name_en: str
+    muscle_group: MuscleGroup
+    is_volume_target: bool
+
+
+class EquipmentRead(ORMSchema):
+    id: int
+    code: str
+    name_en: str
+    name_pl: str
+    category: EquipmentCategory
+    image_url: str | None
+
+
+class ExerciseListItem(ORMSchema):
+    id: int
+    code: str
+    name_en: str
+    name_pl: str
+    main_group: MuscleGroup
+    movement_pattern: MovementPattern
+    is_compound: bool
+    is_unilateral: bool
+    image_url: str | None
+    equipment: list[EquipmentRead]
+
+
+class MuscleShare(ORMSchema):
+    muscle: MuscleRead
+    role: MuscleRole
+    weight: float
+    share_pct: float
+
+
+class ExerciseDetail(ExerciseListItem):
+    fatigue_cost: int
+    complexity: int
+    default_tempo: str | None
+    instructions_pl: str | None
+    instructions_en: str | None
+    muscles: list[MuscleShare] = []
+
+
+class EquipmentPresetRead(BaseModel):
+    code: EquipmentPreset
+    equipment_ids: list[int]
+
+
+class ExerciseFilters(PageParams):
+    model_config = ConfigDict(extra="forbid")
+
+    muscle_group: MuscleGroup | None = None
+    pattern: MovementPattern | None = None
+    is_compound: bool | None = None
+    muscle_id: int | None = Field(default=None, ge=1)
+    equipment_id: int | None = Field(default=None, ge=1)
+    search: str | None = Field(default=None, min_length=1, max_length=100)
+    sort: ExerciseSort = ExerciseSort.NAME_EN
+    available_with: list[int] | None = Field(default=None, max_length=100)
+
+
+class EquipmentFilters(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    category: EquipmentCategory | None = None
+    search: str | None = Field(min_length=1, max_length=100, default=None)
+    sort: EquipmentSort = EquipmentSort.CATEGORY
+
+
+class ExerciseRoles(BaseModel):
+    """What the engine needs about an exercise: flags, tempo and muscle roles by muscle code."""
+
+    id: int
+    code: str
+    is_compound: bool
+    is_unilateral: bool
+    default_tempo: str | None
+    roles: dict[str, MuscleRole]
+
+
+class GeneratorExercise(ExerciseRoles):
+    """ExerciseRoles plus what the plan generator needs: exercise order, variety, equipment."""
+
+    complexity: int
+    fatigue_cost: int
+    movement_pattern: MovementPattern
+    equipment_ids: frozenset[int]  # all of it is needed to do the exercise

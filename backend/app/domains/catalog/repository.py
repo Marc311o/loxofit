@@ -1,0 +1,153 @@
+from collections.abc import Collection, Sequence
+
+from sqlalchemy import ColumnElement, Select, func, or_, select
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
+
+from app.domains.catalog.enums import EquipmentSort, ExerciseSort, MuscleGroup
+from app.domains.catalog.models import Equipment, Exercise, ExerciseMuscleRole, Muscle
+from app.domains.catalog.schemas import EquipmentFilters, ExerciseFilters
+
+
+def _escape_like(value: str) -> str:
+    return value.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+
+
+def _search(text: str, *columns: ColumnElement[str]) -> ColumnElement[bool]:
+    term = f"%{_escape_like(text.strip())}%"
+    return or_(*(column.ilike(term, escape="\\") for column in columns))
+
+
+class CatalogRepository:
+    def __init__(self, db: AsyncSession) -> None:
+        self.db = db
+
+    async def list_muscles(self) -> Sequence[Muscle]:
+        stmt = select(Muscle).order_by(Muscle.muscle_group, Muscle.name_en)
+        return (await self.db.execute(stmt)).scalars().all()
+
+    async def equipment_ids_by_code(self) -> dict[str, int]:
+        rows = (await self.db.execute(select(Equipment.code, Equipment.id))).all()
+        return {code: equipment_id for code, equipment_id in rows}
+
+    async def list_equipment(self, filters: EquipmentFilters) -> Sequence[Equipment]:
+        stmt = select(Equipment)
+        if filters.category is not None:
+            stmt = stmt.where(Equipment.category == filters.category)
+        if filters.search:
+            stmt = stmt.where(_search(filters.search, Equipment.name_en, Equipment.name_pl))
+
+        order_by = {
+            EquipmentSort.CATEGORY: (Equipment.category, Equipment.name_en),
+            EquipmentSort.NAME_EN: (Equipment.name_en,),
+            EquipmentSort.NAME_PL: (Equipment.name_pl.collate("pl-PL-x-icu"),),
+        }[filters.sort]
+        result = await self.db.execute(stmt.order_by(*order_by, Equipment.id))
+        return result.scalars().all()
+
+    async def list_exercises(self, filters: ExerciseFilters) -> tuple[Sequence[Exercise], int]:
+
+        stmt = self._apply_filters(select(Exercise), filters)
+
+        count_stmt = select(func.count()).select_from(stmt.subquery())
+        total = int((await self.db.execute(count_stmt)).scalar_one())
+
+        page_stmt = (
+            self._apply_sort(stmt, filters.sort)
+            .offset(filters.offset)
+            .limit(filters.size)
+            .options(selectinload(Exercise.equipment))
+        )
+        items = (await self.db.execute(page_stmt)).scalars().all()
+        return items, total
+
+    async def count_exercises_by_group(self, filters: ExerciseFilters) -> dict[MuscleGroup, int]:
+        """Exercise count per main group, with every filter applied except the group itself."""
+        matching = self._apply_filters(
+            select(Exercise), filters.model_copy(update={"muscle_group": None})
+        ).subquery()
+        stmt = select(matching.c.main_group, func.count()).group_by(matching.c.main_group)
+        rows = (await self.db.execute(stmt)).all()
+        return {group: count for group, count in rows}
+
+    async def get_exercise_detail(self, exercise_id: int) -> Exercise | None:
+        stmt = (
+            select(Exercise)
+            .where(Exercise.id == exercise_id)
+            .options(
+                selectinload(Exercise.muscle_roles).joinedload(ExerciseMuscleRole.muscle),
+                selectinload(Exercise.equipment),
+            )
+        )
+        return (await self.db.execute(stmt)).scalar_one_or_none()
+
+    @staticmethod
+    def _apply_filters(
+        stmt: Select[tuple[Exercise]], filters: ExerciseFilters
+    ) -> Select[tuple[Exercise]]:
+        if filters.muscle_group is not None:
+            stmt = stmt.where(Exercise.main_group == filters.muscle_group)
+        if filters.pattern is not None:
+            stmt = stmt.where(Exercise.movement_pattern == filters.pattern)
+        if filters.is_compound is not None:
+            stmt = stmt.where(Exercise.is_compound == filters.is_compound)
+        if filters.muscle_id is not None:
+            stmt = stmt.where(
+                Exercise.muscle_roles.any(ExerciseMuscleRole.muscle_id == filters.muscle_id)
+            )
+        if filters.equipment_id is not None:
+            stmt = stmt.where(Exercise.equipment.any(Equipment.id == filters.equipment_id))
+        if filters.search:
+            stmt = stmt.where(_search(filters.search, Exercise.name_en, Exercise.name_pl))
+        if filters.available_with is not None:
+            stmt = stmt.where(~Exercise.equipment.any(Equipment.id.not_in(filters.available_with)))
+        return stmt
+
+    @staticmethod
+    def _apply_sort(stmt: Select[tuple[Exercise]], sort: ExerciseSort) -> Select[tuple[Exercise]]:
+        order_by = {
+            ExerciseSort.NAME_EN: (Exercise.name_en,),
+            ExerciseSort.NAME_PL: (Exercise.name_pl.collate("pl-PL-x-icu"),),
+            ExerciseSort.GROUP: (Exercise.main_group, Exercise.name_en),
+        }[sort]
+        return stmt.order_by(*order_by, Exercise.id)
+
+    async def existing_exercise_ids(self, ids: Collection[int]) -> set[int]:
+        stmt = select(Exercise.id).where(Exercise.id.in_(ids))
+        return set((await self.db.execute(stmt)).scalars())
+
+    async def volume_target_muscle_ids(self, ids: Collection[int]) -> set[int]:
+        stmt = select(Muscle.id).where(Muscle.id.in_(ids), Muscle.is_volume_target)
+        return set((await self.db.execute(stmt)).scalars())
+
+    async def exercises_with_roles(self, ids: Collection[int]) -> Sequence[Exercise]:
+        stmt = (
+            select(Exercise)
+            .where(Exercise.id.in_(ids))
+            .options(selectinload(Exercise.muscle_roles).joinedload(ExerciseMuscleRole.muscle))
+        )
+        return (await self.db.execute(stmt)).scalars().all()
+
+    async def exercises_for_generator(self) -> Sequence[Exercise]:
+        """Every exercise with its muscle roles and equipment, in catalog order."""
+        stmt = (
+            select(Exercise)
+            .order_by(Exercise.id)
+            .options(
+                selectinload(Exercise.muscle_roles).joinedload(ExerciseMuscleRole.muscle),
+                selectinload(Exercise.equipment),
+            )
+        )
+        return (await self.db.execute(stmt)).scalars().all()
+
+    async def equipment_by_ids(self, ids: Collection[int]) -> Sequence[Equipment]:
+        stmt = (
+            select(Equipment)
+            .where(Equipment.id.in_(ids))
+            .order_by(Equipment.category, Equipment.name_en)
+        )
+        return (await self.db.execute(stmt)).scalars().all()
+
+    async def existing_equipment_ids(self, ids: Collection[int]) -> set[int]:
+        stmt = select(Equipment.id).where(Equipment.id.in_(ids))
+        return set((await self.db.execute(stmt)).scalars())

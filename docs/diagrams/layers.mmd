@@ -1,0 +1,19 @@
+flowchart TB
+  subgraph domain["{{domain}}"]
+    router["{{router}}"]
+    schemas["{{schemas}}"]
+    service["{{service}}"]
+    repository["{{repository}}"]
+    models["{{models}}"]
+    adapter["{{adapter}}"]
+  end
+  engine["{{engine}}"]
+  db[("{{db}}")]
+
+  router --> service
+  router -.-> schemas
+  service --> repository
+  repository --> models
+  models --> db
+  service --> adapter
+  adapter --> engine

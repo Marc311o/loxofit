@@ -1,0 +1,460 @@
+{
+  "suite": "tune",
+  "started": "2026-11-20T18:01:23+00:00",
+  "config": "per-muscle-v3",
+  "catalog_data_version": 1,
+  "budget": 30000,
+  "seeds": 10,
+  "scenarios": [
+    {
+      "name": "fbw-3x60-gym",
+      "template": "full_body",
+      "sessions": 3,
+      "minutes": 60,
+      "split": "tune",
+      "equipment": null,
+      "weeks": 5
+    },
+    {
+      "name": "fbw-2x60-gym",
+      "template": "full_body",
+      "sessions": 2,
+      "minutes": 60,
+      "split": "tune",
+      "equipment": null,
+      "weeks": 5
+    },
+    {
+      "name": "ul-4x45-gym",
+      "template": "upper_lower",
+      "sessions": 4,
+      "minutes": 45,
+      "split": "tune",
+      "equipment": null,
+      "weeks": 5
+    },
+    {
+      "name": "ppl-3x60-home",
+      "template": "push_pull_legs",
+      "sessions": 3,
+      "minutes": 60,
+      "split": "tune",
+      "equipment": "frozenset({'adj_bench', 'swiss_ball', 'pullup_bar', 'flat_bench', 'dumbbells'})",
+      "weeks": 5
+    }
+  ],
+  "algorithms": [
+    {
+      "family": "hill",
+      "variant": "patience=200",
+      "params": {
+        "patience": 200
+      }
+    },
+    {
+      "family": "hill",
+      "variant": "patience=500",
+      "params": {
+        "patience": 500
+      }
+    },
+    {
+      "family": "hill",
+      "variant": "patience=1000",
+      "params": {
+        "patience": 1000
+      }
+    },
+    {
+      "family": "hill",
+      "variant": "patience=2000",
+      "params": {
+        "patience": 2000
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=30 mut=0.3 cx=session",
+      "params": {
+        "population": 30,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.3,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=30 mut=0.3 cx=gene",
+      "params": {
+        "population": 30,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.3,
+        "elitism": 2,
+        "crossover": "gene",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=30 mut=0.6 cx=session",
+      "params": {
+        "population": 30,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=30 mut=0.6 cx=gene",
+      "params": {
+        "population": 30,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "gene",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=30 mut=0.9 cx=session",
+      "params": {
+        "population": 30,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.9,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=30 mut=0.9 cx=gene",
+      "params": {
+        "population": 30,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.9,
+        "elitism": 2,
+        "crossover": "gene",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=60 mut=0.3 cx=session",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.3,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=60 mut=0.3 cx=gene",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.3,
+        "elitism": 2,
+        "crossover": "gene",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=60 mut=0.6 cx=session",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=60 mut=0.6 cx=gene",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "gene",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=60 mut=0.9 cx=session",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.9,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=60 mut=0.9 cx=gene",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.9,
+        "elitism": 2,
+        "crossover": "gene",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=120 mut=0.3 cx=session",
+      "params": {
+        "population": 120,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.3,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=120 mut=0.3 cx=gene",
+      "params": {
+        "population": 120,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.3,
+        "elitism": 2,
+        "crossover": "gene",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=120 mut=0.6 cx=session",
+      "params": {
+        "population": 120,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=120 mut=0.6 cx=gene",
+      "params": {
+        "population": 120,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "gene",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=120 mut=0.9 cx=session",
+      "params": {
+        "population": 120,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.9,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "ga",
+      "variant": "pop=120 mut=0.9 cx=gene",
+      "params": {
+        "population": 120,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.9,
+        "elitism": 2,
+        "crossover": "gene",
+        "local_search_count": 0,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "ls=1x10",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 1,
+        "local_search_steps": 10
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "ls=1x25",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 1,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "ls=1x50",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 1,
+        "local_search_steps": 50
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "ls=2x10",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 2,
+        "local_search_steps": 10
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "ls=2x25",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 2,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "ls=2x50",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 2,
+        "local_search_steps": 50
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "ls=5x10",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 5,
+        "local_search_steps": 10
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "ls=5x25",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 5,
+        "local_search_steps": 25
+      }
+    },
+    {
+      "family": "memetic",
+      "variant": "ls=5x50",
+      "params": {
+        "population": 60,
+        "tournament": 3,
+        "crossover_rate": 0.9,
+        "mutation_rate": 0.6,
+        "elitism": 2,
+        "crossover": "session",
+        "local_search_count": 5,
+        "local_search_steps": 50
+      }
+    }
+  ],
+  "workers": 12,
+  "python": "3.11.9",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "git_commit": "a82338878a04e903cf5a1bd673fe389de4627e88",
+  "finished": "2026-11-20T18:18:35+00:00",
+  "seconds": 1032.4
+}

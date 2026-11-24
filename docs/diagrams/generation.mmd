@@ -1,0 +1,27 @@
+sequenceDiagram
+  autonumber
+  participant web as {{web}}
+  participant api as {{api}}
+  participant db as {{db}}
+  participant worker as {{worker}}
+
+  web ->> api: {{start}}
+  api ->> api: {{check}}
+  api ->> db: {{insert}}
+  api ->> worker: {{submit}}
+  api -->> web: {{accepted}}
+  api ->> db: {{running}}
+  activate worker
+  Note over worker: {{search}}
+  loop {{while_running}}
+    worker -->> api: {{progress}}
+    web ->> api: {{poll}}
+    api -->> web: {{status}}
+  end
+  worker -->> api: {{result}}
+  deactivate worker
+  api ->> db: {{done}}
+  web ->> api: {{analysis}}
+  web ->> api: {{save}}
+  api ->> db: {{insert_plan}}
+  api -->> web: {{plan}}

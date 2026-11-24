@@ -1,0 +1,42 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction TB
+  users {
+    uuid id PK
+    varchar email UK
+    varchar password_hash
+    varchar display_name
+    user_role role
+    boolean is_active
+    timestamptz created_at
+    timestamptz last_login_at
+  }
+  refresh_tokens {
+    uuid id PK
+    uuid user_id FK
+    varchar token_hash UK
+    timestamptz expires_at
+    timestamptz revoked_at
+    timestamptz created_at
+  }
+  user_equipment {
+    uuid user_id PK,FK
+    integer equipment_id PK,FK
+  }
+  user_profiles {
+    uuid user_id PK,FK
+    experience_level experience
+    smallint days_per_week
+    smallint max_session_minutes
+    smallint_array preferred_weekdays
+    float weight_kg
+    timestamptz updated_at
+  }
+  equipment
+  equipment ||--o{ user_equipment : "equipment_id"
+  users ||--o{ refresh_tokens : "user_id"
+  users ||--o{ user_equipment : "user_id"
+  users ||--o| user_profiles : "user_id"

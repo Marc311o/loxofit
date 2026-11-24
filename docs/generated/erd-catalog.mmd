@@ -1,0 +1,62 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction TB
+  equipment {
+    integer id PK
+    varchar code UK
+    varchar name_en UK
+    varchar name_pl UK
+    text description_en
+    text description_pl
+    equipment_category category
+    varchar image_url
+  }
+  exercises {
+    integer id PK
+    varchar code UK
+    varchar name_en UK
+    varchar name_pl UK
+    muscle_group main_group
+    movement_pattern movement_pattern
+    boolean is_compound
+    boolean is_unilateral
+    smallint fatigue_cost
+    smallint complexity
+    varchar default_tempo
+    text instructions_pl
+    text instructions_en
+    varchar image_url
+  }
+  muscles {
+    integer id PK
+    varchar code UK
+    varchar name_en
+    varchar name_pl
+    muscle_group muscle_group
+    text description_en
+    text description_pl
+    boolean is_volume_target
+  }
+  exercise_equipment {
+    integer exercise_id PK,FK
+    integer equipment_id PK,FK
+  }
+  exercise_muscle_roles {
+    integer exercise_id PK,FK
+    integer muscle_id PK,FK
+    muscle_role role
+  }
+  exercise_substitutes {
+    integer exercise_id PK,FK
+    integer substitute_exercise_id PK,FK
+    integer priority_score
+  }
+  equipment ||--o{ exercise_equipment : "equipment_id"
+  exercises ||--o{ exercise_equipment : "exercise_id"
+  exercises ||--o{ exercise_muscle_roles : "exercise_id"
+  exercises ||--o{ exercise_substitutes : "exercise_id"
+  exercises ||--o{ exercise_substitutes : "substitute_exercise_id"
+  muscles ||--o{ exercise_muscle_roles : "muscle_id"

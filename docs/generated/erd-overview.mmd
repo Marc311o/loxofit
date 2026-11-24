@@ -1,0 +1,48 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+  direction LR
+  equipment
+  exercises
+  model_configs
+  muscles
+  users
+  config_muscle_landmarks
+  config_role_weights
+  exercise_equipment
+  exercise_muscle_roles
+  exercise_substitutes
+  plans
+  refresh_tokens
+  user_equipment
+  user_profiles
+  generation_runs
+  plan_muscle_targets
+  plan_weeks
+  plan_sessions
+  prescribed_exercises
+  equipment ||--o{ exercise_equipment : ""
+  equipment ||--o{ user_equipment : ""
+  exercises ||--o{ exercise_equipment : ""
+  exercises ||--o{ exercise_muscle_roles : ""
+  exercises ||--o{ exercise_substitutes : ""
+  exercises ||--o{ prescribed_exercises : ""
+  model_configs ||--o{ config_muscle_landmarks : ""
+  model_configs ||--o{ config_role_weights : ""
+  model_configs ||--o{ generation_runs : ""
+  model_configs ||--o{ plans : ""
+  muscles ||--o{ config_muscle_landmarks : ""
+  muscles ||--o{ exercise_muscle_roles : ""
+  muscles ||--o{ plan_muscle_targets : ""
+  plan_sessions ||--o{ prescribed_exercises : ""
+  plan_weeks ||--o{ plan_sessions : ""
+  plans |o--o{ generation_runs : ""
+  plans ||--o{ plan_muscle_targets : ""
+  plans ||--o{ plan_weeks : ""
+  users ||--o{ generation_runs : ""
+  users ||--o{ plans : ""
+  users ||--o{ refresh_tokens : ""
+  users ||--o{ user_equipment : ""
+  users ||--o| user_profiles : ""

@@ -1,0 +1,217 @@
+set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
+set dotenv-load
+
+db_user := env_var('POSTGRES_USER')
+db_name := env_var('POSTGRES_DB')
+
+# shows command list
+default:
+    @just --list
+
+# =======================================================
+# ENVIRONMENT
+# =======================================================
+
+# builds project with logs
+[group('env')]
+up:
+    docker compose up --build
+
+# builds project without logs (in the background)
+[group('env')]
+up-d:
+    docker compose up --build -d --wait
+
+# builds project with pgadmin
+[group('env')]
+tools:
+    docker compose --profile tools up --build -d -V
+
+# stops project
+[group('env')]
+down:
+    docker compose --profile tools down
+
+# restarts container
+[group('env')]
+restart service:
+    docker compose restart {{service}}
+
+# rebuilds containers
+[group('env')]
+rebuild:
+    docker compose up --build --renew-anon-volumes -d
+
+# container status
+[group('env')]
+ps:
+    docker compose ps
+
+# logs
+[group('env')]
+logs service="":
+    docker compose logs -f {{service}}
+
+# =======================================================
+# CODE QUALITY
+# =======================================================
+
+# formats the code the way CI expects it
+[group('quality')]
+format:
+    docker compose exec api ruff check . --fix
+    docker compose exec api ruff format .
+    docker compose exec frontend npx prettier --write src
+
+# the same checks as CI, without the tests - run before pushing
+[group('quality')]
+lint:
+    docker compose exec api ruff check .
+    docker compose exec api ruff format --check .
+    docker compose exec api alembic check
+    docker compose exec frontend npx prettier --check src
+    docker compose exec frontend npx oxlint src
+    docker compose exec frontend npx tsc -b
+
+# docs/generated matches the code - as in CI
+[group('quality')]
+docs-check:
+    just docs --no-render
+    git diff --exit-code -- docs/generated
+
+# everything CI checks, tests included
+[group('quality')]
+ci: lint test docs-check
+
+# backend tests
+[group('test')]
+test *args:
+    docker compose exec api pytest {{args}}
+
+# only failed tests
+[group('test')]
+test-failed:
+    docker compose exec api pytest --lf -x
+
+# test coverage
+[group('test')]
+test-cov:
+    docker compose exec api pytest --cov=app --cov-report=term-missing --cov-report=html
+
+# =======================================================
+# CLEAN
+# =======================================================
+
+# cleans everything
+[group('clean')]
+[confirm("Are you sure? This will remove containers, volumes, data and images. This is irreversible.")]
+clean:
+    docker compose --profile tools down -v --rmi local --remove-orphans
+
+# =======================================================
+# DATABASE
+# =======================================================
+
+# initiate migration
+[group('db')]
+migrate:
+    docker compose exec api alembic upgrade head
+
+# creates new migration
+[group('db')]
+makemigration message:
+    docker compose exec api alembic revision --autogenerate -m "{{message}}"
+
+# Undo migration
+[group('db')]
+[confirm("Undo newest migration?")]
+downgrade:
+    docker compose exec api alembic downgrade -1
+
+# Seeds catalog data
+[group('db')]
+seed-catalog:
+    docker compose exec api python -m app.seeds.seed_catalog
+
+# Seeds superuser
+[group('db')]
+seed-admin:
+    docker compose exec api python -m app.seeds.seed_admin
+
+# Seeds available model configs
+[group('db')]
+seed-config:
+    docker compose exec api python -m app.seeds.seed_config
+
+# Seeds all
+[group('db')]
+seed-all:
+    docker compose exec api python -m app.seeds.seed_admin
+    docker compose exec api python -m app.seeds.seed_catalog
+    docker compose exec api python -m app.seeds.seed_config
+
+[group('db')]
+[confirm("This action will clear ALL data from the database. Continue?")]
+reset-db:
+    docker compose --profile tools down -v
+    docker compose up --build -d --wait
+    just migrate
+    seed-all
+
+# =======================================================
+# SHELLS
+# =======================================================
+
+[group('shell')]
+psql:
+    docker compose exec db psql -U {{db_user}} -d {{db_name}}
+
+[group('shell')]
+shell-api:
+    docker compose exec api bash
+
+# =======================================================
+# RESEARCH
+# =======================================================
+
+py := if os_family() == "windows" { "../.venv/Scripts/python.exe" } else { "../.venv/bin/python" }
+# creates the local research venv (experiments, notebooks, engine CLI)
+[group('research')]
+[working-directory: 'backend']
+research-setup:
+    python -m venv .venv
+    {{py}} -m pip install -r requirements-research.txt
+
+# runs the algorithm experiments -> research/experiments/results
+[group('research')]
+[working-directory: 'backend']
+experiments *args:
+    {{py}} -m research.experiments.run {{args}}
+
+# opens Jupyter in the experiments folder
+[group('research')]
+[working-directory: 'backend']
+notebook:
+    {{py}} -m jupyter lab research/experiments
+
+# evaluates a plan file with the engine (no database)
+[group('research')]
+[working-directory: 'backend']
+engine-eval plan *args:
+    {{py}} -m research.engine_eval {{plan}} {{args}}
+
+# fast vs reference evaluator
+[group('research')]
+[working-directory: 'backend']
+bench:
+    {{py}} -m research.bench_objective
+
+# =======================================================
+# DOCS
+# =======================================================
+
+# generates docs/ from the code: ERD, API map, error codes, diagrams, PDFs
+[group('docs')]
+[working-directory: 'backend']
+docs *args:
+    {{py}} ../docs/generate.py {{args}}

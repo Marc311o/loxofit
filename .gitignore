@@ -16,3 +16,9 @@ dist/
 
 # IDE
 .idea/
+
+# Temporary source folder
+temp
+
+# PDF documentation
+docs/figures/

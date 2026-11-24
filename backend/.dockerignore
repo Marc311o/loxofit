@@ -1,4 +1,19 @@
+# Python
 __pycache__/
+*.pyc
 .venv/
 env/
+
+# Tool caches and reports
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# Secrets and version control
 .env
+.git
+
+# Not needed to run the app (the dev container mounts the whole folder anyway)
+research/
+tests/

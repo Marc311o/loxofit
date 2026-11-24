@@ -1,0 +1,17 @@
+flowchart TB
+  subgraph browser["Przeglądarka"]
+    spa["Aplikacja webowa<br/>React, MUI, TanStack Query"]
+  end
+  subgraph server["Serwer"]
+    api["API<br/>FastAPI"]
+    workers["Procesy generatora<br/>pula procesów"]
+    progress[("Postęp<br/>współdzielony słownik")]
+  end
+  db[("PostgreSQL")]
+
+  spa -- "REST / JSON<br/>JWT" --> api
+  api -- "SQL<br/>SQLAlchemy async" --> db
+  api -- "zadanie generowania" --> workers
+  workers -- "raportuje postęp" --> progress
+  api -. "odczytuje postęp" .-> progress
+  workers -. "wynik" .-> api
