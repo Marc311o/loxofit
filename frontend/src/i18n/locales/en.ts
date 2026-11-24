@@ -660,6 +660,13 @@ export const en = {
       core_flexion: "Core flexion",
       core_anti_extension: "Core anti-extension",
       calf_raise: "Calf raise",
+      shoulder_flexion: "Shoulder flexion",
+      shoulder_extension: "Shoulder extension",
+      scapular_elevation: "Scapular elevation",
+      hip_adduction: "Hip adduction",
+      hip_abduction: "Hip abduction",
+      core_rotation: "Core rotation",
+      core_anti_rotation: "Core anti-rotation",
     },
     roles: {
       primary: "Primary",
