@@ -20,11 +20,13 @@ Metoda & Ścieżka & Opis & Odpowiedzi \\
 \texttt{POST} & \texttt{/\allowbreak{}auth/\allowbreak{}refresh}$^{*}$ & Wydaje nowy token dostępowy na podstawie ciasteczka odświeżającego & 200, 401 \\
 \texttt{POST} & \texttt{/\allowbreak{}auth/\allowbreak{}login}$^{*}$ & Logowanie; zwraca token dostępowy i ustawia ciasteczko odświeżające & 200, 401, 403 \\
 \texttt{POST} & \texttt{/\allowbreak{}auth/\allowbreak{}logout}$^{*}$ & Unieważnia token odświeżający & 204 \\
+\texttt{POST} & \texttt{/\allowbreak{}auth/\allowbreak{}password} & Zmienia hasło; kończy pozostałe sesje & 200, 401, 403 \\
 \texttt{GET} & \texttt{/\allowbreak{}auth/\allowbreak{}me} & Zalogowany użytkownik & 200, 401 \\
 \addlinespace
 \multicolumn{4}{@{}l}{\textbf{Katalog}} \\
 \texttt{GET} & \texttt{/\allowbreak{}muscles} & Mięśnie wraz z grupami & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}equipment} & Sprzęt, z filtrowaniem po kategorii & 200, 401 \\
+\texttt{GET} & \texttt{/\allowbreak{}equipment/\allowbreak{}presets} & Gotowe zestawy sprzętu & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}exercises} & Ćwiczenia - filtry, wyszukiwanie, stronicowanie & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}exercises/\allowbreak{}group-counts} & Liczba ćwiczeń w grupach mięśniowych dla podanych filtrów & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}exercises/\allowbreak{}\{exercise\_id\}} & Szczegóły ćwiczenia: role mięśni, sprzęt, zamienniki & 200, 401 \\
@@ -49,6 +51,7 @@ Metoda & Ścieżka & Opis & Odpowiedzi \\
 \texttt{GET} & \texttt{/\allowbreak{}plans/\allowbreak{}\{plan\_id\}/\allowbreak{}analysis} & Ocenia plan: objętość na mięsień, czas, problemy & 200, 401, 404, 409 \\
 \addlinespace
 \multicolumn{4}{@{}l}{\textbf{Użytkownicy}} \\
+\texttt{DELETE} & \texttt{/\allowbreak{}users/\allowbreak{}me} & Usuwa konto wraz ze wszystkimi danymi & 204, 401, 403 \\
 \texttt{PATCH} & \texttt{/\allowbreak{}users/\allowbreak{}me} & Zmienia dane konta & 200, 401 \\
 \texttt{GET} & \texttt{/\allowbreak{}users/\allowbreak{}me/\allowbreak{}profile} & Profil treningowy & 200, 401, 404 \\
 \texttt{PUT} & \texttt{/\allowbreak{}users/\allowbreak{}me/\allowbreak{}profile} & Tworzy lub zastępuje profil treningowy & 200, 401 \\

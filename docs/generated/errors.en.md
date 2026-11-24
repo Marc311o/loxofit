@@ -14,6 +14,7 @@ Every error response is `{"detail": ..., "code": ...}`; the frontend translates 
 | `INVALID_CREDENTIALS` | 401 | Invalid email or password |
 | `INVALID_REFRESH_TOKEN` | 401 | Session expired, proceed to log in again |
 | `ACCOUNT_INACTIVE` | 403 | The account is inactive |
+| `INCORRECT_PASSWORD` | 403 | Incorrect password |
 | `PROFILE_NOT_FOUND` | 404 | User profile not set up yet |
 | `EMAIL_TAKEN` | 409 | Account with this email address already exists |
 | `INVALID_EQUIPMENT` | 422 | Unknown equipment |

@@ -16,6 +16,7 @@ Wszystkie ścieżki mają prefiks `/api/v1`. Każdy endpoint poza oznaczonymi wy
 | `POST` | `/auth/refresh` ¹ | Wydaje nowy token dostępowy na podstawie ciasteczka odświeżającego | 200, 401, 422 |
 | `POST` | `/auth/login` ¹ | Logowanie; zwraca token dostępowy i ustawia ciasteczko odświeżające | 200, 401, 403, 422 |
 | `POST` | `/auth/logout` ¹ | Unieważnia token odświeżający | 204, 422 |
+| `POST` | `/auth/password` | Zmienia hasło; kończy pozostałe sesje | 200, 401, 403, 422 |
 | `GET` | `/auth/me` | Zalogowany użytkownik | 200, 401 |
 
 ## Katalog
@@ -24,6 +25,7 @@ Wszystkie ścieżki mają prefiks `/api/v1`. Każdy endpoint poza oznaczonymi wy
 |---|---|---|---|
 | `GET` | `/muscles` | Mięśnie wraz z grupami | 200, 401 |
 | `GET` | `/equipment` | Sprzęt, z filtrowaniem po kategorii | 200, 401, 422 |
+| `GET` | `/equipment/presets` | Gotowe zestawy sprzętu | 200, 401 |
 | `GET` | `/exercises` | Ćwiczenia - filtry, wyszukiwanie, stronicowanie | 200, 401, 422 |
 | `GET` | `/exercises/group-counts` | Liczba ćwiczeń w grupach mięśniowych dla podanych filtrów | 200, 401, 422 |
 | `GET` | `/exercises/{exercise_id}` | Szczegóły ćwiczenia: role mięśni, sprzęt, zamienniki | 200, 401, 422 |
@@ -57,6 +59,7 @@ Wszystkie ścieżki mają prefiks `/api/v1`. Każdy endpoint poza oznaczonymi wy
 
 | Metoda | Ścieżka | Opis | Odpowiedzi |
 |---|---|---|---|
+| `DELETE` | `/users/me` | Usuwa konto wraz ze wszystkimi danymi | 204, 401, 403, 422 |
 | `PATCH` | `/users/me` | Zmienia dane konta | 200, 401, 422 |
 | `GET` | `/users/me/profile` | Profil treningowy | 200, 401, 404 |
 | `PUT` | `/users/me/profile` | Tworzy lub zastępuje profil treningowy | 200, 401, 422 |
