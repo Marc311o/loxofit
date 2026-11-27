@@ -688,6 +688,13 @@ export const pl: Messages = {
       core_flexion: "Zgięcie tułowia",
       core_anti_extension: "Antywyprost tułowia",
       calf_raise: "Wspięcia na palce",
+      shoulder_flexion: "Zgięcie ramienia",
+      shoulder_extension: "Wyprost ramienia",
+      scapular_elevation: "Unoszenie łopatek",
+      hip_adduction: "Przywodzenie uda",
+      hip_abduction: "Odwodzenie uda",
+      core_rotation: "Rotacja tułowia",
+      core_anti_rotation: "Antyrotacja tułowia",
     },
     roles: {
       primary: "Główny",

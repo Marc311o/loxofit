@@ -12,15 +12,17 @@ main() {
 	echo "==> Building and starting"
 	docker compose up -d --build --remove-orphans
 
-	echo "==> Waiting for the API"
-	for _ in $(seq 1 30); do
-		if docker compose exec -T api python -c \
-			"import urllib.request as u; u.urlopen('http://localhost:8000/api/v1/health')" 2>/dev/null; then
-			echo "==> Deployed $(git rev-parse --short HEAD)"
-			docker image prune -f >/dev/null
-			exit 0
-		fi
-		sleep 2
+  for _ in $(seq 1 30); do
+    if docker compose exec -T api python -c \
+      "import urllib.request as u; u.urlopen('http://localhost:8000/api/v1/health')" 2>/dev/null; then
+      echo "==> Seeding the catalog and model configs"
+      docker compose exec -T api python -m app.seeds.seed_catalog
+      docker compose exec -T api python -m app.seeds.seed_config
+      echo "==> Deployed $(git rev-parse --short HEAD)"
+      docker image prune -f >/dev/null
+      exit 0
+    fi
+    sleep 2
 	done
 
 	echo "!! The API did not become healthy - last logs:" >&2

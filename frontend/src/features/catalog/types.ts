@@ -29,6 +29,13 @@ export const MOVEMENT_PATTERNS = [
   "core_flexion",
   "core_anti_extension",
   "calf_raise",
+  "shoulder_flexion",
+  "shoulder_extension",
+  "scapular_elevation",
+  "hip_adduction",
+  "hip_abduction",
+  "core_rotation",
+  "core_anti_rotation",
 ] as const;
 export type MovementPattern = (typeof MOVEMENT_PATTERNS)[number];
 
