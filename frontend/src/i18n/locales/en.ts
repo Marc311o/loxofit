@@ -36,6 +36,7 @@ export const en = {
       PLAN_NOT_FOUND: "This plan does not exist.",
       NO_ACTIVE_PLAN: "You have no active plan.",
       PLAN_ARCHIVED: "Archived plans cannot be changed.",
+      PLAN_HAS_WORKOUTS: "A plan with workouts cannot be rebuilt - create a new plan.",
       PLAN_INCOMPLETE: "Compute all weeks before activating the plan.",
       INVALID_PLAN: "The plan has invalid data.",
       UNSUPPORTED_CONFIG: "This plan uses an unsupported configuration.",

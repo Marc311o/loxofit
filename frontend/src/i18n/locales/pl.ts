@@ -37,6 +37,7 @@ export const pl: Messages = {
       PLAN_NOT_FOUND: "Ten plan nie istnieje.",
       NO_ACTIVE_PLAN: "Nie masz aktywnego planu.",
       PLAN_ARCHIVED: "Zarchiwizowanego planu nie można zmieniać.",
+      PLAN_HAS_WORKOUTS: "Planu z treningami nie można przebudować - utwórz nowy plan.",
       PLAN_INCOMPLETE: "Wylicz wszystkie tygodnie przed aktywacją planu.",
       INVALID_PLAN: "Plan zawiera nieprawidłowe dane.",
       UNSUPPORTED_CONFIG: "Ten plan używa nieobsługiwanej konfiguracji.",
