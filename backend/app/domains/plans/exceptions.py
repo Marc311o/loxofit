@@ -30,3 +30,8 @@ class InvalidPlanError(AppError):
 class UnsupportedConfigError(ConflictError):
     code = "UNSUPPORTED_CONFIG"
     detail = "The plan's model config is not supported by the analysis"
+
+
+class PlanHasWorkoutsError(ConflictError):
+    code = "PLAN_HAS_WORKOUTS"
+    detail = "The weeks of a plan with workouts cannot be changed - create a new plan instead"

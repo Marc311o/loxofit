@@ -21,6 +21,7 @@ from app.domains.plans.exceptions import (
     InvalidPlanError,
     NoActivePlanError,
     PlanArchivedError,
+    PlanHasWorkoutsError,
     PlanIncompleteError,
     PlanNotFoundError,
 )
@@ -186,6 +187,7 @@ class PlanService:
         if data.name is not None:
             plan.name = data.name
         if data.num_weeks is not None and data.num_weeks != plan.num_weeks:
+            await self._ensure_no_workouts(plan)
             plan.num_weeks = data.num_weeks
             self._drop_generated_weeks(plan)
         await self._save(plan)
@@ -210,6 +212,7 @@ class PlanService:
         self, user: User, plan_id: uuid.UUID, data: BaseWeekWrite
     ) -> PlanDetail:
         plan = await self._get_editable(user, plan_id)
+        await self._ensure_no_workouts(plan)
         await self._ensure_exercises_exist(data)
 
         week = plan.weeks[0]
@@ -251,6 +254,7 @@ class PlanService:
 
     async def generate_progression(self, user: User, plan_id: uuid.UUID) -> PlanDetail:
         plan = await self._get_editable(user, plan_id)
+        await self._ensure_no_workouts(plan)
         base = plan.weeks[0]
         if not any(s.exercises for s in base.sessions):
             raise InvalidPlanError("The base week has no exercises")
@@ -291,6 +295,11 @@ class PlanService:
         if plan.status == PlanStatus.ARCHIVED:
             raise PlanArchivedError()
         return plan
+
+    async def _ensure_no_workouts(self, plan: Plan) -> None:
+        """Changing the weeks rebuilds them, which would cut the workouts off their sessions."""
+        if await self.repo.has_workouts(plan.id):
+            raise PlanHasWorkoutsError()
 
     async def _save(self, plan: Plan) -> None:
         plan.updated_at = datetime.now(UTC)

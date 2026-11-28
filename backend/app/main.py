@@ -16,6 +16,7 @@ from app.domains.generator.router import router as generator_router
 from app.domains.generator.runner import GenerationRunner
 from app.domains.plans.router import router as plans_router
 from app.domains.users.router import router as users_router
+from app.domains.workouts.router import router as workouts_router
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -69,4 +70,5 @@ api_router.include_router(catalog_router)
 api_router.include_router(generator_router)
 api_router.include_router(plans_router)
 api_router.include_router(users_router)
+api_router.include_router(workouts_router)
 app.include_router(api_router)

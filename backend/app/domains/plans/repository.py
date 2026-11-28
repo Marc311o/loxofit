@@ -1,12 +1,13 @@
 import uuid
 from collections.abc import Sequence
 
-from sqlalchemy import select, update
+from sqlalchemy import exists, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.domains.plans.enums import PlanStatus
 from app.domains.plans.models import Plan, PlanSession, PlanWeek, PrescribedExercise
+from app.domains.workouts.models import WorkoutLog
 
 _DETAIL_OPTIONS = (
     selectinload(Plan.weeks)
@@ -49,3 +50,13 @@ class PlanRepository:
             .values(status=PlanStatus.ARCHIVED)
         )
         await self.db.execute(stmt)
+
+    async def has_workouts(self, plan_id: uuid.UUID) -> bool:
+        """Whether any workout (of any status) was started from a session of the plan."""
+        stmt = select(
+            exists()
+            .where(WorkoutLog.plan_session_id == PlanSession.id)
+            .where(PlanSession.week_id == PlanWeek.id)
+            .where(PlanWeek.plan_id == plan_id)
+        )
+        return bool(await self.db.scalar(stmt))
