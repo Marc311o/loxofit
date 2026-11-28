@@ -44,9 +44,9 @@ from app.main import app
 from sqlalchemy import Column, Table
 from sqlalchemy.dialects import postgresql
 
-# Tables of the auth domain are drawn with the users - one table is not an area.
-AREA_OF_DOMAIN = {"auth": "users"}
-AREA_ORDER = ("users", "catalog", "model_config", "plans", "generator")
+# One table is not an area: auth is drawn with the users, adaptation with the workouts.
+AREA_OF_DOMAIN = {"auth": "users", "adaptation": "workouts"}
+AREA_ORDER = ("users", "catalog", "model_config", "plans", "generator", "workouts")
 # Error codes the exception handlers produce without an AppError subclass.
 HANDLER_ERRORS = (("core", 422, "VALIDATION_ERROR"),)
 
