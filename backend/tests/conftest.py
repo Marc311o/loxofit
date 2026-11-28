@@ -19,12 +19,14 @@ from sqlalchemy import text
 from sqlalchemy.engine import make_url
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engine
 
+import app.domains.adaptation.models
 import app.domains.auth.models
 import app.domains.catalog.models
 import app.domains.generator.models
 import app.domains.model_config.models
 import app.domains.plans.models
 import app.domains.users.models
+import app.domains.workouts.models
 from app.core.config import settings
 from app.core.database import Base, get_db
 from app.domains.users.models import User

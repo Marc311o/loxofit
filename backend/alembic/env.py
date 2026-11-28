@@ -15,6 +15,8 @@ from app.domains.catalog import models as catalog_models  # noqa: F401
 from app.domains.model_config import models as model_config_models  # noqa: F401
 from app.domains.plans import models as plans_models  # noqa: F401
 from app.domains.generator import models as generator_models  # noqa: F401
+from app.domains.workouts import models as workouts_models  # noqa: F401
+from app.domains.adaptation import models as adaptation_models  # noqa: F401
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL.replace("%", "%%"))
